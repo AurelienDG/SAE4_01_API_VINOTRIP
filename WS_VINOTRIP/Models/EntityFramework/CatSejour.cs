@@ -8,7 +8,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("csj_id")]
         public int VignobleId { get; set; }
-        public string LibelleCatVignoble { get; set; }
+        public string? LibelleCatVignoble { get; set; }
 
 
 
