@@ -15,7 +15,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int CatParticipantId { get; set; }
 
         [ForeignKey("SejourId")]
-        [InverseProperty("CatVignobleSejour")]
+        [InverseProperty("ComporteSejour")]
         public virtual Sejour SejourComporte { get; set; } = null!;
 
         [ForeignKey("CatParticipantId")]
