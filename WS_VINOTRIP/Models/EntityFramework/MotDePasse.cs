@@ -11,14 +11,14 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required]
         [Column("mdp_id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdMdp { get; set; }
+        public int MdpId { get; set; }
 
         [Required]
         [Column("mdp_mdp")]
         [StringLength(100)]
         public string? Mdp { get; set; }
 
-        [InverseProperty("CompteMDP")]
-        public virtual ICollection<Compte> MotDePasses { get; } = new List<Compte>();
+        [InverseProperty("MDPCompte")]
+        public virtual ICollection<Compte> CompteMDP { get; } = new List<Compte>();
     }
 }
