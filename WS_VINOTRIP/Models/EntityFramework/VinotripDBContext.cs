@@ -11,7 +11,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         : base(options)
         { }
 
-
+        public virtual DbSet<Sejour> Sejours { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=EnseignantsDB; uid=postgres; password=postgres;"); //à changer
@@ -20,22 +20,18 @@ namespace WS_VINOTRIP.Models.EntityFramework
         {
             modelBuilder.Entity<Comporte>(entity =>
             {
-                entity.HasKey(e => new { e.CoursId, e.EnseignantId })
-                    .HasName("pk_crs");
+                entity.HasKey(e => new { e.SejourId, e.CatParticipantId })
+                    .HasName("pk_cpt");
 
-                entity.HasOne(d => d.EnseignantDuCours).WithMany(p => p.CoursEnseigne)
-                    .HasForeignKey(d => d.EnseignantId)
+                entity.HasOne(d => d.SejourComporte).WithMany(p => p.ComporteSejour)
+                    .HasForeignKey(d => d.SejourId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_crs_ens");
-            });
+                    .HasConstraintName("fk_cpt_sjr");
 
-            modelBuilder.Entity<Enseignant>(entity =>
-            {
-                entity.HasKey(b => b.EnseignantId).HasName("pk_ens");
-
-                entity.HasIndex(b => b.Numen).IsUnique();
-
-                entity.Property(b => b.Universite).HasDefaultValue("USMB");
+                entity.HasOne(d => d.CatParticipantComporte).WithMany(p => p.ComporteCatParticipant)
+                    .HasForeignKey(d => d.CatParticipantId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_cpt_cpp");
             });
 
             OnModelCreatingPartial(modelBuilder);
