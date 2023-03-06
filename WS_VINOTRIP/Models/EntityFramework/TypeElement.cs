@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace WS_VINOTRIP.Models.EntityFramework
 {
     [Table("t_e_typeelementetape_tee")]
-    public partial class TypeElementEtape
+    public partial class TypeElement
     {
         [Key]
         [Required]
