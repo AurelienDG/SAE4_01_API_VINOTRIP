@@ -31,7 +31,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("sjr_est_valide")]
         public bool Est_Valide { get; set; }
 
-
+         
         [ForeignKey("RouteVinId")]
         [InverseProperty("RouteDesVinsSejour")]
         public virtual RouteDesVins SejourRouteDesVins { get; set; } = null!;

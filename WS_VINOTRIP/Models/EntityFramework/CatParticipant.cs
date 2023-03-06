@@ -9,7 +9,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public string? LibelleCatVignoble { get; set; }
         public int LienId { get; set; }
 
-        [InverseProperty("CatParticipantConcerne")]
-        public virtual ICollection<Concerne> ConcerneCatParticipant { get; set; } = new List<Concerne>();
+        [InverseProperty("CatParticipantComporte")]
+        public virtual ICollection<Comporte> ComporteCatParticipant { get; set; } = new List<Comporte>();
     }
 }
