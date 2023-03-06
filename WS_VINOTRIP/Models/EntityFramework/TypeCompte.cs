@@ -11,14 +11,14 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required]
         [Column("tpc_id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdTypeCompte { get; set; }
+        public int TypeCompteId { get; set; }
 
         [Required]
         [StringLength(30)]
         [Column("tpc_libelletypecompte")]
         public string LibelleTypeCompte { get; set; }
 
-        [InverseProperty("CompteTypeCompte")]
-        public virtual ICollection<Compte> TypeComptes { get; } = new List<Compte>();
+        [InverseProperty("TypeCompteCompte")]
+        public virtual ICollection<Compte> CompteTypeCompte { get; } = new List<Compte>();
     }
 }

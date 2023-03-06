@@ -11,22 +11,19 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required]
         [Column("cmp_id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdCompte { get; set; }
+        public int CompteId { get; set; }
 
-        [Key]
         [Required]
         [Column("mdp_id")]
-        public int IdMdp { get; set; }
+        public int MdpId { get; set; }
 
-        [Key]
         [Required]
         [Column("tpc_id")]
-        public int IdTypeCompte { get; set; }
+        public int TypeCompteId { get; set; }
 
-        [Key]
         [Required]
         [Column("prs_id")]
-        public int IdPersonne { get; set; }
+        public int PersonneId { get; set; }
 
         [Required]
         [Column("cmp_telcompte", TypeName = "char(10)")]
@@ -49,16 +46,19 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("cmp_dateconnexion", TypeName = "date")]
         public DateTime DateConnexion { get; set; }
 
-        [ForeignKey("IdTypeCompte")]
-        [InverseProperty("TypeComptes")]
-        public virtual Compte CompteTypeCompte { get; set; } = null!;
+        [ForeignKey("TypeCompteId")]
+        [InverseProperty("CompteTypeCompte")]
+        public virtual TypeCompte TypeCompteCompte { get; set; } = null!;
 
-        [ForeignKey("IdMdp")]
-        [InverseProperty("MotDePasses")]
-        public virtual Compte CompteMDP { get; set; } = null!;
+        [ForeignKey("MdpId")]
+        [InverseProperty("CompteMDP")]
+        public virtual MotDePasse MDPCompte { get; set; } = null!;
 
-        [ForeignKey("IdPersonne")]
-        [InverseProperty("Personnes")]
-        public virtual Compte ComptePersonne { get; set; } = null!;
+        [ForeignKey("PersonneId")]
+        [InverseProperty("ComptePersonne")]
+        public virtual Personne PersonneCompte { get; set; } = null!;
+
+        [InverseProperty("ComptePanier")]
+        public virtual ICollection<Panier> PanierCompte { get; } = new List<Panier>();
     }
 }
