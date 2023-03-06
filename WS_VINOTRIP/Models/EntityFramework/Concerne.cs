@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WS_VINOTRIP.Models.EntityFramework
 {
     [Table("t_j_concerne_ccr")]
-    public class Concerne
+    public partial class Concerne
     {
         [Key]
         [Column("etp_id")]
