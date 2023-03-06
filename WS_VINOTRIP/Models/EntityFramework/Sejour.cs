@@ -50,8 +50,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("SejourPanier")]
         public virtual ICollection<Panier> PanierSejour { get; set; } = new List<Panier>();
         
-        [InverseProperty("SejourConcerne")]
-        public virtual ICollection<Concerne> ConcerneSejour { get; set; } = new List<Concerne>();
+        [InverseProperty("SejourComporte")]
+        public virtual ICollection<Comporte> ComporteSejour { get; set; } = new List<Comporte>();
 
 
     }
