@@ -9,9 +9,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int VignobleId { get; set; }
 
         [StringLength(30), Column("csj_libellecatvignoble", TypeName = "varchar(30)")]
-        public string? LibelleCatVignoble { get; set; }
+        public string? Libelle { get; set; }
 
-        [InverseProperty("CatVignobleSejour")]
-        public virtual ICollection<Sejour> SejourCatVignoble { get; set; } = new List<Sejour>();
+        [InverseProperty("SejourCatVignoble")]
+        public virtual ICollection<Sejour> CatVignobleSejour { get; set; } = new List<Sejour>();
     }
 }

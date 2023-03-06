@@ -6,7 +6,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
     public partial class CatParticipant
     {
         public int CatParticipantId { get; set; }
-        public string? LibelleCatVignoble { get; set; }
+        public string? Libelle { get; set; }
         public int LienId { get; set; }
 
         [InverseProperty("CatParticipantComporte")]

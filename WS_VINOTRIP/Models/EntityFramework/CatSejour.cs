@@ -8,11 +8,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("csj_id")]
         public int VignobleId { get; set; }
-        public string? LibelleCatVignoble { get; set; }
+        public string? Libelle { get; set; }
 
 
 
-        [InverseProperty("CatSejourSejour")]
-        public virtual ICollection<Sejour> SejourCatSejour { get; set; } = new List<Sejour>();
+        [InverseProperty("SejourCatSejour")]
+        public virtual ICollection<Sejour> CatSejourSejour { get; set; } = new List<Sejour>();
     }
 }

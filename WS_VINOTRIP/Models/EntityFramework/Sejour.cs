@@ -17,11 +17,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int CatVignobleId { get; set; }
 
         [StringLength(100), Required, Column("sjr_titre", TypeName = "varchar(100)")]
-        public string? TitreSejour { get; set; }
+        public string? Titre { get; set; }
         [Required, Column("sjr_description", TypeName = "text")]
-        public string? DescriptionSejour { get; set; }
+        public string? Description { get; set; }
         [Required, Column("sjr_prix", TypeName = "numeric(7,2)")]
-        public double PrixSejour { get; set; }
+        public double Prix { get; set; }
         [Required, Column("sjr_nbjour", TypeName = "numeric(3,2)")]
         public double NbJour { get; set; }
         [Required, Column("sjr_nbnuit")]
