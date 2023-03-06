@@ -13,6 +13,7 @@
   <ItemGroup>
     <Folder Include="Models\EntityFramework\" />
     <Folder Include="Models\DataManager\" />
+    <Folder Include="Models\Repository\" />
   </ItemGroup>
 
 </Project>
