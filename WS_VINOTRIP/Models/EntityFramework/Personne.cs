@@ -23,5 +23,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [StringLength(50)]
         [Column("prs_mailpersonne")]
         public string MailPersonne { get; set; }
+
+        [InverseProperty("ComptePersonne")]
+        public virtual ICollection<Compte> Personnes { get; } = new List<Compte>();
     }
 }
