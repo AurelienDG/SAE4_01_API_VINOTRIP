@@ -13,17 +13,14 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CompteId { get; set; }
 
-        [Key]
         [Required]
         [Column("mdp_id")]
         public int MdpId { get; set; }
 
-        [Key]
         [Required]
         [Column("tpc_id")]
         public int TypeCompteId { get; set; }
 
-        [Key]
         [Required]
         [Column("prs_id")]
         public int PersonneId { get; set; }
