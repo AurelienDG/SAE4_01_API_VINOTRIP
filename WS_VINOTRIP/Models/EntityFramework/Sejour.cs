@@ -2,5 +2,6 @@
 {
     public class Sejour
     {
+        public int MyProperty { get; set; }
     }
 }
