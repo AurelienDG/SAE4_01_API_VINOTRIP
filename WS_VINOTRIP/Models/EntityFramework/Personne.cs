@@ -11,7 +11,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required]
         [Column("prs_id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdPersonne { get; set; }
+        public int PersonneId { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -24,7 +24,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("prs_mailpersonne")]
         public string MailPersonne { get; set; }
 
-        [InverseProperty("ComptePersonne")]
-        public virtual ICollection<Compte> Personnes { get; } = new List<Compte>();
+        [InverseProperty("PersonneCompte")]
+        public virtual ICollection<Compte> ComptePersonne { get; } = new List<Compte>();
     }
 }
