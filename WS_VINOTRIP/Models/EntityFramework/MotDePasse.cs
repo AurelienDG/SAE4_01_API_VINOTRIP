@@ -17,5 +17,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("mdp_mdp")]
         [StringLength(100)]
         public string? Mdp { get; set; }
+
+        [InverseProperty("CompteMDP")]
+        public virtual ICollection<Compte> MotDePasses { get; } = new List<Compte>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
@@ -16,5 +17,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [StringLength(30)]
         [Column("tpc_libelletypecompte")]
         public string LibelleTypeCompte { get; set; }
+
+        [InverseProperty("CompteTypeCompte")]
+        public virtual ICollection<Compte> TypeComptes { get; } = new List<Compte>();
     }
 }

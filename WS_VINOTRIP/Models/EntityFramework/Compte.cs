@@ -48,5 +48,17 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required]
         [Column("cmp_dateconnexion", TypeName = "date")]
         public DateTime DateConnexion { get; set; }
+
+        [ForeignKey("IdTypeCompte")]
+        [InverseProperty("TypeComptes")]
+        public virtual Compte CompteTypeCompte { get; set; } = null!;
+
+        [ForeignKey("IdMdp")]
+        [InverseProperty("MotDePasses")]
+        public virtual Compte CompteMDP { get; set; } = null!;
+
+        [ForeignKey("IdPersonne")]
+        [InverseProperty("Personnes")]
+        public virtual Compte ComptePersonne { get; set; } = null!;
     }
 }
