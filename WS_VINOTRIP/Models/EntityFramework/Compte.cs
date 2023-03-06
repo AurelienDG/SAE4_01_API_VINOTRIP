@@ -60,5 +60,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [ForeignKey("PersonneId")]
         [InverseProperty("ComptePersonne")]
         public virtual Compte PersonneCompte { get; set; } = null!;
+
+        [InverseProperty("ComptePanier")]
+        public virtual ICollection<Panier> PanierCompte { get; } = new List<Panier>();
     }
 }
