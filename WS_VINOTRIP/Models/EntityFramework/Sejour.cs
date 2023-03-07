@@ -53,6 +53,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("SejourComporte")]
         public virtual ICollection<Comporte> ComporteSejour { get; set; } = new List<Comporte>();
 
+         [InverseProperty("SejourFavori")]
+        public virtual ICollection<Favori> FavoriSejour { get; set; } = new List<Favori>();
+
 
     }
 }
