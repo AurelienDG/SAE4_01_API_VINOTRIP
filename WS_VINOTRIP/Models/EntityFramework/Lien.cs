@@ -35,5 +35,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("LienLienEtape")]
         public virtual ICollection<LienEtape> LienEtapeLien { get; set; } = new List<LienEtape>();
 
+        [InverseProperty("LienContient")]
+        public virtual ICollection<Contient> ContientLien { get; set; } = new List<Contient>();
+
     }
 }
