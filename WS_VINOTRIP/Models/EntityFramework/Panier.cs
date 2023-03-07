@@ -34,7 +34,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [Required]
         [Column("pnr_prixtotal", TypeName = "numeric(9,2)")]
-        public string PrixTotal { get; set; }
+        public double PrixTotal { get; set; }
 
         [Column("pnr_datesejour", TypeName = "date")]
         public DateTime DateSejour { get; set; }
