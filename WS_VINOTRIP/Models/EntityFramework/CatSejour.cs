@@ -16,7 +16,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
 
         [InverseProperty("SejourCatSejour")]
-        public virtual ICollection<Sejour> CatSejourSejour { get; set; } = new List<Sejour>();
+        public virtual ICollection<Sejour> CatSejoursSejour { get; set; } = new List<Sejour>();
 
         [ForeignKey("LienId")]
         [InverseProperty("CatSejourLien")]

@@ -44,7 +44,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_sjr_rdv");
 
-                entity.HasOne(d => d.SejourCatSejour).WithMany(p => p.CatSejourSejour)
+                entity.HasOne(d => d.SejourCatSejour).WithMany(p => p.CatSejoursSejour)
                     .HasForeignKey(d => d.CatSejourId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_sjr_csj");

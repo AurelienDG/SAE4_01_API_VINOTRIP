@@ -51,7 +51,7 @@ namespace WS_VINOTRIP.Models.DataManager
             sejour.NbNuit = entity.NbNuit;
             sejour.Promotion = entity.Promotion;
             sejour.Est_Valide = entity.Est_Valide;
-            sejour.SejourRouteDesVins = entity.SejourRouteDesVins;
+            sejour.RouteDesVinsSejour = entity.RouteDesVinsSejour;
             sejour.SejourCatSejour = entity.SejourCatSejour;
             sejour.SejourCatVignoble = entity.SejourCatVignoble;
             sejour.EtapesSejour = entity.EtapesSejour;
