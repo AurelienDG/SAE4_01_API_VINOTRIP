@@ -12,7 +12,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PersonneId { get; set; }
 
-        [Key]
         [Required]
         [Column("sjr_id")]
         public int SejourId { get; set; }

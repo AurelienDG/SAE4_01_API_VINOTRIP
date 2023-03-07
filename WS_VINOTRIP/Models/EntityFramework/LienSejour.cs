@@ -6,9 +6,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_liensejour_lsj")]
     public partial class LienSejour
     {
-        [Key, Column("lsj_id")]
+        [Column("lsj_id")]
         public int SejourId { get; set; }
-        [Key, Column("lsj_id")]
+        [Column("lsj_id")]
         public int LienId { get; set; }
 
 

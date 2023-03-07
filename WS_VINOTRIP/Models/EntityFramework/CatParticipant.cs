@@ -11,14 +11,14 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int CatParticipantId { get; set; }
         [StringLength(30), Required, Column("vgb_titre", TypeName = "varchar(30)")]
         public string? Libelle { get; set; }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("len_id")]
+        [Column("len_id")]
         public int LienId { get; set; }
 
         [InverseProperty("CatParticipantComporte")]
         public virtual ICollection<Comporte> ComporteCatParticipant { get; set; } = new List<Comporte>();
 
         [ForeignKey("LienId")]
-        [InverseProperty("VCatParticipantLien")]
+        [InverseProperty("CatParticipantLien")]
         public virtual Lien LienCatParticipant { get; set; } = null!;
     }
 }

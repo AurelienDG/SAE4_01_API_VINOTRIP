@@ -10,7 +10,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("sjr_id")]
         public int SejourId { get; set; }
 
-        [Key]
         [Column("cpp_id")]
         public int CatParticipantId { get; set; }
 
