@@ -18,6 +18,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("VignobleRouteDesVins")]
         public virtual ICollection<RouteDesVins> RouteDesVinsVignoble { get; set; } = new List<RouteDesVins>();
 
+        [InverseProperty("VignobleElementVignoble")]
+        public virtual ICollection<ElementVignoble> ElementVignobleVignoble { get; set; } = new List<ElementVignoble>();
+
         [ForeignKey("LienId")]
         [InverseProperty("VignobleLien")]
         public virtual Lien LienVignoble { get; set; } = null!;
