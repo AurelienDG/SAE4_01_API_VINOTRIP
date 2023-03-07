@@ -10,7 +10,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int VignobleId { get; set; }
         [StringLength(30), Required, Column("csj_libelle", TypeName = "varchar(30)")]
         public string? Libelle { get; set; }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("len_id")]
+        [Column("len_id")]
         public int LienId { get; set; }
 
 

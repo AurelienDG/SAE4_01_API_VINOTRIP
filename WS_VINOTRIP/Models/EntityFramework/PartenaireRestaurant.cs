@@ -28,8 +28,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int EtoilesRestaurant { get; set; }
 
         [ForeignKey("PersonneId")]
-        [InverseProperty("PartenairePartenaireRestaurant")]
-        public virtual Partenaire PartenaireRestaurantPartenaire { get; set; } = null!;
+        [InverseProperty("PartenaireRestaurantPartenaire")]
+        public virtual Partenaire PartenairePartenaireRestaurant { get; set; } = null!;
 
     }
 }

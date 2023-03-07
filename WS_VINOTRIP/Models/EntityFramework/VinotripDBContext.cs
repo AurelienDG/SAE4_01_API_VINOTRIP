@@ -55,6 +55,24 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasConstraintName("fk_sjr_cvg");
             });
 
+            modelBuilder.Entity<Concerne>(entity =>
+            {
+                entity.HasKey(e => new { e.EtapeId, e.ElementId })
+                    .HasName("pk_ccr");
+
+                entity.HasOne(d => d.EtapeConcerne).WithMany(p => p.ConcerneEtape)
+                    .HasForeignKey(d => d.EtapeId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_ccr_etp");
+
+                entity.HasOne(d => d.ElementEtapeConcerne).WithMany(p => p.ConcerneElementEtape)
+                    .HasForeignKey(d => d.ElementId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_ccr_ele");
+
+                entity.Property(e => e.Horaire).HasColumnType("time");
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 

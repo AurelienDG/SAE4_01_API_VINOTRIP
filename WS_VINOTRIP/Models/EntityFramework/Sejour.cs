@@ -9,11 +9,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("sjr_id")]
         public int SejourId { get; set; }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("rdv_id")]
+        [Column("rdv_id")]
         public int RouteVinId { get; set; }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("csj_id")]
+        [Column("csj_id")]
         public int CatSejourId { get; set; }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("cvg_id")]
+        [Column("cvg_id")]
         public int CatVignobleId { get; set; }
 
         [StringLength(100), Required, Column("sjr_titre", TypeName = "varchar(100)")]
@@ -58,6 +58,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("SejourLienSejour")]
         public virtual ICollection<LienSejour> LienSejourSejour { get; set; } = new List<LienSejour>();
+        
+        [InverseProperty("SejourSejourCadeau")]
+        public virtual ICollection<SejourCadeau> SejourCadeauSejour { get; set; } = new List<SejourCadeau>();
 
 
     }

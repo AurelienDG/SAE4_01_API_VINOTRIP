@@ -12,7 +12,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public string? Titre { get; set; }
         [Required, Column("vgb_description", TypeName = "text")]
         public string? Description { get; set; }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("len_id")]
+        [Column("len_id")]
         public int LienId { get; set; }
 
         [InverseProperty("VignobleRouteDesVins")]

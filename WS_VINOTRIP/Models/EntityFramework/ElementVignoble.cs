@@ -8,7 +8,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("evg_id")]
         public int ElementVignobleId { get; set; }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("vgb_id")]
+        [Column("vgb_id")]
         public int VignobleId { get; set; }
         [StringLength(70), Required, Column("evg_titre", TypeName = "varchar(70)")]
         public string? Titre { get; set; }

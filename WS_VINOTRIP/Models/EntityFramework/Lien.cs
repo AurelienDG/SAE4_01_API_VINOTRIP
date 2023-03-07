@@ -23,7 +23,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("LienCatParticipant")]
         public virtual ICollection<CatParticipant> CatParticipantLien { get; set; } = new List<CatParticipant>();
 
-        [InverseProperty("ElementVignobleLienLien")]
+        [InverseProperty("LienLienElementVignoble")]
         public virtual ICollection<LienElementVignoble> LienElementVignobleLien { get; set; } = new List<LienElementVignoble>();
 
         [InverseProperty("LienLienSejour")]
@@ -34,6 +34,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("LienLienEtape")]
         public virtual ICollection<LienEtape> LienEtapeLien { get; set; } = new List<LienEtape>();
+
+        [InverseProperty("LienContient")]
+        public virtual ICollection<Contient> ContientLien { get; set; } = new List<Contient>();
 
     }
 }

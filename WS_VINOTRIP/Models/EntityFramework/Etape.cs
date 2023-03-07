@@ -11,7 +11,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EtapeId { get; set; }
 
-        [Key]
         [Column("sjr_id")]
         public int SejourId { get; set; }
 
@@ -32,5 +31,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("EtapeLienEtape")]
         public virtual ICollection<LienEtape> LienEtapeEtape { get; set; } = new List<LienEtape>();
+
     }
 }
