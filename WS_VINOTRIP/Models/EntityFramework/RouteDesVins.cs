@@ -16,8 +16,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("len_id")]
         public int LienId { get; set; }
 
-        [InverseProperty("RouteDesVinsVignoble")]
-        public virtual ICollection<Sejour> VignobleRouteDesVins { get; set; } = new List<Sejour>();
+        [InverseProperty("RouteDesVinsSejour")]
+        public virtual ICollection<Sejour> SejourRouteDesVins { get; set; } = new List<Sejour>();
 
         [ForeignKey("VignobleId")]
         [InverseProperty("VignobleRouteDesVins")]
