@@ -31,7 +31,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("sjr_est_valide")]
         public bool Est_Valide { get; set; }
 
-         
+
         [ForeignKey("RouteVinId")]
         [InverseProperty("SejourRouteDesVins")]
         public virtual RouteDesVins RouteDesVinsSejour { get; set; } = null!;
@@ -49,12 +49,15 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("SejourPanier")]
         public virtual ICollection<Panier> PanierSejour { get; set; } = new List<Panier>();
-        
+
         [InverseProperty("SejourComporte")]
         public virtual ICollection<Comporte> ComporteSejour { get; set; } = new List<Comporte>();
 
-         [InverseProperty("SejourFavori")]
+        [InverseProperty("SejourFavori")]
         public virtual ICollection<Favori> FavoriSejour { get; set; } = new List<Favori>();
+
+        [InverseProperty("SejourLienSejour")]
+        public virtual ICollection<LienSejour> LienSejourSejour { get; set; } = new List<LienSejour>();
 
 
     }
