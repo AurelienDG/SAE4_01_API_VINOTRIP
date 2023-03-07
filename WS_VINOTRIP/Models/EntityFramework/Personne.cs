@@ -30,4 +30,3 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual ICollection<Avis> AvisPersonne { get; } = new List<Avis>();
     }
 }
-}
