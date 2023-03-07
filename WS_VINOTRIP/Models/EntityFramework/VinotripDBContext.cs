@@ -53,11 +53,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasForeignKey(d => d.CatVignobleId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_sjr_cvg");
-
-                entity.HasOne(d => d.SejourRouteDesVins).WithMany(p => p.RouteDesVinsSejour)
-                    .HasForeignKey(d => d.RouteVinId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_sjr_rdv");
             });
 
             OnModelCreatingPartial(modelBuilder);
