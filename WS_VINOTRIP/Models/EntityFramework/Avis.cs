@@ -11,22 +11,21 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AvisId { get; set; }
 
-        [Key]
         [Column("prs_id")]
         public int PersonneId { get; set; }
 
-        [Column("avi_titreavis")]
+        [Column("avi_titre")]
         [StringLength(50)]
         [Required]
-        public string? TitreAvis { get; set; }
+        public string? Titre { get; set; }
 
         [Column("avi_note")]
         [Required]
         public int Note { get; set; }
 
-        [Column("avi_desvriptionavis", TypeName = "text")]
+        [Column("avi_desvription", TypeName = "text")]
         [Required]
-        public string? DescriptionAvis { get; set; }
+        public string? Description { get; set; }
 
         [Column("avi_dateavis", TypeName = "date")]
         [Required]
@@ -34,12 +33,19 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [Column("sjr_id")]
         [Required]
-        public int SjourId { get; set; }
+        public int SejourId { get; set; }
 
         [Required]
         [Column("avi_reponse", TypeName = "text")]
         public string? Reponse { get; set; }
 
+        [ForeignKey("SejourId")]
+        [InverseProperty("AvisSejour")]
+        public virtual Sejour SejourAvis { get; set; } = null!;
+
+        [ForeignKey("PersonneId")]
+        [InverseProperty("AvisPersonne")]
+        public virtual Personne PersonneAvis { get; set; } = null!;
 
     }
 }
