@@ -38,5 +38,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [ForeignKey("TypeElementId")]
         [InverseProperty("ElementEtapeTypeElement")]
         public virtual TypeElement TypeElementElementEtape { get; set; } = null!;
+
+        [InverseProperty("ElementEtapeContient")]
+        public virtual ICollection<Contient> ContientElementEtape { get; set; } = new List<Contient>();
     }
 }
