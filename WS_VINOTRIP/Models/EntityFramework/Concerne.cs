@@ -14,7 +14,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         
         [Column("ccr_horaire", TypeName = "time")]
         [Required]
-        public DateTime Horaire { get; set; }
+        public DateTime? Horaire { get; set; }
 
         [ForeignKey("EtapeId")]
         [InverseProperty("ConcerneEtape")]
