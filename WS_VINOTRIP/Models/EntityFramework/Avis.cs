@@ -12,6 +12,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int AvisId { get; set; }
 
         [Column("prs_id")]
+        [Required]
         public int PersonneId { get; set; }
 
         [Column("avi_titre")]
@@ -46,6 +47,10 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [ForeignKey("PersonneId")]
         [InverseProperty("AvisPersonne")]
         public virtual Personne PersonneAvis { get; set; } = null!;
+
+        [InverseProperty("AvisReported")]
+        public virtual ICollection<Reported> ReportedAvis { get; } = new List<Reported>();
+
 
     }
 }

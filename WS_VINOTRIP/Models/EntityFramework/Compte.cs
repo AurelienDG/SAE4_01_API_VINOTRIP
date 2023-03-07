@@ -60,5 +60,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("ComptePanier")]
         public virtual ICollection<Panier> PanierCompte { get; } = new List<Panier>();
+
+        [InverseProperty("CompteReported")]
+        public virtual ICollection<Reported> ReportedCompte { get; } = new List<Reported>();
+
     }
 }
