@@ -23,9 +23,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual ICollection<HistoriqueCadeau> HistoriqueCadeauBonCadeau { get; } = new List<HistoriqueCadeau>();
 
         [InverseProperty("BonCadeauSejourCadeau")]
-        public virtual ICollection<SejourCadeau> SejourCadeauHistoriqueCadeau { get; } = new List<SejourCadeau>();
+        public virtual ICollection<SejourCadeau> SejourCadeauBonCadeau { get; } = new List<SejourCadeau>();
 
         [InverseProperty("BonCadeauChequeCadeau")]
-        public virtual ICollection<ChequeCadeau> ChequeCadeauHistoriqueCadeau { get; } = new List<ChequeCadeau>();
+        public virtual ICollection<ChequeCadeau> ChequeCadeauBonCadeau { get; } = new List<ChequeCadeau>();
     }
 }
