@@ -19,7 +19,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("RouteDesVinsSejour")]
         public virtual ICollection<Sejour> SejourRouteDesVins { get; set; } = new List<Sejour>();
 
-        [InverseProperty("LienLienRouteDesVins")]
+        [InverseProperty("RouteDesVinsLienRouteDesVins")]
         public virtual ICollection<LienRouteDesVins> LienRouteDesVinsRouteDesVins { get; set; } = new List<LienRouteDesVins>();
 
         [ForeignKey("VignobleId")]
