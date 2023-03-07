@@ -14,7 +14,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual DbSet<Sejour> Sejours { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=EnseignantsDB; uid=postgres; password=postgres;"); //à changer
+            => optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=VinotripDB; uid=postgres; password=postgres;"); //à changer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,32 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasForeignKey(d => d.CatParticipantId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_cpt_cpp");
+            });
+
+            modelBuilder.Entity<Sejour>(entity =>
+            {
+                entity.HasKey(e => new { e.SejourId })
+                    .HasName("pk_sjr");
+
+                entity.HasOne(d => d.SejourRouteDesVins).WithMany(p => p.RouteDesVinsSejour)
+                    .HasForeignKey(d => d.RouteVinId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_sjr_rdv");
+
+                entity.HasOne(d => d.SejourCatSejour).WithMany(p => p.CatSejourSejour)
+                    .HasForeignKey(d => d.CatSejourId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_sjr_csj");
+
+                entity.HasOne(d => d.SejourCatVignoble).WithMany(p => p.CatVignobleSejour)
+                    .HasForeignKey(d => d.CatVignobleId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_sjr_cvg");
+
+                entity.HasOne(d => d.SejourRouteDesVins).WithMany(p => p.RouteDesVinsSejour)
+                    .HasForeignKey(d => d.RouteVinId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_sjr_rdv");
             });
 
             OnModelCreatingPartial(modelBuilder);

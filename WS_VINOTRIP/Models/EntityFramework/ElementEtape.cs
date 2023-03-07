@@ -20,13 +20,13 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("tpe_id")]
         public int TypeElementId { get; set; }
 
-        [Column("ele_libelleelement")]
+        [Column("ele_libelle")]
         [StringLength(100)]
         [Required]
-        public string? LibelleElement { get; set; }
+        public string? Libelle { get; set; }
 
-        [Column("ele_descriptionelement", TypeName = "text")]
-        public string? DescriptionElement { get; set; }
+        [Column("ele_description", TypeName = "text")]
+        public string? Description { get; set; }
 
         [ForeignKey("PersonneId")]
         [InverseProperty("PartenaireElementEtape")]

@@ -15,13 +15,13 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("sjr_id")]
         public int SejourId { get; set; }
 
-        [Column("etp_titreetape")]
+        [Column("etp_titre")]
         [Required]
         [StringLength(100)]
-        public string? TitreEtape { get; set; }
+        public string? Titre { get; set; }
 
-        [Column("etp_descriptionetape", TypeName = "text")]
-        public string? DescriptionEtape { get; set; }
+        [Column("etp_description", TypeName = "text")]
+        public string? Description { get; set; }
 
         [ForeignKey("SejourId")]
         [InverseProperty("EtapesSejour")]
