@@ -6,11 +6,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_concerne_ccr")]
     public partial class Concerne
     {
-        [Key]
         [Column("etp_id")]
         public int EtapeId { get; set; }
 
-        [Key]
         [Column("ele_id")]
         public int ElementId { get; set; }
         

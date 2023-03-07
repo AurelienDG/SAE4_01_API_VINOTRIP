@@ -5,9 +5,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_lienelementvignoble_lev")]
     public class LienElementVignoble
     {
-        [Key, Column("evg_id")]
+        [Column("evg_id")]
         public int ElementVignobleId { get; set; }
-        [Key, Column("len_id")]
+        [Column("len_id")]
         public int LienId { get; set; }
 
         [ForeignKey("ElementVignobleId")]

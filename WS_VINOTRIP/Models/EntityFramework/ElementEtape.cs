@@ -11,12 +11,10 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("ele_id")]
         public int ElementId { get; set; }
 
-        [Key]
         [Column("prs_id")]
         [Required]
         public int PersonneId { get; set; }
 
-        [Key]
         [Column("tpe_id")]
         public int TypeElementId { get; set; }
 
