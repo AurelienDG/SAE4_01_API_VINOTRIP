@@ -89,6 +89,42 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasName("pk_fav");
             });
 
+            modelBuilder.Entity<HistoriqueCadeau>(entity =>
+            {
+                entity.HasKey(e => new { e.PersonneId, e.BonCadeauId })
+                    .HasName("pk_htc");
+            });
+
+            modelBuilder.Entity<LienElementVignoble>(entity =>
+            {
+                entity.HasKey(e => new { e.LienId, e.ElementVignobleId })
+                    .HasName("pk_lev");
+            });
+
+            modelBuilder.Entity<LienEtape>(entity =>
+            {
+                entity.HasKey(e => new { e.LienId, e.EtapeId })
+                    .HasName("pk_lep");
+            });
+
+            modelBuilder.Entity<LienRouteDesVins>(entity =>
+            {
+                entity.HasKey(e => new { e.LienId, e.RouteDesVinsId })
+                    .HasName("pk_lrv");
+            });
+
+            modelBuilder.Entity<LienSejour>(entity =>
+            {
+                entity.HasKey(e => new { e.LienId, e.SejourId })
+                    .HasName("pk_lsj");
+            });
+
+            modelBuilder.Entity<Reported>(entity =>
+            {
+                entity.HasKey(e => new { e.AvisId, e.CompteId })
+                    .HasName("pk_rep");
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 
