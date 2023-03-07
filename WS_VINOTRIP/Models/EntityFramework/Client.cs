@@ -11,13 +11,15 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("prs_id")]
         public int PersonneId { get; set; }
 
-        [Required]
         [Column("ctl_titreclient", TypeName = "char(5)")]
         public string? TitreClient { get; set; }
 
         [Required]
         [Column("ctl_prenomclient")]
         public string? PrenomClient { get; set; }
+
+        [Column("ctl_datenaissance", TypeName = "date")]
+        public DateTime DateNaissance { get; set; }
 
         [InverseProperty("ClientCompte")]
         public virtual ICollection<Compte> CompteClient { get; } = new List<Compte>();
