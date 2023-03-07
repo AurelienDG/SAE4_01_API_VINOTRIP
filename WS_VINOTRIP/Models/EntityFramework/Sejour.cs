@@ -58,6 +58,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("SejourLienSejour")]
         public virtual ICollection<LienSejour> LienSejourSejour { get; set; } = new List<LienSejour>();
+        
+        [InverseProperty("SejourSejourCadeau")]
+        public virtual ICollection<SejourCadeau> SejourCadeauSejour { get; set; } = new List<SejourCadeau>();
 
 
     }
