@@ -39,7 +39,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                 entity.HasKey(e => new { e.SejourId })
                     .HasName("pk_sjr");
 
-                entity.HasOne(d => d.SejourRouteDesVins).WithMany(p => p.RouteDesVinsSejour)
+                entity.HasOne(d => d.RouteDesVinsSejour).WithMany(p => p.SejourRouteDesVins)
                     .HasForeignKey(d => d.RouteVinId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_sjr_rdv");

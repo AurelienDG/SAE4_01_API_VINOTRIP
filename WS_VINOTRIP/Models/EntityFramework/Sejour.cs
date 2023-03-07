@@ -33,8 +33,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
          
         [ForeignKey("RouteVinId")]
-        [InverseProperty("RouteDesVinsSejour")]
-        public virtual RouteDesVins SejourRouteDesVins { get; set; } = null!;
+        [InverseProperty("SejourRouteDesVins")]
+        public virtual RouteDesVins RouteDesVinsSejour { get; set; } = null!;
 
         [ForeignKey("CatSejourId")]
         [InverseProperty("CatSejoursSejour")]
