@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
-    [Table("t_e_Sejourcadeau_sjc")]
+    [Table("t_e_sejourcadeau_sjc")]
     public partial class SejourCadeau
     {
         [Required]
