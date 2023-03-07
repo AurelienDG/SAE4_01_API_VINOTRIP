@@ -12,11 +12,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int LienId { get; set; }
 
         [ForeignKey("EtapeId")]
-        [InverseProperty("LienSejourRouteDesVins")]
-        public virtual RouteDesVins RouteDesVinsLienSejour { get; set; } = null!;
+        [InverseProperty("LienEtapeEtape")]
+        public virtual Etape EtapeLienEtape { get; set; } = null!;
 
         [ForeignKey("LienId")]
-        [InverseProperty("LienSejourLien")]
-        public virtual Lin LienLienSejour { get; set; } = null!;
+        [InverseProperty("LienEtapeLien")]
+        public virtual Lien LienLienEtape { get; set; } = null!;
     }
 }
