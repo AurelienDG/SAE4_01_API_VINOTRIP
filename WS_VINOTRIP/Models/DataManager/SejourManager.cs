@@ -8,7 +8,8 @@ namespace WS_VINOTRIP.Models.DataManager
     public class SejourManager : IDataRepository<Sejour>
     {
         readonly VinotripDBContext? vinotripDbContext;
-        public SejourManager() { }
+        public SejourManager() 
+        { }
 
         public SejourManager(VinotripDBContext context)
         {
@@ -27,7 +28,7 @@ namespace WS_VINOTRIP.Models.DataManager
 
         public async Task<ActionResult<Sejour>> GetByStringAsync(string titre)
         {
-            return await vinotripDbContext.Sejours.FirstOrDefaultAsync(u => u.TitreSejour.ToUpper() == titre.ToUpper());
+            return await vinotripDbContext.Sejours.FirstOrDefaultAsync(u => u.Titre.ToUpper() == titre.ToUpper());
         }
 
         public async Task AddAsync(Sejour entity)
@@ -43,9 +44,9 @@ namespace WS_VINOTRIP.Models.DataManager
             sejour.RouteVinId = entity.RouteVinId;
             sejour.CatSejourId = entity.CatSejourId;
             sejour.CatVignobleId = entity.CatVignobleId;
-            sejour.TitreSejour = entity.TitreSejour;
-            sejour.DescriptionSejour = entity.DescriptionSejour;
-            sejour.PrixSejour = entity.PrixSejour;
+            sejour.Titre = entity.Titre;
+            sejour.Description = entity.Description;
+            sejour.Prix = entity.Prix;
             sejour.NbJour = entity.NbJour;
             sejour.NbNuit = entity.NbNuit;
             sejour.Promotion = entity.Promotion;
