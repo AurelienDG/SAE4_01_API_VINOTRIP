@@ -30,6 +30,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("ClientClientCarte")]
         public virtual ICollection<ClientCarte> ClientCarteClient { get; } = new List<ClientCarte>();
 
+        [InverseProperty("ClientHistoriqueCadeau")]
+        public virtual ICollection<HistoriqueCadeau> HistoriqueCadeauClient { get; } = new List<HistoriqueCadeau>();
+
         [ForeignKey("PersonneId")]
         [InverseProperty("ClientPersonne")]
         public virtual Personne PersonneClient { get; set; } = null!;
