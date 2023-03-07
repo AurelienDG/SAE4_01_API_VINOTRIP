@@ -6,9 +6,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_lienetape_lep")]
     public partial class LienEtape
     {
-        [Column("lep_id")]
+        [Key, Column("etp_id")]
         public int EtapeId { get; set; }
-        [Column("lep_id")]
+        [Key, Column("len_id")]
         public int LienId { get; set; }
 
         [ForeignKey("EtapeId")]
