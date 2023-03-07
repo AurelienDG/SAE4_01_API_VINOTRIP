@@ -25,6 +25,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("ClientFavori")]
         public virtual ICollection<Favori> FavoriClient { get; } = new List<Favori>();
 
+        [InverseProperty("ClientClientCarte")]
+        public virtual ICollection<ClientCarte> ClientCarteClient { get; } = new List<ClientCarte>();
+
         [ForeignKey("PersonneId")]
         [InverseProperty("ClientPersonne")]
         public virtual Personne PersonneClient { get; set; } = null!;
