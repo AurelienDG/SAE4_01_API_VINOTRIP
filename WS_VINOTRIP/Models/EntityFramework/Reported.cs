@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WS_VINOTRIP.Models.EntityFramework
 {
     [Table("t_j_reported_rep")]
-    public class Reported
+    public partial class Reported
     {
         [Column("cmp_id")]
         [Required]

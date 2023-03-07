@@ -51,6 +51,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("AvisReported")]
         public virtual ICollection<Reported> ReportedAvis { get; } = new List<Reported>();
 
+        [InverseProperty("AvisLienAvis")]
+        public virtual ICollection<LiensAvis> LiensAvisAvis { get; } = new List<LiensAvis>();
 
     }
 }
