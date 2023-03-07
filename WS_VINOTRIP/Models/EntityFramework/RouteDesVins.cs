@@ -9,11 +9,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("rdv_id")]
         public int RouteDesVinsId { get; set; }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("vgb_id")]
+        [Column("vgb_id")]
         public int VignobleId { get; set; }
         [StringLength(30), Required, Column("rdv_titre", TypeName = "varchar(30)")]
         public string? Titre { get; set; }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("len_id")]
+        [Column("len_id")]
         public int LienId { get; set; }
 
         [InverseProperty("RouteDesVinsSejour")]
