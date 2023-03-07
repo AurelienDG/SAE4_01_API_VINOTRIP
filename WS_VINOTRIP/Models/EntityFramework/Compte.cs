@@ -22,7 +22,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int TypeCompteId { get; set; }
 
         [Required]
-        [Column("prs_id")]
+        [Column("clt_id")]
         public int PersonneId { get; set; }
 
         [Required]
@@ -55,8 +55,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual MotDePasse MDPCompte { get; set; } = null!;
 
         [ForeignKey("PersonneId")]
-        [InverseProperty("ComptePersonne")]
-        public virtual Personne PersonneCompte { get; set; } = null!;
+        [InverseProperty("CompteClient")]
+        public virtual Client ClientCompte { get; set; } = null!;
 
         [InverseProperty("ComptePanier")]
         public virtual ICollection<Panier> PanierCompte { get; } = new List<Panier>();
