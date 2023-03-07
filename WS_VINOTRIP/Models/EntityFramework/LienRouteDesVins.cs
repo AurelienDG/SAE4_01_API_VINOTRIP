@@ -16,7 +16,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual RouteDesVins RouteDesVinsLienRouteDesVins { get; set; } = null!;
 
         [ForeignKey("LienId")]
-        [InverseProperty("LienSejourLien")]
-        public virtual Lien LienLienSejour { get; set; } = null!;
+        [InverseProperty("LienRouteDesVinsLien")]
+        public virtual Lien LienLienRouteDesVins { get; set; } = null!;
     }
 }
