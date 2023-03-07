@@ -24,6 +24,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("ElementId")]
         [InverseProperty("ConcerneElementEtape")]
-        public virtual ElementEtape ElemenEtapeConcerne { get; set; } = null!;
+        public virtual ElementEtape ElementEtapeConcerne { get; set; } = null!;
     }
 }
