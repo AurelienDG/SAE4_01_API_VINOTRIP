@@ -14,7 +14,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual DbSet<Sejour> Sejours { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=EnseignantsDB; uid=postgres; password=postgres;"); //à changer
+            => optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=VinotripDB; uid=postgres; password=postgres;"); //à changer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
