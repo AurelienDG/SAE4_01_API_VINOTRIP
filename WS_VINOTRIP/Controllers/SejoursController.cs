@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WS_VINOTRIP.Models.EntityFramework;
+using WS_VINOTRIP.Models.Repository;
 
 namespace WS_VINOTRIP.Controllers
 {
@@ -13,25 +14,24 @@ namespace WS_VINOTRIP.Controllers
     [ApiController]
     public class SejoursController : ControllerBase
     {
-        private readonly VinotripDBContext _context;
-
-        public SejoursController(VinotripDBContext context)
+        private readonly IDataRepository<Sejour> dataRepository;
+        public SejoursController(IDataRepository<Sejour> dataRepo)
         {
-            _context = context;
+            dataRepository = dataRepo;
         }
 
         // GET: api/Sejours
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sejour>>> GetSejours()
         {
-            return await _context.Sejours.ToListAsync();
+            return dataRepository.GetAllAsync().Result;
         }
 
         // GET: api/Sejours/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Sejour>> GetSejour(int id)
+        public async Task<ActionResult<Sejour>> GetSejourById(int id)
         {
-            var sejour = await _context.Sejours.FindAsync(id);
+            var sejour = dataRepository.GetByIdAsync(id).Result;
 
             if (sejour == null)
             {
@@ -39,6 +39,19 @@ namespace WS_VINOTRIP.Controllers
             }
 
             return sejour;
+        }
+
+        public async Task<ActionResult<Sejour>> GetSejourByTitre(string titre)
+        {
+            var sejour = dataRepository.GetByStringAsync(titre);
+            //var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(e => e.Mail.ToUpper() == email.ToUpper());
+
+            if (sejour.Result == null)
+            {
+                return NotFound();
+            }
+
+            return sejour.Result;
         }
 
         // PUT: api/Sejours/5
@@ -51,25 +64,18 @@ namespace WS_VINOTRIP.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(sejour).State = EntityState.Modified;
+            var sejourToUpdate = dataRepository.GetByIdAsync(id);
 
-            try
+            if (sejourToUpdate == null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SejourExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
-            return NoContent();
+            else
+            {
+                dataRepository.UpdateAsync(sejourToUpdate.Result.Value, sejour);
+                return NoContent();
+            }
         }
 
         // POST: api/Sejours
@@ -77,31 +83,35 @@ namespace WS_VINOTRIP.Controllers
         [HttpPost]
         public async Task<ActionResult<Sejour>> PostSejour(Sejour sejour)
         {
-            _context.Sejours.Add(sejour);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            return CreatedAtAction("GetSejour", new { id = sejour.SejourId }, sejour);
+            dataRepository.AddAsync(sejour);
+
+            return CreatedAtAction("GetById", new { id = sejour.SejourId }, sejour); // GetById : nom de l’action
         }
 
         // DELETE: api/Sejours/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSejour(int id)
         {
-            var sejour = await _context.Sejours.FindAsync(id);
+            var sejour = dataRepository.GetByIdAsync(id);
+
             if (sejour == null)
             {
                 return NotFound();
             }
 
-            _context.Sejours.Remove(sejour);
-            await _context.SaveChangesAsync();
+            dataRepository.DeleteAsync(sejour.Result.Value);
 
             return NoContent();
         }
 
-        private bool SejourExists(int id)
+        /*private bool SejourExists(int id)
         {
             return _context.Sejours.Any(e => e.SejourId == id);
-        }
+        }*/
     }
 }
