@@ -6,9 +6,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_lienroutedesvins_lrv")]
     public partial class LienRouteDesVins
     {
-        [Key, Column("rdv_id")]
+        [Column("rdv_id")]
         public int RouteDesVinsId { get; set; }
-        [Key, Column("len_id")]
+        [Column("len_id")]
         public int LienId { get; set; }
 
         [ForeignKey("RouteDesVinsId")]
