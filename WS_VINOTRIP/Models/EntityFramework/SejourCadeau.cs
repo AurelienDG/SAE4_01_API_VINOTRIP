@@ -6,6 +6,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_sejourcadeau_sjc")]
     public partial class SejourCadeau
     {
+        [Key]
         [Required]
         [Column("bcd_id")]
         public int BonCadeauId { get; set; }

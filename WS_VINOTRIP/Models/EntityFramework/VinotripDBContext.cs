@@ -69,8 +69,24 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasForeignKey(d => d.ElementId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_ccr_ele");
+            });
 
-                entity.Property(e => e.Horaire).HasColumnType("time");
+            modelBuilder.Entity<ClientCarte>(entity =>
+            {
+                entity.HasKey(e => new { e.PersonneId, e.CarteId })
+                    .HasName("pk_clc");
+            });
+
+            modelBuilder.Entity<Contient>(entity =>
+            {
+                entity.HasKey(e => new { e.LienId, e.ElementId })
+                    .HasName("pk_ctn");
+            });
+
+            modelBuilder.Entity<Favori>(entity =>
+            {
+                entity.HasKey(e => new { e.SejourId, e.PersonneId })
+                    .HasName("pk_fav");
             });
 
             OnModelCreatingPartial(modelBuilder);
