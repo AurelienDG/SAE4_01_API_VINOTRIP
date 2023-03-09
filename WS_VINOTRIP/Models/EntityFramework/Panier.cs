@@ -6,10 +6,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_panier_pnr")]
     public partial class Panier
     {
-        [Key]
         [Required]
-        [Column("pnr_id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("prs_id")]
         public int PersonneId { get; set; }
 
         [Required]

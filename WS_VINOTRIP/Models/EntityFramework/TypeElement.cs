@@ -3,18 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
-    [Table("t_e_typeelementetape_tee")]
+    [Table("t_e_typeelementetape_tpe")]
     public partial class TypeElement
     {
         [Key]
         [Required]
-        [Column("tee_id")]
+        [Column("tpe_id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TypeElementId { get; set; }
 
         [Required]
         [StringLength(50)]
-        [Column("tee_libelletypecompte")]
+        [Column("tpe_libelletypecompte")]
         public string LibelleTypeElement { get; set; }
 
         [InverseProperty("TypeElementElementEtape")]

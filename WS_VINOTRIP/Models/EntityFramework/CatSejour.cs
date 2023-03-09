@@ -7,7 +7,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
     public partial class CatSejour
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("csj_id")]
-        public int VignobleId { get; set; }
+        public int CatSejourId { get; set; }
         [StringLength(30), Required, Column("csj_libelle", TypeName = "varchar(30)")]
         public string? Libelle { get; set; }
         [Column("len_id")]
