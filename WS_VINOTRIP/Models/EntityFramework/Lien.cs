@@ -8,11 +8,12 @@ namespace WS_VINOTRIP.Models.EntityFramework
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("len_id")]
         public int LienId { get; set; }
-        [StringLength(150), Required, Column("len_url", TypeName = "varchar(150)")]
-        public string? url { get; set; }
-        [StringLength(30), Required, Column("len_type", TypeName = "varchar(30)")]
-        public string? type { get; set; }
 
+        [Required, Column("len_url"), StringLength(150)]
+        public string? Url { get; set; }
+
+        [Required, Column("len_type"), StringLength(30)]
+        public string? Type { get; set; }
 
         [InverseProperty("LienVignoble")]
         public virtual ICollection<Vignoble> VignobleLien { get; set; } = new List<Vignoble>();
