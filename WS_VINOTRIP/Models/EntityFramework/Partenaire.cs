@@ -19,7 +19,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual ICollection<ElementEtape>? ElementsEtapePartenaire { get; set; } = null!;
 
         [InverseProperty("PartenairePartenaireRestaurant")]
-        public virtual ICollection<PartenaireRestaurant>? PartenaireRestaurantPartenaire { get; set; } = null!;
+        public virtual ICollection<PartenaireRestaurant>? PartenairesRestaurantPartenaire { get; set; } = null!;
 
         [InverseProperty("PartenairePartenaireCave")]
         public virtual ICollection<PartenaireCave>? PartenairesCavePartenaire { get; set; } = null!;
