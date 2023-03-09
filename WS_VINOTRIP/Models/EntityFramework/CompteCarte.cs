@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
-    [Table("t_e_comptecarte_clc")]
+    [Table("t_e_comptecarte_cpc")]
     public partial class CompteCarte
     {
         [Required]

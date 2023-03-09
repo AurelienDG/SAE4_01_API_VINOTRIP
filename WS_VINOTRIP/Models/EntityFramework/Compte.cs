@@ -7,11 +7,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_compte_cmp")]
     public partial class Compte
     {
+        [Key, Required, Column("prs_id")]
+        public int PersonneId { get; set; }
+
         [Required, Column("tpc_id")]
         public int TypeCompteId { get; set; }
-
-        [Required, Column("prs_id")]
-        public int PersonneId { get; set; }
 
         [Required, Column("cmp_telcompte", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
         public string? Tel { get; set; }
@@ -64,7 +64,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("CompteCommande")]
         public virtual ICollection<Commande> CommandeCompte { get; } = new List<Commande>();
         
-
         [ForeignKey("PersonneId")]
         [InverseProperty("ComptePersonne")]
         public virtual Personne PersonneCompte { get; set; } = null!;

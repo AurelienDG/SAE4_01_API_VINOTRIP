@@ -27,6 +27,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public string? NomCarte { get; set; }
 
         [InverseProperty("RefCarteBancaireCompteCarte")]
-        public virtual CompteCarte CompteCarteRefCarteBancaire { get; set; } = null!;
+        public virtual ICollection<CompteCarte> CompteCarteRefCarteBancaire { get; set; } = null!;
     }
 }
