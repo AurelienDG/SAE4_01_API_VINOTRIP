@@ -7,7 +7,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
     public partial class BonCadeau
     {
         [Key]
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("bcd_id")]
         public int BonCadeauId { get; set; }
 

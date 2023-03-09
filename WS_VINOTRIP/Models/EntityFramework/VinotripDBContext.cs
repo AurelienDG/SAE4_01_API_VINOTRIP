@@ -22,6 +22,16 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.AvisId })
                     .HasName("pk_avi");
+
+                entity.HasOne(d => d.PersonneAvis).WithMany(p => p.AvisPersonne)
+                    .HasForeignKey(d => d.PersonneId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_avi_prs");
+
+                entity.HasOne(d => d.SejourAvis).WithMany(p => p.AvisSejour)
+                    .HasForeignKey(d => d.SejourId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_avi_sjr");
             });
 
             modelBuilder.Entity<BonCadeau>(entity =>
@@ -34,12 +44,22 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.CatParticipantId })
                     .HasName("pk_cpp");
+
+                entity.HasOne(d => d.LienCatParticipant).WithMany(p => p.CatParticipantLien)
+                    .HasForeignKey(d => d.LienId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_cpp_len");
             });
 
             modelBuilder.Entity<CatSejour>(entity =>
             {
                 entity.HasKey(e => new { e.CatSejourId })
                     .HasName("pk_csj");
+
+                entity.HasOne(d => d.LienCatSejour).WithMany(p => p.CatSejourLien)
+                    .HasForeignKey(d => d.LienId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_csj_len");
             });
 
             modelBuilder.Entity<CatVignoble>(entity =>
@@ -52,18 +72,38 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.BonCadeauId })
                     .HasName("pk_cqc");
+
+                entity.HasOne(d => d.BonCadeauChequeCadeau).WithMany(p => p.ChequeCadeauBonCadeau)
+                    .HasForeignKey(d => d.BonCadeauId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_cqc_bcd");
             });
 
             modelBuilder.Entity<Client>(entity =>
             {
                 entity.HasKey(e => new { e.PersonneId })
                     .HasName("pk_clt");
+
+                entity.HasOne(d => d.PersonneClient).WithMany(p => p.ClientPersonne)
+                    .HasForeignKey(d => d.PersonneId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_clt_prs");
             });
 
             modelBuilder.Entity<ClientCarte>(entity =>
             {
                 entity.HasKey(e => new { e.PersonneId, e.CarteId })
                     .HasName("pk_clc");
+
+                entity.HasOne(d => d.ClientClientCarte).WithMany(p => p.ClientCarteClient)
+                    .HasForeignKey(d => d.PersonneId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_clc_clt");
+
+                entity.HasOne(d => d.RefCarteBancaireClientCarte).WithMany(p => p.ClientCarteRefCarteBancaire)
+                    .HasForeignKey(d => d.CarteId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_clc_rcb");
             });
 
             modelBuilder.Entity<Comporte>(entity =>
@@ -86,6 +126,21 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.CompteId })
                     .HasName("pk_cmp");
+
+                entity.HasOne(d => d.TypeCompteCompte).WithMany(p => p.CompteTypeCompte)
+                    .HasForeignKey(d => d.TypeCompteId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_cmp_tpc");
+
+                entity.HasOne(d => d.MdpCompte).WithMany(p => p.CompteMdp)
+                    .HasForeignKey(d => d.MdpId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_cmp_mdp");
+
+                entity.HasOne(d => d.ClientCompte).WithMany(p => p.CompteClient)
+                    .HasForeignKey(d => d.PersonneId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_cmp_clt");
             });
 
             modelBuilder.Entity<Concerne>(entity =>
@@ -108,12 +163,32 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.LienId, e.ElementId })
                     .HasName("pk_ctn");
+
+                entity.HasOne(d => d.LienContient).WithMany(p => p.ContientLien)
+                    .HasForeignKey(d => d.LienId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_ctn_len");
+
+                entity.HasOne(d => d.ElementEtapeContient).WithMany(p => p.ContientElementEtape)
+                    .HasForeignKey(d => d.ElementId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_ctn_ele");
             });
 
             modelBuilder.Entity<ElementEtape>(entity =>
             {
                 entity.HasKey(e => new { e.ElementId })
                     .HasName("pk_ele");
+
+                entity.HasOne(d => d.PartenaireElementEtape).WithMany(p => p.ElementsEtapePartenaire)
+                    .HasForeignKey(d => d.PersonneId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_ele_ptn");
+
+                entity.HasOne(d => d.TypeElementElementEtape).WithMany(p => p.ElementEtapeTypeElement)
+                    .HasForeignKey(d => d.TypeElementId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_ele_tpe");
             });
 
             modelBuilder.Entity<ElementVignoble>(entity =>
