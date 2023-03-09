@@ -41,17 +41,18 @@ namespace WS_VINOTRIP.Controllers
             return sejour;
         }
 
-        public async Task<ActionResult<Sejour>> GetSejourByTitre(string titre)
+        //idcatvignoble idcatsejour, idcatparticipant
+        public async Task<ActionResult<IEnumerable<Sejour>>> GetSejourFilter(int sejour, int vignoble, int participant)
         {
-            var sejour = dataRepository.GetByStringAsync(titre);
+            var filterList = dataRepository.GetAllAsync().Result.Value.Where(e => e.SejourId == sejour && e.CatVignobleId == vignoble /*&& e.*/);
             //var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(e => e.Mail.ToUpper() == email.ToUpper());
 
-            if (sejour.Result == null)
+            if (filterList == null)
             {
                 return NotFound();
             }
 
-            return sejour.Result;
+            return filterList.ToList();
         }
 
         // PUT: api/Sejours/5
