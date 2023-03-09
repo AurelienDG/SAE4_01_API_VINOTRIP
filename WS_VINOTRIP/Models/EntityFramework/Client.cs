@@ -7,7 +7,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
     public class Client
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("prs_id")]
         public int PersonneId { get; set; }
 
