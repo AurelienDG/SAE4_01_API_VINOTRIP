@@ -11,7 +11,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
         : base(options)
         { }
 
-        public virtual DbSet<Sejour> Sejours { get; set; }
+        public virtual DbSet<Sejour>? Sejours { get; set; }
+        public virtual DbSet<CatParticipant>? CatsParticipant { get; set; }
+        public virtual DbSet<Comporte>? Comportes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=VinotripDB; uid=postgres; password=postgres;"); //à changer
@@ -181,7 +183,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_ele_ptn");
 
-                entity.HasOne(d => d.TypeElementEtapeElementEtape).WithMany(p => p.ElementEtapeTypeElementetape)
+                entity.HasOne(d => d.TypeElementEtapeElementEtape).WithMany(p => p.ElementEtapeTypeElementEtape)
                     .HasForeignKey(d => d.TypeElementId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_ele_tpe");
@@ -246,7 +248,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                 entity.HasKey(e => new { e.PersonneId, e.BonCadeauId })
                     .HasName("pk_htc");
 
-                entity.HasOne(d => d.ClientHistoriqueCadeau).WithMany(p => p.HistoriqueCadeauClient)
+                entity.HasOne(d => d.CompteHistoriqueCadeau).WithMany(p => p.HistoriqueCadeauCompte)
                     .HasForeignKey(d => d.PersonneId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_htc_clt");
@@ -261,6 +263,22 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.LienId })
                     .HasName("pk_len");
+            });
+
+            modelBuilder.Entity<LienAvis>(entity =>
+            {
+                entity.HasKey(e => new { e.LienId, e.AvisId })
+                    .HasName("pk_lav");
+
+                entity.HasOne(d => d.LienLienAvis).WithMany(p => p.LiensAvisLien)
+                    .HasForeignKey(d => d.LienId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_lav_len");
+
+                entity.HasOne(d => d.AvisLienAvis).WithMany(p => p.LiensAvisAvis)
+                    .HasForeignKey(d => d.AvisId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_lav_avi");
             });
 
             modelBuilder.Entity<LienElementVignoble>(entity =>

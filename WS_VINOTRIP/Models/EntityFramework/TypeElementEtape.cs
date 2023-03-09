@@ -15,9 +15,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required]
         [StringLength(50)]
         [Column("tpe_libelletypecompte")]
-        public string? LibelleTypeElementEtape { get; set; }
+        public string? Libelle { get; set; }
 
-        [InverseProperty("TypeElementElementEtape")]
-        public virtual ICollection<ElementEtape> ElementEtapeTypeElementetape { get; } = new List<ElementEtape>();
+        [InverseProperty("TypeElementEtapeElementEtape")]
+        public virtual ICollection<ElementEtape> ElementEtapeTypeElementEtape { get; } = new List<ElementEtape>();
     }
 }

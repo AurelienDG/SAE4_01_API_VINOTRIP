@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
-    [Table("t_e_favori_fav")]
+    [Table("t_j_favori_fav")]
     public class Favori
     {
         [Required]

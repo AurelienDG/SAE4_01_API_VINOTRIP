@@ -59,8 +59,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual ICollection<CompteCarte> CompteCarteCompte { get; } = new List<CompteCarte>();
 
         [InverseProperty("CompteHistoriqueCadeau")]
-        public virtual ICollection<HistoriqueCadeau> CompteHistoriqueCadeau { get; } = new List<HistoriqueCadeau>();
-        //
+        public virtual ICollection<HistoriqueCadeau> HistoriqueCadeauCompte { get; } = new List<HistoriqueCadeau>();
+        
         [InverseProperty("CompteCommande")]
         public virtual ICollection<Commande> CommandeCompte { get; } = new List<Commande>();
         

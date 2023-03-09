@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WS_VINOTRIP.Models.EntityFramework
 {
     [Table("t_j_lienavis_lav")]
-    public partial class LiensAvis
+    public partial class LienAvis
     {
         [Required]
         [Column("len_id")]

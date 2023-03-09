@@ -24,7 +24,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("rsv_nbchambres")]
         public int NbChambres { get; set; }
 
-        [Required, Column("rsv_id", TypeName = "numeric(9,2)")]
+        [Required, Column("rsv_prixtotal", TypeName = "numeric(9,2)")]
         public double PrixTotal { get; set; }
 
         [Required, Column("rsv_datedebutresa", TypeName = "date")]
