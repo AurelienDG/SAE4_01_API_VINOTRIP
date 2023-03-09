@@ -7,7 +7,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
     public class Favori
     {
         [Required]
-        [Column("ctl_id")]
+        [Column("prs_id")]
         public int PersonneId { get; set; }
 
         [Required]
@@ -15,8 +15,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int SejourId { get; set; }
 
         [ForeignKey("PersonneId")]
-        [InverseProperty("FavoriClient")]
-        public virtual Client ClientFavori { get; set; } = null!;
+        [InverseProperty("FavoriCompte")]
+        public virtual Compte CompteFavori { get; set; } = null!;
 
         [ForeignKey("SejourId")]
         [InverseProperty("FavoriSejour")]

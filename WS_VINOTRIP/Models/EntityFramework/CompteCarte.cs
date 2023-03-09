@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
-    [Table("t_e_clientcarte_clc")]
-    public partial class ClientCarte
+    [Table("t_e_comptecarte_clc")]
+    public partial class CompteCarte
     {
         [Required]
         [Column("ctl_id")]
@@ -16,11 +16,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int CarteId { get; set; }
 
         [ForeignKey("PersonneId")]
-        [InverseProperty("ClientCarteClient")]
-        public virtual Client ClientClientCarte { get; set; } = null!;
+        [InverseProperty("CompteCarteCompte")]
+        public virtual Compte CompteCompteCarte { get; set; } = null!;
 
         [ForeignKey("CarteId")]
-        [InverseProperty("ClientCarteRefCarteBancaire")]
-        public virtual RefCarteBancaire RefCarteBancaireClientCarte { get; set; } = null!;
+        [InverseProperty("CompteCarteRefCarteBancaire")]
+        public virtual RefCarteBancaire RefCarteBancaireCompteCarte { get; set; } = null!;
     }
 }
