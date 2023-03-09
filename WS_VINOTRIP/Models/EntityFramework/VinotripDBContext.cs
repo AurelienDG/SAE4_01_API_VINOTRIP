@@ -185,7 +185,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_ele_ptn");
 
-                entity.HasOne(d => d.TypeElementElementEtape).WithMany(p => p.ElementEtapeTypeElement)
+                entity.HasOne(d => d.TypeElementEtapeElementEtape).WithMany(p => p.ElementEtapeTypeElementetape)
                     .HasForeignKey(d => d.TypeElementId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_ele_tpe");
@@ -195,6 +195,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.ElementVignobleId })
                     .HasName("pk_evg");
+
+                entity.HasOne(d => d.VignobleElementVignoble).WithMany(p => p.ElementVignobleVignoble)
+                    .HasForeignKey(d => d.VignobleId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_evg_vgb");
             });
 
             modelBuilder.Entity<Etape>(entity =>
@@ -344,9 +349,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasName("pk_tpc");
             });
 
-            modelBuilder.Entity<TypeElement>(entity =>
+            modelBuilder.Entity<TypeElementEtape>(entity =>
             {
-                entity.HasKey(e => new { e.TypeElementId })
+                entity.HasKey(e => new { e.TypeElementEtapeId })
                     .HasName("pk_tpe");
             });
 
