@@ -32,7 +32,7 @@ namespace WS_VINOTRIP.Models.DataManager
             return await vinotripDbContext.Comportes.ToListAsync();
         }
 
-        public Task<ActionResult<Comporte>> GetByIdAsync(int id)
+        public async Task<ActionResult<Comporte>> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

@@ -15,9 +15,13 @@ namespace WS_VINOTRIP.Controllers
     public class SejoursController : ControllerBase
     {
         private readonly IDataRepository<Sejour> dataRepository;
-        public SejoursController(IDataRepository<Sejour> dataRepo)
+        private readonly IDataRepository<CatParticipant> dataRepository2;
+        private readonly IDataRepository<Comporte> dataRepository3;
+        public SejoursController(IDataRepository<Sejour> dataRepo, IDataRepository<CatParticipant> dataRepo2, IDataRepository<Comporte> dataRepo3)
         {
             dataRepository = dataRepo;
+            dataRepository2 = dataRepo2;
+            dataRepository3 = dataRepo3;
         }
 
         // GET: api/Sejours
@@ -42,9 +46,14 @@ namespace WS_VINOTRIP.Controllers
         }
 
         //idcatvignoble idcatsejour, idcatparticipant
-        public async Task<ActionResult<IEnumerable<Sejour>>> GetSejourFilter(int sejour, int vignoble, int participant)
+        public async Task<ActionResult<IEnumerable<Sejour>>> GetSejourFilter(int catsejour, int catvignoble, int catparticipant)
         {
-            var filterList = dataRepository.GetAllAsync().Result.Value.Where(e => e.SejourId == sejour && e.CatVignobleId == vignoble /*&& e.*/);
+            var pute = dataRepository3.GetAllAsync().Result.Value.Where(e => e.CatParticipantId == catparticipant);
+
+            var filterList = dataRepository.GetAllAsync().Result.Value.Where(e => e.CatSejourId == catsejour && e.CatVignobleId == catvignoble);
+
+            /*var result = filterList.Join(pute);*/
+
             //var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(e => e.Mail.ToUpper() == email.ToUpper());
 
             if (filterList == null)
