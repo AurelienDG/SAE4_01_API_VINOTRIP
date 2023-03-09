@@ -12,16 +12,13 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("ele_id")]
         public int ElementId { get; set; }
         
-        [Column("ccr_horaire", TypeName = "time")]
-        [Required]
+        [Column("ccr_horaire", TypeName = "time"), Required]
         public TimeOnly Horaire { get; set; }
 
-        [ForeignKey("EtapeId")]
-        [InverseProperty("ConcerneEtape")]
+        [InverseProperty("ConcerneEtape"), ForeignKey("EtapeId")]
         public virtual Etape EtapeConcerne { get; set; } = null!;
 
-        [ForeignKey("ElementId")]
-        [InverseProperty("ConcerneElementEtape")]
+        [InverseProperty("ConcerneElementEtape"), ForeignKey("ElementId")]
         public virtual ElementEtape ElementEtapeConcerne { get; set; } = null!;
     }
 }

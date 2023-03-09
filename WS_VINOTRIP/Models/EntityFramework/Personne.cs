@@ -28,5 +28,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("PersonneAvis")]
         public virtual ICollection<Avis> AvisPersonne { get; } = new List<Avis>();
+
+        [InverseProperty("PersonneReside")]
+        public virtual ICollection<Reside> ResidePersonne { get; set; } = new List<Reside>();
     }
 }

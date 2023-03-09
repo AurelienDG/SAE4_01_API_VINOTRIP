@@ -15,8 +15,8 @@ builder.Services.AddRazorPages();
 
 /*builder.Services.AddDbContext<SeriesDbContext>(options =>
   options.UseNpgsql(builder.Configuration.GetConnectionString("SeriesDbContext")));*/
-builder.Services.AddDbContext<VinotripDBContext>(options =>
-  options.UseNpgsql(builder.Configuration.GetConnectionString("VinotripDbContextRemote")));
+builder.Services.AddDbContext<VinotripDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("VinotripDbContextRemote")));
+
 builder.Services.AddScoped<IDataRepository<Sejour>, SejourManager>();
 
 var app = builder.Build();
