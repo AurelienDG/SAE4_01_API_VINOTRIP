@@ -6,9 +6,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_reported_rep")]
     public partial class Reported
     {
-        [Column("cmp_id")]
+        [Column("prs_id")]
         [Required]
-        public int CompteId { get; set; }
+        public int PersonneId { get; set; }
 
         [Column("avi_id")]
         [Required]
@@ -18,7 +18,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required]
         public bool A_Signale { get; set; }
 
-        [ForeignKey("CompteId")]
+        [ForeignKey("PersonneId")]
         [InverseProperty("ReportedCompte")]
         public virtual Compte CompteReported { get; set; } = null!;
 

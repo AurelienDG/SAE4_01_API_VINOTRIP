@@ -27,7 +27,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual ICollection<Favori> FavoriClient { get; } = new List<Favori>();
 
         [InverseProperty("ClientClientCarte")]
-        public virtual ICollection<ClientCarte> ClientCarteClient { get; } = new List<ClientCarte>();
+        public virtual ICollection<CompteCarte> ClientCarteClient { get; } = new List<CompteCarte>();
 
         [InverseProperty("ClientHistoriqueCadeau")]
         public virtual ICollection<HistoriqueCadeau> HistoriqueCadeauClient { get; } = new List<HistoriqueCadeau>();

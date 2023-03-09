@@ -11,101 +11,13 @@ namespace WS_VINOTRIP.Models.EntityFramework
         : base(options)
         { }
 
-        public virtual DbSet<Sejour>? Sejours { get; set; }
+        public virtual DbSet<Sejour> Sejours { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=VinotripDB; uid=postgres; password=postgres;"); //à changer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Avis>(entity =>
-            {
-                entity.HasKey(e => new { e.AvisId })
-                    .HasName("pk_avi");
-
-                entity.HasOne(d => d.PersonneAvis).WithMany(p => p.AvisPersonne)
-                    .HasForeignKey(d => d.PersonneId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_avi_prs");
-
-                entity.HasOne(d => d.SejourAvis).WithMany(p => p.AvisSejour)
-                    .HasForeignKey(d => d.SejourId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_avi_sjr");
-            });
-
-            modelBuilder.Entity<BonCadeau>(entity =>
-            {
-                entity.HasKey(e => new { e.BonCadeauId })
-                    .HasName("pk_bcd");
-            });
-
-            modelBuilder.Entity<CatParticipant>(entity =>
-            {
-                entity.HasKey(e => new { e.CatParticipantId })
-                    .HasName("pk_cpp");
-
-                entity.HasOne(d => d.LienCatParticipant).WithMany(p => p.CatParticipantLien)
-                    .HasForeignKey(d => d.LienId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_cpp_len");
-            });
-
-            modelBuilder.Entity<CatSejour>(entity =>
-            {
-                entity.HasKey(e => new { e.CatSejourId })
-                    .HasName("pk_csj");
-
-                entity.HasOne(d => d.LienCatSejour).WithMany(p => p.CatSejourLien)
-                    .HasForeignKey(d => d.LienId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_csj_len");
-            });
-
-            modelBuilder.Entity<CatVignoble>(entity =>
-            {
-                entity.HasKey(e => new { e.CatVignobleId })
-                    .HasName("pk_cvg");
-            });
-
-            modelBuilder.Entity<ChequeCadeau>(entity =>
-            {
-                entity.HasKey(e => new { e.BonCadeauId })
-                    .HasName("pk_cqc");
-
-                entity.HasOne(d => d.BonCadeauChequeCadeau).WithMany(p => p.ChequeCadeauBonCadeau)
-                    .HasForeignKey(d => d.BonCadeauId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_cqc_bcd");
-            });
-
-            modelBuilder.Entity<Client>(entity =>
-            {
-                entity.HasKey(e => new { e.PersonneId })
-                    .HasName("pk_clt");
-
-                entity.HasOne(d => d.PersonneClient).WithMany(p => p.ClientPersonne)
-                    .HasForeignKey(d => d.PersonneId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_clt_prs");
-            });
-
-            modelBuilder.Entity<ClientCarte>(entity =>
-            {
-                entity.HasKey(e => new { e.PersonneId, e.CarteId })
-                    .HasName("pk_clc");
-
-                entity.HasOne(d => d.ClientClientCarte).WithMany(p => p.ClientCarteClient)
-                    .HasForeignKey(d => d.PersonneId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_clc_clt");
-
-                entity.HasOne(d => d.RefCarteBancaireClientCarte).WithMany(p => p.ClientCarteRefCarteBancaire)
-                    .HasForeignKey(d => d.CarteId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_clc_rcb");
-            });
-
             modelBuilder.Entity<Comporte>(entity =>
             {
                 entity.HasKey(e => new { e.SejourId, e.CatParticipantId })
@@ -122,25 +34,25 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasConstraintName("fk_cpt_cpp");
             });
 
-            modelBuilder.Entity<Compte>(entity =>
+            modelBuilder.Entity<Sejour>(entity =>
             {
-                entity.HasKey(e => new { e.CompteId })
-                    .HasName("pk_cmp");
+                entity.HasKey(e => new { e.SejourId })
+                    .HasName("pk_sjr");
 
-                entity.HasOne(d => d.TypeCompteCompte).WithMany(p => p.CompteTypeCompte)
-                    .HasForeignKey(d => d.TypeCompteId)
+                entity.HasOne(d => d.RouteDesVinsSejour).WithMany(p => p.SejourRouteDesVins)
+                    .HasForeignKey(d => d.RouteVinId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_cmp_tpc");
+                    .HasConstraintName("fk_sjr_rdv");
 
-                entity.HasOne(d => d.MdpCompte).WithMany(p => p.CompteMdp)
-                    .HasForeignKey(d => d.MdpId)
+                entity.HasOne(d => d.SejourCatSejour).WithMany(p => p.CatSejoursSejour)
+                    .HasForeignKey(d => d.CatSejourId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_cmp_mdp");
+                    .HasConstraintName("fk_sjr_csj");
 
-                entity.HasOne(d => d.ClientCompte).WithMany(p => p.CompteClient)
-                    .HasForeignKey(d => d.PersonneId)
+                entity.HasOne(d => d.SejourCatVignoble).WithMany(p => p.CatVignobleSejour)
+                    .HasForeignKey(d => d.CatVignobleId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_cmp_clt");
+                    .HasConstraintName("fk_sjr_cvg");
             });
 
             modelBuilder.Entity<Concerne>(entity =>
@@ -159,20 +71,16 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasConstraintName("fk_ccr_ele");
             });
 
+            modelBuilder.Entity<CompteCarte>(entity =>
+            {
+                entity.HasKey(e => new { e.PersonneId, e.CarteId })
+                    .HasName("pk_clc");
+            });
+
             modelBuilder.Entity<Contient>(entity =>
             {
                 entity.HasKey(e => new { e.LienId, e.ElementId })
                     .HasName("pk_ctn");
-
-                entity.HasOne(d => d.LienContient).WithMany(p => p.ContientLien)
-                    .HasForeignKey(d => d.LienId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_ctn_len");
-
-                entity.HasOne(d => d.ElementEtapeContient).WithMany(p => p.ContientElementEtape)
-                    .HasForeignKey(d => d.ElementId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_ctn_ele");
             });
 
             modelBuilder.Entity<ElementEtape>(entity =>
@@ -243,12 +151,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasForeignKey(d => d.BonCadeauId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_htc_bcd");
-            });
-
-            modelBuilder.Entity<Lien>(entity =>
-            {
-                entity.HasKey(e => new { e.LienId })
-                    .HasName("pk_len");
             });
 
             modelBuilder.Entity<LienElementVignoble>(entity =>

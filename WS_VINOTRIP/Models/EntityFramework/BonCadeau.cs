@@ -27,5 +27,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("BonCadeauChequeCadeau")]
         public virtual ICollection<ChequeCadeau> ChequeCadeauBonCadeau { get; } = new List<ChequeCadeau>();
+
+        [InverseProperty("BonCadeauReservation")]
+        public virtual ICollection<Reservation> ReservationBonCadeau { get; set; } = new List<Reservation>();
+
     }
 }

@@ -7,15 +7,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_motdepasse_mdp")]
     public partial class MotDePasse
     {
-        [Key]
-        [Required]
-        [Column("mdp_id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
+        [Key, Column("mdp_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MdpId { get; set; }
 
-        [Required]
-        [Column("mdp_mdp")]
-        [StringLength(100)]
+        [Required, Column("mdp_mdp"), StringLength(100)]
         public string? Mdp { get; set; }
 
         [InverseProperty("MdpCompte")]
