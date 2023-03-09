@@ -12,7 +12,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("ReservationId")]
         [InverseProperty("Est_factureeReservation")]
-        public virtual Reservation EtapeEst_facturee { get; set; } = null!;
+        public virtual Reservation ReservationEst_facturee { get; set; } = null!;
 
         [ForeignKey("AdresseId")]
         [InverseProperty("Est_factureeAdresse")]

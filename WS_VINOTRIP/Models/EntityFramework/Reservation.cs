@@ -42,9 +42,12 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("BonCadeauId")]
         [InverseProperty("ReservationBonCadeau")]
-        public virtual Sejour BonCadeauReservation { get; set; } = null!;
+        public virtual BonCadeau BonCadeauReservation { get; set; } = null!;
 
         [InverseProperty("ReservationPasse")]
         public virtual ICollection<Passe> PasseReservation { get; } = new List<Passe>();
+
+        [InverseProperty("ReservationEst_facturee")]
+        public virtual ICollection<Est_facturee> Est_factureeReservation { get; } = new List<Est_facturee>();
     }
 }

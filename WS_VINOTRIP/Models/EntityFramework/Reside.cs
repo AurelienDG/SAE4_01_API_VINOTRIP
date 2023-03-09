@@ -16,6 +16,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("AdresseId")]
         [InverseProperty("ResideAdresse")]
-        public virtual ElementEtape AdresseReside { get; set; } = null!;
+        public virtual Adresse AdresseReside { get; set; } = null!;
     }
 }
