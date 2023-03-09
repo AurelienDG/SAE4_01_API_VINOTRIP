@@ -7,9 +7,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_compte_cmp")]
     public partial class Compte
     {
-        [Required, Column("mdp_id")]
-        public int MdpId { get; set; }
-
         [Required, Column("tpc_id")]
         public int TypeCompteId { get; set; }
 
@@ -66,7 +63,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         //
         [InverseProperty("CompteCommande")]
         public virtual ICollection<Commande> CommandeCompte { get; } = new List<Commande>();
-        //
+        
 
         [ForeignKey("PersonneId")]
         [InverseProperty("ComptePersonne")]
