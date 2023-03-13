@@ -24,6 +24,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.AdresseId })
                     .HasName("pk_ads");
+
+                entity.HasCheckConstraint("ck_ads_rue1_rue2", "rue1 <> rue2");
             });
 
             modelBuilder.Entity<Avis>(entity =>
@@ -40,6 +42,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasForeignKey(d => d.SejourId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_avi_sjr");
+
+                entity.HasCheckConstraint("ck_avi_note", "note BETWEEN 1 AND 5");
             });
 
             modelBuilder.Entity<BonCadeau>(entity =>
@@ -92,26 +96,10 @@ namespace WS_VINOTRIP.Models.EntityFramework
                 entity.HasKey(e => new { e.CommandeId })
                     .HasName("pk_cmd");
 
-                entity.HasOne(d => d.CompteCommande).WithMany(p => p.CommandeCompte)
+                entity.HasOne(d => d.UserCommande).WithMany(p => p.CommandeUser)
                     .HasForeignKey(d => d.PersonneId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_cmd_cmp");
-            });
-
-            modelBuilder.Entity<CompteCarte>(entity =>
-            {
-                entity.HasKey(e => new { e.PersonneId, e.CarteId })
-                    .HasName("pk_cpc");
-
-                entity.HasOne(d => d.CompteCompteCarte).WithMany(p => p.CompteCarteCompte)
-                    .HasForeignKey(d => d.PersonneId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_cpc_cmp");
-
-                entity.HasOne(d => d.RefCarteBancaireCompteCarte).WithMany(p => p.CompteCarteRefCarteBancaire)
-                    .HasForeignKey(d => d.CarteId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_cpc_rcb");
             });
 
             modelBuilder.Entity<Comporte>(entity =>
@@ -133,12 +121,30 @@ namespace WS_VINOTRIP.Models.EntityFramework
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => new { e.PersonneId })
-                    .HasName("pk_cmp");
+                    .HasName("pk_usr");
 
-                entity.HasOne(d => d.TypeCompteCompte).WithMany(p => p.CompteTypeCompte)
+                entity.HasOne(d => d.TypeCompteUser).WithMany(p => p.UserTypeCompte)
                     .HasForeignKey(d => d.TypeCompteId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_cmp_tpc");
+                    .HasConstraintName("fk_usr_tpc");
+
+                entity.HasCheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '18 years'");
+            });
+
+            modelBuilder.Entity<CompteCarte>(entity =>
+            {
+                entity.HasKey(e => new { e.PersonneId, e.CarteId })
+                    .HasName("pk_cpc");
+
+                entity.HasOne(d => d.UserCompteCarte).WithMany(p => p.CompteCarteUser)
+                    .HasForeignKey(d => d.PersonneId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_cpc_cmp");
+
+                entity.HasOne(d => d.RefCarteBancaireCompteCarte).WithMany(p => p.CompteCarteRefCarteBancaire)
+                    .HasForeignKey(d => d.CarteId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_cpc_rcb");
             });
 
             modelBuilder.Entity<Concerne>(entity =>
@@ -237,7 +243,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_fav_sjr");
 
-                entity.HasOne(d => d.CompteFavori).WithMany(p => p.FavoriCompte)
+                entity.HasOne(d => d.UserFavori).WithMany(p => p.FavoriUser)
                     .HasForeignKey(d => d.PersonneId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_fav_clt");
@@ -248,7 +254,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                 entity.HasKey(e => new { e.PersonneId, e.BonCadeauId })
                     .HasName("pk_htc");
 
-                entity.HasOne(d => d.CompteHistoriqueCadeau).WithMany(p => p.HistoriqueCadeauCompte)
+                entity.HasOne(d => d.UserHistoriqueCadeau).WithMany(p => p.HistoriqueCadeauUser)
                     .HasForeignKey(d => d.PersonneId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_htc_clt");
@@ -355,7 +361,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_pnr_sjr");
 
-                entity.HasOne(d => d.ComptePanier).WithMany(p => p.PanierCompte)
+                entity.HasOne(d => d.UserPanier).WithMany(p => p.PanierUser)
                     .HasForeignKey(d => d.PersonneId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_pnr_cmp");
@@ -449,7 +455,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_rep_avi");
 
-                entity.HasOne(d => d.CompteReported).WithMany(p => p.ReportedCompte)
+                entity.HasOne(d => d.UserReported).WithMany(p => p.ReportedUser)
                     .HasForeignKey(d => d.PersonneId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_rep_cmp");
@@ -481,7 +487,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_rsd_ads");
 
-                entity.HasOne(d => d.CompteReside).WithMany(p => p.ResideCompte)
+                entity.HasOne(d => d.UserReside).WithMany(p => p.ResideUser)
                     .HasForeignKey(d => d.PersonneId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_rsd_cmp");

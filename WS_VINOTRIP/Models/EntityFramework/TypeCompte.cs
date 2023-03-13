@@ -18,7 +18,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("tpc_libelletypecompte")]
         public string? Libelle { get; set; }
 
-        [InverseProperty("TypeCompteCompte")]
-        public virtual ICollection<User> CompteTypeCompte { get; } = new List<User>();
+        [InverseProperty("TypeCompteUser")]
+        public virtual ICollection<User> UserTypeCompte { get; } = new List<User>();
     }
 }

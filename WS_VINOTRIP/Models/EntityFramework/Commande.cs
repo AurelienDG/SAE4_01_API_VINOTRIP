@@ -17,8 +17,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int MontantReduction { get; set; }
 
         [ForeignKey("PersonneId")]
-        [InverseProperty("CommandeCompte")]
-        public virtual User CompteCommande { get; set; } = null!;
+        [InverseProperty("CommandeUser")]
+        public virtual User UserCommande { get; set; } = null!;
 
         [InverseProperty("CommandePasse")]
         public virtual ICollection<Passe> PasseCommande { get; } = new List<Passe>();

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
-    [Table("t_e_compte_cmp")]
+    [Table("t_e_user_usr")]
     public partial class User
     {
         [Key, Required, Column("prs_id")]
@@ -40,33 +40,33 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("cmp_mdp"), StringLength(100)]
         public string? Mdp { get; set; }
 
-        [InverseProperty("CompteReside")]
-        public virtual ICollection<Reside> ResideCompte { get; set; } = new List<Reside>();
+        [InverseProperty("UserReside")]
+        public virtual ICollection<Reside> ResideUser { get; set; } = new List<Reside>();
 
-        [ForeignKey("TypeCompteId"), InverseProperty("CompteTypeCompte")]
-        public virtual TypeCompte TypeCompteCompte { get; set; } = null!;
+        [ForeignKey("TypeCompteId"), InverseProperty("UserTypeCompte")]
+        public virtual TypeCompte TypeCompteUser { get; set; } = null!;
 
-        [InverseProperty("ComptePanier")]
-        public virtual ICollection<Panier> PanierCompte { get; } = new List<Panier>();
+        [InverseProperty("UserPanier")]
+        public virtual ICollection<Panier> PanierUser { get; } = new List<Panier>();
 
-        [InverseProperty("CompteReported")]
-        public virtual ICollection<Reported> ReportedCompte { get; } = new List<Reported>();
+        [InverseProperty("UserReported")]
+        public virtual ICollection<Reported> ReportedUser { get; } = new List<Reported>();
 
-        [InverseProperty("CompteFavori")]
-        public virtual ICollection<Favori> FavoriCompte { get; } = new List<Favori>();
+        [InverseProperty("UserFavori")]
+        public virtual ICollection<Favori> FavoriUser { get; } = new List<Favori>();
 
-        [InverseProperty("CompteCompteCarte")]
-        public virtual ICollection<CompteCarte> CompteCarteCompte { get; } = new List<CompteCarte>();
+        [InverseProperty("UserCompteCarte")]
+        public virtual ICollection<CompteCarte> CompteCarteUser { get; } = new List<CompteCarte>();
 
-        [InverseProperty("CompteHistoriqueCadeau")]
-        public virtual ICollection<HistoriqueCadeau> HistoriqueCadeauCompte { get; } = new List<HistoriqueCadeau>();
+        [InverseProperty("UserHistoriqueCadeau")]
+        public virtual ICollection<HistoriqueCadeau> HistoriqueCadeauUser { get; } = new List<HistoriqueCadeau>();
         
-        [InverseProperty("CompteCommande")]
-        public virtual ICollection<Commande> CommandeCompte { get; } = new List<Commande>();
+        [InverseProperty("UserCommande")]
+        public virtual ICollection<Commande> CommandeUser { get; } = new List<Commande>();
         
         [ForeignKey("PersonneId")]
-        [InverseProperty("ComptePersonne")]
-        public virtual Personne PersonneCompte { get; set; } = null!;
+        [InverseProperty("UserPersonne")]
+        public virtual Personne PersonneUser { get; set; } = null!;
 
     }
 }

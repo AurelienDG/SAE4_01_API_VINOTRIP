@@ -48,11 +48,17 @@ namespace WS_VINOTRIP.Controllers
         //idcatvignoble idcatsejour, idcatparticipant
         public async Task<ActionResult<IEnumerable<Sejour>>> GetSejourFilter(int catsejour, int catvignoble, int catparticipant)
         {
+            if (catsejour == null && catvignoble == null && catparticipant == null)
+                return dataRepository.GetAllAsync().Result;
+
             var pute = dataRepository3.GetAllAsync().Result.Value.Where(e => e.CatParticipantId == catparticipant);
 
             var filterList = dataRepository.GetAllAsync().Result.Value.Where(e => e.CatSejourId == catsejour && e.CatVignobleId == catvignoble);
 
-            /*var result = filterList.Join(pute);*/
+            foreach (var sejour in filterList)
+            {
+                var result = sejour.ComporteSejour.Intersect(pute);
+            }
 
             //var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(e => e.Mail.ToUpper() == email.ToUpper());
 

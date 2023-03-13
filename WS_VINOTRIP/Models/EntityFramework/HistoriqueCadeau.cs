@@ -20,8 +20,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public string? TypeCadeau { get; set; }
 
         [ForeignKey("PersonneId")]
-        [InverseProperty("HistoriqueCadeauCompte")]
-        public virtual User CompteHistoriqueCadeau { get; set; } = null!;
+        [InverseProperty("HistoriqueCadeauUser")]
+        public virtual User UserHistoriqueCadeau { get; set; } = null!;
 
         [ForeignKey("BonCadeauId")]
         [InverseProperty("HistoriqueCadeauBonCadeau")]
