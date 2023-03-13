@@ -1016,6 +1016,11 @@ namespace WS_VINOTRIP.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RouteDesVinsId"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("rdv_description");
+
                     b.Property<int>("LienId")
                         .HasColumnType("integer")
                         .HasColumnName("len_id");

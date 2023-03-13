@@ -12,8 +12,8 @@ using WS_VINOTRIP.Models.EntityFramework;
 namespace WS_VINOTRIP.Migrations
 {
     [DbContext(typeof(VinotripDBContext))]
-    [Migration("20230313132512_TopMoumoute")]
-    partial class TopMoumoute
+    [Migration("20230313135818_SuperMigration")]
+    partial class SuperMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1017,6 +1017,11 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnName("rdv_id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RouteDesVinsId"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("rdv_description");
 
                     b.Property<int>("LienId")
                         .HasColumnType("integer")

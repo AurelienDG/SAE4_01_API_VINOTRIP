@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WS_VINOTRIP.Migrations
 {
-    public partial class TopMoumoute : Migration
+    public partial class SuperMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -414,6 +414,7 @@ namespace WS_VINOTRIP.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     vgb_id = table.Column<int>(type: "integer", nullable: false),
                     rdv_titre = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
+                    rdv_description = table.Column<string>(type: "text", nullable: false),
                     len_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
