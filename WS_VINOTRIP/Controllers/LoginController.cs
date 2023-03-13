@@ -16,10 +16,10 @@ namespace WS_VINOTRIP.Controllers
     {
         private readonly IConfiguration _config;
 
-        private List<User> appUsers = new List<User>
+        private List<User1> appUsers = new List<User1>
         {
-            new User { FullName = "Vincent COUTURIER", UserName = "vince", Password = "1234", UserRole = "Admin" },
-            new User { FullName = "Marc MACHIN", UserName = "marc", Password = "1234", UserRole = "User" }
+            new User1 { FullName = "Vincent COUTURIER", UserName = "vince", Password = "1234", UserRole = "Admin" },
+            new User1 { FullName = "Marc MACHIN", UserName = "marc", Password = "1234", UserRole = "User" }
         };
 
         public LoginController(IConfiguration config)
@@ -29,10 +29,10 @@ namespace WS_VINOTRIP.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login([FromBody] User login)
+        public IActionResult Login([FromBody] User1 login)
         {
             IActionResult response = Unauthorized();
-            User user = AuthenticateUser(login);
+            User1 user = AuthenticateUser(login);
             if (user != null)
             {
                 var tokenString = GenerateJwtToken(user);
@@ -46,13 +46,13 @@ namespace WS_VINOTRIP.Controllers
         }
 
 
-        private User AuthenticateUser(User user)
+        private User1 AuthenticateUser(User1 user)
         {
             return appUsers.SingleOrDefault(x => x.UserName.ToUpper() == user.UserName.ToUpper() && x.Password == user.Password);
         }
 
 
-        private string GenerateJwtToken(User userInfo)
+        private string GenerateJwtToken(User1 userInfo)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);

@@ -118,7 +118,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasConstraintName("fk_cpt_cpp");
             });
 
-            modelBuilder.Entity<Compte>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => new { e.PersonneId })
                     .HasName("pk_cmp");
