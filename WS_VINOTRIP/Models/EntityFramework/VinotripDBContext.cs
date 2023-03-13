@@ -25,7 +25,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                 entity.HasKey(e => new { e.AdresseId })
                     .HasName("pk_ads");
 
-                entity.HasCheckConstraint("ck_ads_rue1_rue2", "rue1 <> rue2");
+                entity.HasCheckConstraint("ck_ads_rue1_rue2", "ads_rue1 <> ads_rue2");
             });
 
             modelBuilder.Entity<Avis>(entity =>
@@ -43,7 +43,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_avi_sjr");
 
-                entity.HasCheckConstraint("ck_avi_note", "note between 1 and 5");
+                entity.HasCheckConstraint("ck_avi_note", "avi_note between 1 and 5");
             });
 
             modelBuilder.Entity<BonCadeau>(entity =>
@@ -395,7 +395,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_pth_ptn");
 
-                entity.HasCheckConstraint("ck_pth_etoiles", "etoiles between 0 and 5");
+                entity.HasCheckConstraint("ck_pth_etoiles", "pth_etoiles between 0 and 5");
             });
 
             modelBuilder.Entity<PartenaireRestaurant>(entity =>
@@ -408,7 +408,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_ptr_ptn");
 
-                entity.HasCheckConstraint("ck_ptr_etoiles", "etoiles between 0 and 5");
+                entity.HasCheckConstraint("ck_ptr_etoiles", "ptr_etoiles between 0 and 5");
             });
 
             modelBuilder.Entity<Passe>(entity =>
@@ -432,7 +432,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                 entity.HasKey(e => new { e.PersonneId })
                     .HasName("pk_prs");
 
-                entity.HasCheckConstraint("ck_prs_mail", "mail like '%@%.%'");
+                entity.HasCheckConstraint("ck_prs_mail", "prs_mail like '%@%.%'");
 
                 entity.HasAlternateKey(u => u.Mail)
                     .HasName("uq_prs_mail");
@@ -562,8 +562,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_usr_tpc");
 
-                entity.HasCheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '6570 days'");
-                entity.HasCheckConstraint("ck_usr_tel", "tel like '06%' or tel like '07%'");
+                entity.HasCheckConstraint("ck_usr_datenaissance", "now() - usr_datenaissance > INTERVAL '6570 days'");
+                entity.HasCheckConstraint("ck_usr_tel", "usr_tel like '06%' or tel like '07%'");
 
                 entity.HasAlternateKey(u => u.Tel)
                     .HasName("uq_usr_tel");
