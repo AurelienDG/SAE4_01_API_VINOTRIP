@@ -13,31 +13,31 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("tpc_id")]
         public int TypeCompteId { get; set; }
 
-        [Required, Column("cmp_telcompte", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
+        [Required, Column("usr_telcompte", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
         public string? Tel { get; set; }
 
-        [Required, Column("cmp_newsletter")]
+        [Required, Column("usr_newsletter")]
         public bool Newsletter { get; set; }
 
-        [Required, Column("cmp_estverifie")]
+        [Required, Column("usr_estverifie")]
         public bool EstVerifie { get; set; }
 
-        [Required, Column("cmp_estadmin")]
-        public bool EstAdmin { get; set; }
+        [Required, Column("usr_estadmin")]
+        public string? UserRole { get; set; }
 
-        [Required, Column("cmp_dateconnexion", TypeName = "date")]
+        [Required, Column("usr_dateconnexion", TypeName = "date")]
         public DateTime DateConnexion { get; set; }
 
-        [Column("cmp_titreclient", TypeName = "char(5)")]
+        [Column("usr_titreclient"), StringLength(5)]
         public string? Titre { get; set; }
 
-        [Required, Column("cmp_prenomclient")]
+        [Required, Column("usr_prenomclient")]
         public string? Prenom { get; set; }
 
-        [Column("cmp_datenaissance", TypeName = "date")]
+        [Column("usr_datenaissance", TypeName = "date")]
         public DateTime DateNaissance { get; set; }
 
-        [Required, Column("cmp_mdp"), StringLength(100)]
+        [Required, Column("usr_mdp"), StringLength(100)]
         public string? Mdp { get; set; }
 
         [InverseProperty("UserReside")]
@@ -60,10 +60,10 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("UserHistoriqueCadeau")]
         public virtual ICollection<HistoriqueCadeau> HistoriqueCadeauUser { get; } = new List<HistoriqueCadeau>();
-        
+
         [InverseProperty("UserCommande")]
         public virtual ICollection<Commande> CommandeUser { get; } = new List<Commande>();
-        
+
         [ForeignKey("PersonneId")]
         [InverseProperty("UserPersonne")]
         public virtual Personne PersonneUser { get; set; } = null!;
