@@ -244,7 +244,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.Property<DateTime>("DateFacture")
                         .HasColumnType("date")
-                        .HasColumnName("cmp_datenaissance");
+                        .HasColumnName("usr_datenaissance");
 
                     b.Property<int>("MontantReduction")
                         .HasColumnType("integer")
@@ -278,64 +278,6 @@ namespace WS_VINOTRIP.Migrations
                     b.HasIndex("CatParticipantId");
 
                     b.ToTable("t_j_comporte_cpt");
-                });
-
-            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Compte", b =>
-                {
-                    b.Property<int>("PersonneId")
-                        .HasColumnType("integer")
-                        .HasColumnName("prs_id");
-
-                    b.Property<DateTime>("DateConnexion")
-                        .HasColumnType("date")
-                        .HasColumnName("cmp_dateconnexion");
-
-                    b.Property<DateTime>("DateNaissance")
-                        .HasColumnType("date")
-                        .HasColumnName("cmp_datenaissance");
-
-                    b.Property<bool>("EstAdmin")
-                        .HasColumnType("boolean")
-                        .HasColumnName("cmp_estadmin");
-
-                    b.Property<bool>("EstVerifie")
-                        .HasColumnType("boolean")
-                        .HasColumnName("cmp_estverifie");
-
-                    b.Property<string>("Mdp")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("cmp_mdp");
-
-                    b.Property<bool>("Newsletter")
-                        .HasColumnType("boolean")
-                        .HasColumnName("cmp_newsletter");
-
-                    b.Property<string>("Prenom")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("cmp_prenomclient");
-
-                    b.Property<string>("Tel")
-                        .IsRequired()
-                        .HasColumnType("char(10)")
-                        .HasColumnName("cmp_telcompte");
-
-                    b.Property<string>("Titre")
-                        .HasColumnType("char(5)")
-                        .HasColumnName("cmp_titreclient");
-
-                    b.Property<int>("TypeCompteId")
-                        .HasColumnType("integer")
-                        .HasColumnName("tpc_id");
-
-                    b.HasKey("PersonneId")
-                        .HasName("pk_cmp");
-
-                    b.HasIndex("TypeCompteId");
-
-                    b.ToTable("t_e_compte_cmp");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.CompteCarte", b =>
@@ -685,9 +627,6 @@ namespace WS_VINOTRIP.Migrations
                     b.Property<int>("PersonneId")
                         .HasColumnType("integer")
                         .HasColumnName("prs_id");
-
-                    b.Property<int>("CompteId")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("DateSejour")
                         .HasColumnType("date")
@@ -1195,6 +1134,67 @@ namespace WS_VINOTRIP.Migrations
                     b.ToTable("t_e_typeelementetape_tpe");
                 });
 
+            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.User", b =>
+                {
+                    b.Property<int>("PersonneId")
+                        .HasColumnType("integer")
+                        .HasColumnName("prs_id");
+
+                    b.Property<DateTime>("DateConnexion")
+                        .HasColumnType("date")
+                        .HasColumnName("usr_dateconnexion");
+
+                    b.Property<DateTime>("DateNaissance")
+                        .HasColumnType("date")
+                        .HasColumnName("usr_datenaissance");
+
+                    b.Property<bool>("EstVerifie")
+                        .HasColumnType("boolean")
+                        .HasColumnName("usr_estverifie");
+
+                    b.Property<string>("Mdp")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("usr_mdp");
+
+                    b.Property<bool>("Newsletter")
+                        .HasColumnType("boolean")
+                        .HasColumnName("usr_newsletter");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("usr_prenomclient");
+
+                    b.Property<string>("Tel")
+                        .IsRequired()
+                        .HasColumnType("char(10)")
+                        .HasColumnName("usr_telcompte");
+
+                    b.Property<string>("Titre")
+                        .HasColumnType("char(5)")
+                        .HasColumnName("usr_titreclient");
+
+                    b.Property<int>("TypeCompteId")
+                        .HasColumnType("integer")
+                        .HasColumnName("tpc_id");
+
+                    b.Property<string>("UserRole")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("usr_estadmin");
+
+                    b.HasKey("PersonneId")
+                        .HasName("pk_usr");
+
+                    b.HasIndex("TypeCompteId");
+
+                    b.ToTable("t_e_compte_usr");
+
+                    b.HasCheckConstraint("ck_usr_datenaissance", "DATEDIFF(year,datenaissance,getdate()) > 18)");
+                });
+
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Vignoble", b =>
                 {
                     b.Property<int>("VignobleId")
@@ -1286,14 +1286,14 @@ namespace WS_VINOTRIP.Migrations
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Commande", b =>
                 {
-                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Compte", "CompteCommande")
-                        .WithMany("CommandeCompte")
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.User", "UserCommande")
+                        .WithMany("CommandeUser")
                         .HasForeignKey("PersonneId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("fk_cmd_cmp");
 
-                    b.Navigation("CompteCommande");
+                    b.Navigation("UserCommande");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Comporte", b =>
@@ -1317,26 +1317,6 @@ namespace WS_VINOTRIP.Migrations
                     b.Navigation("SejourComporte");
                 });
 
-            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Compte", b =>
-                {
-                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Personne", "PersonneCompte")
-                        .WithMany("ComptePersonne")
-                        .HasForeignKey("PersonneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.TypeCompte", "TypeCompteCompte")
-                        .WithMany("CompteTypeCompte")
-                        .HasForeignKey("TypeCompteId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("fk_cmp_tpc");
-
-                    b.Navigation("PersonneCompte");
-
-                    b.Navigation("TypeCompteCompte");
-                });
-
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.CompteCarte", b =>
                 {
                     b.HasOne("WS_VINOTRIP.Models.EntityFramework.RefCarteBancaire", "RefCarteBancaireCompteCarte")
@@ -1346,16 +1326,16 @@ namespace WS_VINOTRIP.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_cpc_rcb");
 
-                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Compte", "CompteCompteCarte")
-                        .WithMany("CompteCarteCompte")
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.User", "UserCompteCarte")
+                        .WithMany("CompteCarteUser")
                         .HasForeignKey("PersonneId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("fk_cpc_cmp");
 
-                    b.Navigation("CompteCompteCarte");
-
                     b.Navigation("RefCarteBancaireCompteCarte");
+
+                    b.Navigation("UserCompteCarte");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Concerne", b =>
@@ -1468,8 +1448,8 @@ namespace WS_VINOTRIP.Migrations
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Favori", b =>
                 {
-                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Compte", "CompteFavori")
-                        .WithMany("FavoriCompte")
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.User", "UserFavori")
+                        .WithMany("FavoriUser")
                         .HasForeignKey("PersonneId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
@@ -1482,9 +1462,9 @@ namespace WS_VINOTRIP.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_fav_sjr");
 
-                    b.Navigation("CompteFavori");
-
                     b.Navigation("SejourFavori");
+
+                    b.Navigation("UserFavori");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.HistoriqueCadeau", b =>
@@ -1496,8 +1476,8 @@ namespace WS_VINOTRIP.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_htc_bcd");
 
-                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Compte", "CompteHistoriqueCadeau")
-                        .WithMany("HistoriqueCadeauCompte")
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.User", "UserHistoriqueCadeau")
+                        .WithMany("HistoriqueCadeauUser")
                         .HasForeignKey("PersonneId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
@@ -1505,7 +1485,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.Navigation("BonCadeauHistoriqueCadeau");
 
-                    b.Navigation("CompteHistoriqueCadeau");
+                    b.Navigation("UserHistoriqueCadeau");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.LienAvis", b =>
@@ -1615,8 +1595,8 @@ namespace WS_VINOTRIP.Migrations
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Panier", b =>
                 {
-                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Compte", "ComptePanier")
-                        .WithMany("PanierCompte")
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.User", "UserPanier")
+                        .WithMany("PanierUser")
                         .HasForeignKey("PersonneId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
@@ -1629,9 +1609,9 @@ namespace WS_VINOTRIP.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_pnr_sjr");
 
-                    b.Navigation("ComptePanier");
-
                     b.Navigation("SejourPanier");
+
+                    b.Navigation("UserPanier");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.PartenaireActivite", b =>
@@ -1712,8 +1692,8 @@ namespace WS_VINOTRIP.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_rep_avi");
 
-                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Compte", "CompteReported")
-                        .WithMany("ReportedCompte")
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.User", "UserReported")
+                        .WithMany("ReportedUser")
                         .HasForeignKey("PersonneId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
@@ -1721,7 +1701,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.Navigation("AvisReported");
 
-                    b.Navigation("CompteReported");
+                    b.Navigation("UserReported");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Reservation", b =>
@@ -1754,8 +1734,8 @@ namespace WS_VINOTRIP.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_rsd_ads");
 
-                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Compte", "CompteReside")
-                        .WithMany("ResideCompte")
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.User", "UserReside")
+                        .WithMany("ResideUser")
                         .HasForeignKey("PersonneId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
@@ -1763,7 +1743,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.Navigation("AdresseReside");
 
-                    b.Navigation("CompteReside");
+                    b.Navigation("UserReside");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.RouteDesVins", b =>
@@ -1829,6 +1809,26 @@ namespace WS_VINOTRIP.Migrations
                     b.Navigation("SejourSejourCadeau");
                 });
 
+            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.User", b =>
+                {
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Personne", "PersonneUser")
+                        .WithMany("UserPersonne")
+                        .HasForeignKey("PersonneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.TypeCompte", "TypeCompteUser")
+                        .WithMany("UserTypeCompte")
+                        .HasForeignKey("TypeCompteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_usr_tpc");
+
+                    b.Navigation("PersonneUser");
+
+                    b.Navigation("TypeCompteUser");
+                });
+
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Vignoble", b =>
                 {
                     b.HasOne("WS_VINOTRIP.Models.EntityFramework.Lien", "LienVignoble")
@@ -1884,23 +1884,6 @@ namespace WS_VINOTRIP.Migrations
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Commande", b =>
                 {
                     b.Navigation("PasseCommande");
-                });
-
-            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Compte", b =>
-                {
-                    b.Navigation("CommandeCompte");
-
-                    b.Navigation("CompteCarteCompte");
-
-                    b.Navigation("FavoriCompte");
-
-                    b.Navigation("HistoriqueCadeauCompte");
-
-                    b.Navigation("PanierCompte");
-
-                    b.Navigation("ReportedCompte");
-
-                    b.Navigation("ResideCompte");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.ElementEtape", b =>
@@ -1960,7 +1943,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     b.Navigation("AvisPersonne");
 
-                    b.Navigation("ComptePersonne");
+                    b.Navigation("UserPersonne");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.RefCarteBancaire", b =>
@@ -2003,12 +1986,29 @@ namespace WS_VINOTRIP.Migrations
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.TypeCompte", b =>
                 {
-                    b.Navigation("CompteTypeCompte");
+                    b.Navigation("UserTypeCompte");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.TypeElementEtape", b =>
                 {
                     b.Navigation("ElementEtapeTypeElementEtape");
+                });
+
+            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.User", b =>
+                {
+                    b.Navigation("CommandeUser");
+
+                    b.Navigation("CompteCarteUser");
+
+                    b.Navigation("FavoriUser");
+
+                    b.Navigation("HistoriqueCadeauUser");
+
+                    b.Navigation("PanierUser");
+
+                    b.Navigation("ReportedUser");
+
+                    b.Navigation("ResideUser");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Vignoble", b =>

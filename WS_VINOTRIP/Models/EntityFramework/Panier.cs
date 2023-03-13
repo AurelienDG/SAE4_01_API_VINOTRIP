@@ -41,8 +41,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [InverseProperty("PanierSejour")]
         public virtual Sejour SejourPanier { get; set; } = null!;
 
-        [ForeignKey("CompteId")]
-        [InverseProperty("PanierCompte")]
-        public virtual User ComptePanier { get; set; } = null!;
+        [ForeignKey("PersonneId")]
+        [InverseProperty("PanierUser")]
+        public virtual User UserPanier { get; set; } = null!;
     }
 }

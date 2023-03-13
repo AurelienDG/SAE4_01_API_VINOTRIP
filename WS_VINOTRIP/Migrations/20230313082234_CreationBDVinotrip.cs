@@ -302,36 +302,37 @@ namespace WS_VINOTRIP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "t_e_compte_cmp",
+                name: "t_e_compte_usr",
                 columns: table => new
                 {
                     prs_id = table.Column<int>(type: "integer", nullable: false),
                     tpc_id = table.Column<int>(type: "integer", nullable: false),
-                    cmp_telcompte = table.Column<string>(type: "char(10)", nullable: false),
-                    cmp_newsletter = table.Column<bool>(type: "boolean", nullable: false),
-                    cmp_estverifie = table.Column<bool>(type: "boolean", nullable: false),
-                    cmp_estadmin = table.Column<bool>(type: "boolean", nullable: false),
-                    cmp_dateconnexion = table.Column<DateTime>(type: "date", nullable: false),
-                    cmp_titreclient = table.Column<string>(type: "char(5)", nullable: true),
-                    cmp_prenomclient = table.Column<string>(type: "text", nullable: false),
-                    cmp_datenaissance = table.Column<DateTime>(type: "date", nullable: false),
-                    cmp_mdp = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    usr_telcompte = table.Column<string>(type: "char(10)", nullable: false),
+                    usr_newsletter = table.Column<bool>(type: "boolean", nullable: false),
+                    usr_estverifie = table.Column<bool>(type: "boolean", nullable: false),
+                    usr_estadmin = table.Column<string>(type: "text", nullable: false),
+                    usr_dateconnexion = table.Column<DateTime>(type: "date", nullable: false),
+                    usr_titreclient = table.Column<string>(type: "char(5)", nullable: true),
+                    usr_prenomclient = table.Column<string>(type: "text", nullable: false),
+                    usr_datenaissance = table.Column<DateTime>(type: "date", nullable: false),
+                    usr_mdp = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_cmp", x => x.prs_id);
+                    table.PrimaryKey("pk_usr", x => x.prs_id);
+                    table.CheckConstraint("ck_usr_datenaissance", "DATEDIFF(year,datenaissance,getdate()) > 18)");
                     table.ForeignKey(
-                        name: "fk_cmp_tpc",
-                        column: x => x.tpc_id,
-                        principalTable: "t_e_typecompte_tpc",
-                        principalColumn: "tpc_id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_t_e_compte_cmp_t_e_personne_prs_prs_id",
+                        name: "FK_t_e_compte_usr_t_e_personne_prs_prs_id",
                         column: x => x.prs_id,
                         principalTable: "t_e_personne_prs",
                         principalColumn: "prs_id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_usr_tpc",
+                        column: x => x.tpc_id,
+                        principalTable: "t_e_typecompte_tpc",
+                        principalColumn: "tpc_id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -412,7 +413,7 @@ namespace WS_VINOTRIP.Migrations
                     cmd_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     prs_id = table.Column<int>(type: "integer", nullable: false),
-                    cmp_datenaissance = table.Column<DateTime>(type: "date", nullable: false),
+                    usr_datenaissance = table.Column<DateTime>(type: "date", nullable: false),
                     cmd_montantreduction = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -421,7 +422,7 @@ namespace WS_VINOTRIP.Migrations
                     table.ForeignKey(
                         name: "fk_cmd_cmp",
                         column: x => x.prs_id,
-                        principalTable: "t_e_compte_cmp",
+                        principalTable: "t_e_compte_usr",
                         principalColumn: "prs_id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -439,7 +440,7 @@ namespace WS_VINOTRIP.Migrations
                     table.ForeignKey(
                         name: "fk_cpc_cmp",
                         column: x => x.ctl_id,
-                        principalTable: "t_e_compte_cmp",
+                        principalTable: "t_e_compte_usr",
                         principalColumn: "prs_id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -470,7 +471,7 @@ namespace WS_VINOTRIP.Migrations
                     table.ForeignKey(
                         name: "fk_htc_clt",
                         column: x => x.ctl_id,
-                        principalTable: "t_e_compte_cmp",
+                        principalTable: "t_e_compte_usr",
                         principalColumn: "prs_id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -494,7 +495,7 @@ namespace WS_VINOTRIP.Migrations
                     table.ForeignKey(
                         name: "fk_rsd_cmp",
                         column: x => x.prs_id,
-                        principalTable: "t_e_compte_cmp",
+                        principalTable: "t_e_compte_usr",
                         principalColumn: "prs_id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -675,8 +676,7 @@ namespace WS_VINOTRIP.Migrations
                     pnr_nbchambres = table.Column<int>(type: "integer", nullable: false),
                     pnr_offert = table.Column<bool>(type: "boolean", nullable: false),
                     pnr_prixtotal = table.Column<decimal>(type: "numeric(9,2)", nullable: false),
-                    pnr_datesejour = table.Column<DateTime>(type: "date", nullable: false),
-                    CompteId = table.Column<int>(type: "integer", nullable: false)
+                    pnr_datesejour = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -684,7 +684,7 @@ namespace WS_VINOTRIP.Migrations
                     table.ForeignKey(
                         name: "fk_pnr_cmp",
                         column: x => x.prs_id,
-                        principalTable: "t_e_compte_cmp",
+                        principalTable: "t_e_compte_usr",
                         principalColumn: "prs_id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -790,7 +790,7 @@ namespace WS_VINOTRIP.Migrations
                     table.ForeignKey(
                         name: "fk_fav_clt",
                         column: x => x.prs_id,
-                        principalTable: "t_e_compte_cmp",
+                        principalTable: "t_e_compte_usr",
                         principalColumn: "prs_id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -869,7 +869,7 @@ namespace WS_VINOTRIP.Migrations
                     table.ForeignKey(
                         name: "fk_rep_cmp",
                         column: x => x.prs_id,
-                        principalTable: "t_e_compte_cmp",
+                        principalTable: "t_e_compte_usr",
                         principalColumn: "prs_id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -997,8 +997,8 @@ namespace WS_VINOTRIP.Migrations
                 column: "prs_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_t_e_compte_cmp_tpc_id",
-                table: "t_e_compte_cmp",
+                name: "IX_t_e_compte_usr_tpc_id",
+                table: "t_e_compte_usr",
                 column: "tpc_id");
 
             migrationBuilder.CreateIndex(
@@ -1244,7 +1244,7 @@ namespace WS_VINOTRIP.Migrations
                 name: "t_e_typeelementetape_tpe");
 
             migrationBuilder.DropTable(
-                name: "t_e_compte_cmp");
+                name: "t_e_compte_usr");
 
             migrationBuilder.DropTable(
                 name: "t_e_boncadeau_bcd");
@@ -1253,10 +1253,10 @@ namespace WS_VINOTRIP.Migrations
                 name: "t_e_sejour_sjr");
 
             migrationBuilder.DropTable(
-                name: "t_e_typecompte_tpc");
+                name: "t_e_personne_prs");
 
             migrationBuilder.DropTable(
-                name: "t_e_personne_prs");
+                name: "t_e_typecompte_tpc");
 
             migrationBuilder.DropTable(
                 name: "t_e_catsejour_csj");

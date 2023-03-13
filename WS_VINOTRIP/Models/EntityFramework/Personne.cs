@@ -23,8 +23,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("prs_mailpersonne")]
         public string? MailPersonne { get; set; }
 
-        [InverseProperty("PersonneCompte")]
-        public virtual ICollection<User> ComptePersonne { get; } = new List<User>();
+        [InverseProperty("PersonneUser")]
+        public virtual ICollection<User> UserPersonne { get; } = new List<User>();
 
         [InverseProperty("PersonneAvis")]
         public virtual ICollection<Avis> AvisPersonne { get; } = new List<Avis>();

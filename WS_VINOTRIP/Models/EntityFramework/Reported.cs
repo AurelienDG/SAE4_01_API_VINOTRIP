@@ -19,8 +19,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public bool A_Signale { get; set; }
 
         [ForeignKey("PersonneId")]
-        [InverseProperty("ReportedCompte")]
-        public virtual User CompteReported { get; set; } = null!;
+        [InverseProperty("ReportedUser")]
+        public virtual User UserReported { get; set; } = null!;
 
         [ForeignKey("AvisId")]
         [InverseProperty("ReportedAvis")]

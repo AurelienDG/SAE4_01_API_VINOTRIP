@@ -11,8 +11,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int AdresseId { get; set; }
 
         [ForeignKey("PersonneId")]
-        [InverseProperty("ResideCompte")]
-        public virtual User CompteReside { get; set; } = null!;
+        [InverseProperty("ResideUser")]
+        public virtual User UserReside { get; set; } = null!;
 
         [ForeignKey("AdresseId")]
         [InverseProperty("ResideAdresse")]
