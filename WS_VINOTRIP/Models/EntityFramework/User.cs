@@ -28,7 +28,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("usr_dateconnexion", TypeName = "date")]
         public DateTime DateConnexion { get; set; }
 
-        [Column("usr_titreclient", TypeName = "char(5)")]
+        [Column("usr_titreclient"), StringLength(5)]
         public string? Titre { get; set; }
 
         [Required, Column("usr_prenomclient")]

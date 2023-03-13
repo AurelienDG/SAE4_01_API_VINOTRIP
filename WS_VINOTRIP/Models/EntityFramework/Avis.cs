@@ -24,7 +24,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required]
         public int Note { get; set; }
 
-        [Column("avi_desvription", TypeName = "text")]
+        [Column("avi_description", TypeName = "text")]
         [Required]
         public string? Description { get; set; }
 

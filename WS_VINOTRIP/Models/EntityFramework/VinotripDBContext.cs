@@ -118,19 +118,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasConstraintName("fk_cpt_cpp");
             });
 
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.HasKey(e => new { e.PersonneId })
-                    .HasName("pk_usr");
-
-                entity.HasOne(d => d.TypeCompteUser).WithMany(p => p.UserTypeCompte)
-                    .HasForeignKey(d => d.TypeCompteId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_usr_tpc");
-
-                entity.HasCheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '18 years'");
-            });
-
             modelBuilder.Entity<CompteCarte>(entity =>
             {
                 entity.HasKey(e => new { e.PersonneId, e.CarteId })
@@ -551,6 +538,19 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.TypeElementEtapeId })
                     .HasName("pk_tpe");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => new { e.PersonneId })
+                    .HasName("pk_usr");
+
+                entity.HasOne(d => d.TypeCompteUser).WithMany(p => p.UserTypeCompte)
+                    .HasForeignKey(d => d.TypeCompteId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_usr_tpc");
+
+                entity.HasCheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '18 years'");
             });
 
             modelBuilder.Entity<Vignoble>(entity =>

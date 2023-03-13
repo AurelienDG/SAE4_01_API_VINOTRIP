@@ -12,7 +12,7 @@ using WS_VINOTRIP.Models.EntityFramework;
 namespace WS_VINOTRIP.Migrations
 {
     [DbContext(typeof(VinotripDBContext))]
-    [Migration("20230313082234_CreationBDVinotrip")]
+    [Migration("20230313083544_CreationBDVinotrip")]
     partial class CreationBDVinotrip
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,7 @@ namespace WS_VINOTRIP.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("avi_desvription");
+                        .HasColumnName("avi_description");
 
                     b.Property<int>("Note")
                         .HasColumnType("integer")
@@ -1175,7 +1175,8 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnName("usr_telcompte");
 
                     b.Property<string>("Titre")
-                        .HasColumnType("char(5)")
+                        .HasMaxLength(5)
+                        .HasColumnType("character varying(5)")
                         .HasColumnName("usr_titreclient");
 
                     b.Property<int>("TypeCompteId")
@@ -1192,9 +1193,9 @@ namespace WS_VINOTRIP.Migrations
 
                     b.HasIndex("TypeCompteId");
 
-                    b.ToTable("t_e_compte_usr");
+                    b.ToTable("t_e_user_usr");
 
-                    b.HasCheckConstraint("ck_usr_datenaissance", "DATEDIFF(year,datenaissance,getdate()) > 18)");
+                    b.HasCheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '18 years'");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Vignoble", b =>
