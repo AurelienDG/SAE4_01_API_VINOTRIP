@@ -40,6 +40,7 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_bcd", x => x.bcd_id);
+                    table.UniqueConstraint("uq_bcd_codereduction", x => x.bcd_codereduction);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,7 +76,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     prs_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ptn_telpartenaire = table.Column<string>(type: "char(10)", nullable: false)
+                    ptn_tel = table.Column<string>(type: "char(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,12 +89,14 @@ namespace WS_VINOTRIP.Migrations
                 {
                     prs_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    prs_nompersonne = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    prs_mailpersonne = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    prs_nom = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    prs_mail = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_prs", x => x.prs_id);
+                    table.UniqueConstraint("uq_prs_mail", x => x.prs_mail);
+                    table.CheckConstraint("ck_prs_mail", "mail like '%@%.%'");
                 });
 
             migrationBuilder.CreateTable(
@@ -117,7 +120,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     tpc_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    tpc_libelletypecompte = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false)
+                    tpc_libelle = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -130,7 +133,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     tpe_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    tpe_libelletypecompte = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    tpe_libelle = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -266,11 +269,12 @@ namespace WS_VINOTRIP.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     pth_typehebergement = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     pth_nbchambre = table.Column<int>(type: "integer", nullable: false),
-                    pth_etoileshebergement = table.Column<int>(type: "integer", nullable: false)
+                    pth_etoiles = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_pth", x => x.ptn_id);
+                    table.CheckConstraint("ck_pth_etoiles", "etoiles between 0 and 5");
                     table.ForeignKey(
                         name: "fk_pth_ptn",
                         column: x => x.ptn_id,
@@ -288,11 +292,12 @@ namespace WS_VINOTRIP.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ptr_typecuisine = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     ptr_specialite = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
-                    ptr_etoilesrestaurant = table.Column<int>(type: "integer", nullable: false)
+                    ptr_etoiles = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_ptr", x => x.ptn_id);
+                    table.CheckConstraint("ck_ptr_etoiles", "etoiles between 0 and 5");
                     table.ForeignKey(
                         name: "fk_ptr_ptn",
                         column: x => x.ptn_id,
@@ -307,7 +312,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     prs_id = table.Column<int>(type: "integer", nullable: false),
                     tpc_id = table.Column<int>(type: "integer", nullable: false),
-                    usr_telcompte = table.Column<string>(type: "char(10)", nullable: false),
+                    usr_tel = table.Column<string>(type: "char(10)", nullable: false),
                     usr_newsletter = table.Column<bool>(type: "boolean", nullable: false),
                     usr_estverifie = table.Column<bool>(type: "boolean", nullable: false),
                     usr_estadmin = table.Column<string>(type: "text", nullable: false),
@@ -320,7 +325,9 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_usr", x => x.prs_id);
-                    table.CheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '18 years'");
+                    table.UniqueConstraint("uq_usr_tel", x => x.usr_tel);
+                    table.CheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '6570 days'");
+                    table.CheckConstraint("ck_usr_tel", "tel like '06%' or tel like '07%'");
                     table.ForeignKey(
                         name: "FK_t_e_user_usr_t_e_personne_prs_prs_id",
                         column: x => x.prs_id,
@@ -413,7 +420,7 @@ namespace WS_VINOTRIP.Migrations
                     cmd_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     prs_id = table.Column<int>(type: "integer", nullable: false),
-                    usr_datenaissance = table.Column<DateTime>(type: "date", nullable: false),
+                    cmd_datefacture = table.Column<DateTime>(type: "date", nullable: false),
                     cmd_montantreduction = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -629,7 +636,7 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_avi", x => x.avi_id);
-                    table.CheckConstraint("ck_avi_note", "note BETWEEN 1 AND 5");
+                    table.CheckConstraint("ck_avi_note", "note between 1 and 5");
                     table.ForeignKey(
                         name: "fk_avi_prs",
                         column: x => x.prs_id,
@@ -709,7 +716,7 @@ namespace WS_VINOTRIP.Migrations
                     rsv_prixtotal = table.Column<decimal>(type: "numeric(9,2)", nullable: false),
                     rsv_datedebutresa = table.Column<DateTime>(type: "date", nullable: false),
                     rsv_datefinresa = table.Column<DateTime>(type: "date", nullable: false),
-                    rsv_datefacture = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    rsv_datefacture = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {

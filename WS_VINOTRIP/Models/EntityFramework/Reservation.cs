@@ -33,7 +33,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("rsv_datefinresa", TypeName = "date")]
         public DateTime DateFinResa{ get; set; }
 
-        [Required, Column("rsv_datefacture")]
+        [Required, Column("rsv_datefacture", TypeName = "date")]
         public DateTime DateFacture { get; set; }
 
         [ForeignKey("SejourId")]

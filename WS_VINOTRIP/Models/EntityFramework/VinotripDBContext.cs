@@ -43,13 +43,16 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_avi_sjr");
 
-                entity.HasCheckConstraint("ck_avi_note", "note BETWEEN 1 AND 5");
+                entity.HasCheckConstraint("ck_avi_note", "note between 1 and 5");
             });
 
             modelBuilder.Entity<BonCadeau>(entity =>
             {
                 entity.HasKey(e => new { e.BonCadeauId })
                     .HasName("pk_bcd");
+
+                entity.HasAlternateKey(u => u.CodeReduction)
+                    .HasName("uq_bcd_codereduction");
             });
 
             modelBuilder.Entity<CatParticipant>(entity =>
@@ -391,6 +394,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasForeignKey(d => d.PersonneId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_pth_ptn");
+
+                entity.HasCheckConstraint("ck_pth_etoiles", "etoiles between 0 and 5");
             });
 
             modelBuilder.Entity<PartenaireRestaurant>(entity =>
@@ -402,6 +407,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasForeignKey(d => d.PersonneId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_ptr_ptn");
+
+                entity.HasCheckConstraint("ck_ptr_etoiles", "etoiles between 0 and 5");
             });
 
             modelBuilder.Entity<Passe>(entity =>
@@ -424,6 +431,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.PersonneId })
                     .HasName("pk_prs");
+
+                entity.HasCheckConstraint("ck_prs_mail", "mail like '%@%.%'");
+
+                entity.HasAlternateKey(u => u.Mail)
+                    .HasName("uq_prs_mail");
             });
 
             modelBuilder.Entity<RefCarteBancaire>(entity =>
@@ -550,7 +562,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_usr_tpc");
 
-                entity.HasCheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '18 years'");
+                entity.HasCheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '6570 days'");
+                entity.HasCheckConstraint("ck_usr_tel", "tel like '06%' or tel like '07%'");
+
+                entity.HasAlternateKey(u => u.Tel)
+                    .HasName("uq_usr_tel");
             });
 
             modelBuilder.Entity<Vignoble>(entity =>

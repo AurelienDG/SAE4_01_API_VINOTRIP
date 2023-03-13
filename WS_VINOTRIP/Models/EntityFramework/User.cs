@@ -13,7 +13,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("tpc_id")]
         public int TypeCompteId { get; set; }
 
-        [Required, Column("usr_telcompte", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
+        [Column("usr_tel", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
         public string? Tel { get; set; }
 
         [Required, Column("usr_newsletter")]

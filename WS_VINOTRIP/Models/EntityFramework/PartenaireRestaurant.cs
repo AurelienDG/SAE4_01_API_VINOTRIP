@@ -24,8 +24,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("ptr_specialite")]
         public string? Specialite { get; set; }
 
-        [Column("ptr_etoilesrestaurant")]
-        public int EtoilesRestaurant { get; set; }
+        [Column("ptr_etoiles")]
+        public int Etoiles { get; set; }
 
         [ForeignKey("PersonneId")]
         [InverseProperty("PartenairesRestaurantPartenaire")]

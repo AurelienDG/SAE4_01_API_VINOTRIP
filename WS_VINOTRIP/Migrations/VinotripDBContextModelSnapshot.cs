@@ -116,7 +116,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.ToTable("t_e_avis_avi");
 
-                    b.HasCheckConstraint("ck_avi_note", "note BETWEEN 1 AND 5");
+                    b.HasCheckConstraint("ck_avi_note", "note between 1 and 5");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.BonCadeau", b =>
@@ -139,6 +139,9 @@ namespace WS_VINOTRIP.Migrations
 
                     b.HasKey("BonCadeauId")
                         .HasName("pk_bcd");
+
+                    b.HasAlternateKey("CodeReduction")
+                        .HasName("uq_bcd_codereduction");
 
                     b.ToTable("t_e_boncadeau_bcd");
                 });
@@ -244,7 +247,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.Property<DateTime>("DateFacture")
                         .HasColumnType("date")
-                        .HasColumnName("usr_datenaissance");
+                        .HasColumnName("cmd_datefacture");
 
                     b.Property<int>("MontantReduction")
                         .HasColumnType("integer")
@@ -669,10 +672,10 @@ namespace WS_VINOTRIP.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PersonneId"));
 
-                    b.Property<string>("TelPartenaire")
+                    b.Property<string>("Tel")
                         .IsRequired()
                         .HasColumnType("char(10)")
-                        .HasColumnName("ptn_telpartenaire");
+                        .HasColumnName("ptn_tel");
 
                     b.HasKey("PersonneId")
                         .HasName("pk_ptn");
@@ -741,9 +744,9 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("ptn_id");
 
-                    b.Property<int>("EtoilesHebergement")
+                    b.Property<int>("Etoiles")
                         .HasColumnType("integer")
-                        .HasColumnName("pth_etoileshebergement");
+                        .HasColumnName("pth_etoiles");
 
                     b.Property<int>("NbChambre")
                         .HasColumnType("integer")
@@ -766,6 +769,8 @@ namespace WS_VINOTRIP.Migrations
                         .HasName("pk_pth");
 
                     b.ToTable("t_e_partenairehebergement_pth");
+
+                    b.HasCheckConstraint("ck_pth_etoiles", "etoiles between 0 and 5");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.PartenaireRestaurant", b =>
@@ -774,9 +779,9 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("ptn_id");
 
-                    b.Property<int>("EtoilesRestaurant")
+                    b.Property<int>("Etoiles")
                         .HasColumnType("integer")
-                        .HasColumnName("ptr_etoilesrestaurant");
+                        .HasColumnName("ptr_etoiles");
 
                     b.Property<int>("PartenaireRestaurantId")
                         .ValueGeneratedOnAdd()
@@ -800,6 +805,8 @@ namespace WS_VINOTRIP.Migrations
                         .HasName("pk_ptr");
 
                     b.ToTable("t_e_partenairerestaurant_ptr");
+
+                    b.HasCheckConstraint("ck_ptr_etoiles", "etoiles between 0 and 5");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Passe", b =>
@@ -829,22 +836,27 @@ namespace WS_VINOTRIP.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PersonneId"));
 
-                    b.Property<string>("MailPersonne")
+                    b.Property<string>("Mail")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("prs_mailpersonne");
+                        .HasColumnName("prs_mail");
 
-                    b.Property<string>("NomPersonne")
+                    b.Property<string>("Nom")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("prs_nompersonne");
+                        .HasColumnName("prs_nom");
 
                     b.HasKey("PersonneId")
                         .HasName("pk_prs");
 
+                    b.HasAlternateKey("Mail")
+                        .HasName("uq_prs_mail");
+
                     b.ToTable("t_e_personne_prs");
+
+                    b.HasCheckConstraint("ck_prs_mail", "mail like '%@%.%'");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.RefCarteBancaire", b =>
@@ -918,7 +930,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnName("rsv_datedebutresa");
 
                     b.Property<DateTime>("DateFacture")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("date")
                         .HasColumnName("rsv_datefacture");
 
                     b.Property<DateTime>("DateFinResa")
@@ -1105,7 +1117,7 @@ namespace WS_VINOTRIP.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)")
-                        .HasColumnName("tpc_libelletypecompte");
+                        .HasColumnName("tpc_libelle");
 
                     b.HasKey("TypeCompteId")
                         .HasName("pk_tpc");
@@ -1126,7 +1138,7 @@ namespace WS_VINOTRIP.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("tpe_libelletypecompte");
+                        .HasColumnName("tpe_libelle");
 
                     b.HasKey("TypeElementEtapeId")
                         .HasName("pk_tpe");
@@ -1170,7 +1182,7 @@ namespace WS_VINOTRIP.Migrations
                     b.Property<string>("Tel")
                         .IsRequired()
                         .HasColumnType("char(10)")
-                        .HasColumnName("usr_telcompte");
+                        .HasColumnName("usr_tel");
 
                     b.Property<string>("Titre")
                         .HasMaxLength(5)
@@ -1189,11 +1201,16 @@ namespace WS_VINOTRIP.Migrations
                     b.HasKey("PersonneId")
                         .HasName("pk_usr");
 
+                    b.HasAlternateKey("Tel")
+                        .HasName("uq_usr_tel");
+
                     b.HasIndex("TypeCompteId");
 
                     b.ToTable("t_e_user_usr");
 
-                    b.HasCheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '18 years'");
+                    b.HasCheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '6570 days'");
+
+                    b.HasCheckConstraint("ck_usr_tel", "tel like '06%' or tel like '07%'");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Vignoble", b =>

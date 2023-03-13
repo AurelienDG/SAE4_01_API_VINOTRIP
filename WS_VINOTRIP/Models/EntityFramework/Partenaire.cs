@@ -7,13 +7,12 @@ namespace WS_VINOTRIP.Models.EntityFramework
     public class Partenaire
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("prs_id")]
         public int PersonneId { get; set; }
 
-        [Column("ptn_telpartenaire", TypeName = "char(10)")]
+        [Column("ptn_tel", TypeName = "char(10)")]
         [Required]
-        public string? TelPartenaire { get; set; }
+        public string? Tel { get; set; }
 
         [InverseProperty("PartenaireElementEtape")]
         public virtual ICollection<ElementEtape>? ElementsEtapePartenaire { get; set; } = null!;

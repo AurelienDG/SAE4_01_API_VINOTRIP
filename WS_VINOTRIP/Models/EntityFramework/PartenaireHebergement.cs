@@ -23,8 +23,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("pth_nbchambre")]
         public int NbChambre { get; set; }
 
-        [Column("pth_etoileshebergement")]
-        public int EtoilesHebergement { get; set; }
+        [Column("pth_etoiles")]
+        public int Etoiles { get; set; }
 
         [ForeignKey("PersonneId")]
         [InverseProperty("PartenairesHebergementPartenaire")]

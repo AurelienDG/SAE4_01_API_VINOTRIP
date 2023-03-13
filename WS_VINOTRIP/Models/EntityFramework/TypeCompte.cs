@@ -15,7 +15,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [Required]
         [StringLength(30)]
-        [Column("tpc_libelletypecompte")]
+        [Column("tpc_libelle")]
         public string? Libelle { get; set; }
 
         [InverseProperty("TypeCompteUser")]

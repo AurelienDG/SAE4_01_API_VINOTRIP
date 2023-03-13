@@ -14,14 +14,14 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [Required]
         [StringLength(50)]
-        [Column("prs_nompersonne")]
-        public string? NomPersonne { get; set; }
+        [Column("prs_nom")]
+        public string? Nom { get; set; }
 
         [Required]
         [EmailAddress]
         [StringLength(50)]
-        [Column("prs_mailpersonne")]
-        public string? MailPersonne { get; set; }
+        [Column("prs_mail")]
+        public string? Mail { get; set; }
 
         [InverseProperty("PersonneUser")]
         public virtual ICollection<User> UserPersonne { get; } = new List<User>();
