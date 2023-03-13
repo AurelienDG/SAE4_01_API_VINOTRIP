@@ -15,13 +15,13 @@ namespace WS_VINOTRIP.Controllers
     public class SejoursController : ControllerBase
     {
         private readonly IDataRepository<Sejour> dataRepository;
-        private readonly IDataRepository<CatParticipant> dataRepository2;
-        private readonly IDataRepository<Comporte> dataRepository3;
-        public SejoursController(IDataRepository<Sejour> dataRepo, IDataRepository<CatParticipant> dataRepo2, IDataRepository<Comporte> dataRepo3)
+        /*private readonly IDataRepository<CatParticipant> dataRepository2;
+        private readonly IDataRepository<Comporte> dataRepository3;*/
+        public SejoursController(IDataRepository<Sejour> dataRepo/*, IDataRepository<CatParticipant> dataRepo2, IDataRepository<Comporte> dataRepo3*/)
         {
             dataRepository = dataRepo;
-            dataRepository2 = dataRepo2;
-            dataRepository3 = dataRepo3;
+            /*dataRepository2 = dataRepo2;
+            dataRepository3 = dataRepo3;*/
         }
 
         // GET: api/Sejours
@@ -47,7 +47,7 @@ namespace WS_VINOTRIP.Controllers
             return sejour;
         }
 
-        //idcatvignoble idcatsejour, idcatparticipant
+        /*//idcatvignoble idcatsejour, idcatparticipant
         [HttpGet]
         [Route("[action]/{catsejour}/{catvignoble}/{catparticipant}")]
         [ActionName("GetWithFilter")]
@@ -73,7 +73,7 @@ namespace WS_VINOTRIP.Controllers
             }
 
             return filterList.ToList();
-        }
+        }*/
 
         // PUT: api/Sejours/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

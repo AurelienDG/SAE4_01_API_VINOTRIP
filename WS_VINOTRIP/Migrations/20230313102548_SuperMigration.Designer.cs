@@ -12,7 +12,7 @@ using WS_VINOTRIP.Models.EntityFramework;
 namespace WS_VINOTRIP.Migrations
 {
     [DbContext(typeof(VinotripDBContext))]
-    [Migration("20230313101100_SuperMigration")]
+    [Migration("20230313102548_SuperMigration")]
     partial class SuperMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,7 +65,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.ToTable("t_e_adresse_ads");
 
-                    b.HasCheckConstraint("ck_ads_rue1_rue2", "rue1 <> rue2");
+                    b.HasCheckConstraint("ck_ads_rue1_rue2", "ads_rue1 <> ads_rue2");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Avis", b =>
@@ -118,7 +118,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.ToTable("t_e_avis_avi");
 
-                    b.HasCheckConstraint("ck_avi_note", "note between 1 and 5");
+                    b.HasCheckConstraint("ck_avi_note", "avi_note between 1 and 5");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.BonCadeau", b =>
@@ -772,7 +772,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.ToTable("t_e_partenairehebergement_pth");
 
-                    b.HasCheckConstraint("ck_pth_etoiles", "etoiles between 0 and 5");
+                    b.HasCheckConstraint("ck_pth_etoiles", "pth_etoiles between 0 and 5");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.PartenaireRestaurant", b =>
@@ -808,7 +808,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.ToTable("t_e_partenairerestaurant_ptr");
 
-                    b.HasCheckConstraint("ck_ptr_etoiles", "etoiles between 0 and 5");
+                    b.HasCheckConstraint("ck_ptr_etoiles", "ptr_etoiles between 0 and 5");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Passe", b =>
@@ -858,7 +858,7 @@ namespace WS_VINOTRIP.Migrations
 
                     b.ToTable("t_e_personne_prs");
 
-                    b.HasCheckConstraint("ck_prs_mail", "mail like '%@%.%'");
+                    b.HasCheckConstraint("ck_prs_mail", "prs_mail like '%@%.%'");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.RefCarteBancaire", b =>
@@ -1210,9 +1210,9 @@ namespace WS_VINOTRIP.Migrations
 
                     b.ToTable("t_e_user_usr");
 
-                    b.HasCheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '6570 days'");
+                    b.HasCheckConstraint("ck_usr_datenaissance", "now() - usr_datenaissance > INTERVAL '6570 days'");
 
-                    b.HasCheckConstraint("ck_usr_tel", "tel like '06%' or tel like '07%'");
+                    b.HasCheckConstraint("ck_usr_tel", "usr_tel like '06%' or usr_tel like '07%'");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Vignoble", b =>

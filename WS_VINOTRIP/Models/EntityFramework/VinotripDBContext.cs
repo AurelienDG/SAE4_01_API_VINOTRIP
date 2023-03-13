@@ -16,7 +16,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual DbSet<Comporte>? Comportes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=VinotripDB; uid=postgres; password=postgres;"); //à changer
+            => optionsBuilder.UseNpgsql("Server=51.83.36.122;port=5432;Database=vinotrique;SearchPath=vinotrip; uid=s222; password=8F1ASd"); //à changer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -563,7 +563,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasConstraintName("fk_usr_tpc");
 
                 entity.HasCheckConstraint("ck_usr_datenaissance", "now() - usr_datenaissance > INTERVAL '6570 days'");
-                entity.HasCheckConstraint("ck_usr_tel", "usr_tel like '06%' or tel like '07%'");
+                entity.HasCheckConstraint("ck_usr_tel", "usr_tel like '06%' or usr_tel like '07%'");
 
                 entity.HasAlternateKey(u => u.Tel)
                     .HasName("uq_usr_tel");

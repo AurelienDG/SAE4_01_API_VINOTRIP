@@ -25,7 +25,7 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_ads", x => x.ads_id);
-                    table.CheckConstraint("ck_ads_rue1_rue2", "rue1 <> rue2");
+                    table.CheckConstraint("ck_ads_rue1_rue2", "ads_rue1 <> ads_rue2");
                 });
 
             migrationBuilder.CreateTable(
@@ -96,7 +96,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     table.PrimaryKey("pk_prs", x => x.prs_id);
                     table.UniqueConstraint("uq_prs_mail", x => x.prs_mail);
-                    table.CheckConstraint("ck_prs_mail", "mail like '%@%.%'");
+                    table.CheckConstraint("ck_prs_mail", "prs_mail like '%@%.%'");
                 });
 
             migrationBuilder.CreateTable(
@@ -274,7 +274,7 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_pth", x => x.ptn_id);
-                    table.CheckConstraint("ck_pth_etoiles", "etoiles between 0 and 5");
+                    table.CheckConstraint("ck_pth_etoiles", "pth_etoiles between 0 and 5");
                     table.ForeignKey(
                         name: "fk_pth_ptn",
                         column: x => x.ptn_id,
@@ -297,7 +297,7 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_ptr", x => x.ptn_id);
-                    table.CheckConstraint("ck_ptr_etoiles", "etoiles between 0 and 5");
+                    table.CheckConstraint("ck_ptr_etoiles", "ptr_etoiles between 0 and 5");
                     table.ForeignKey(
                         name: "fk_ptr_ptn",
                         column: x => x.ptn_id,
@@ -326,8 +326,8 @@ namespace WS_VINOTRIP.Migrations
                 {
                     table.PrimaryKey("pk_usr", x => x.prs_id);
                     table.UniqueConstraint("uq_usr_tel", x => x.usr_tel);
-                    table.CheckConstraint("ck_usr_datenaissance", "now() - datenaissance > INTERVAL '6570 days'");
-                    table.CheckConstraint("ck_usr_tel", "tel like '06%' or tel like '07%'");
+                    table.CheckConstraint("ck_usr_datenaissance", "now() - usr_datenaissance > INTERVAL '6570 days'");
+                    table.CheckConstraint("ck_usr_tel", "usr_tel like '06%' or usr_tel like '07%'");
                     table.ForeignKey(
                         name: "FK_t_e_user_usr_t_e_personne_prs_prs_id",
                         column: x => x.prs_id,
@@ -636,7 +636,7 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_avi", x => x.avi_id);
-                    table.CheckConstraint("ck_avi_note", "note between 1 and 5");
+                    table.CheckConstraint("ck_avi_note", "avi_note between 1 and 5");
                     table.ForeignKey(
                         name: "fk_avi_prs",
                         column: x => x.prs_id,
