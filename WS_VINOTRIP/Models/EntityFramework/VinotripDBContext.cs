@@ -427,6 +427,22 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasConstraintName("fk_pss_cmd");
             });
 
+            modelBuilder.Entity<Paye>(entity =>
+            {
+                entity.HasKey(e => new { e.ReservationId, e.TypePayementId })
+                    .HasName("pk_pay");
+
+                entity.HasOne(d => d.ReservationPaye).WithMany(p => p.PayeReservation)
+                    .HasForeignKey(d => d.ReservationId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_pay_rsv");
+
+                entity.HasOne(d => d.TypePayementPaye).WithMany(p => p.PayeTypePayement)
+                    .HasForeignKey(d => d.TypePayementId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_pay_tpa");
+            });
+
             modelBuilder.Entity<Personne>(entity =>
             {
                 entity.HasKey(e => new { e.PersonneId })
@@ -550,6 +566,12 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.TypeElementEtapeId })
                     .HasName("pk_tpe");
+            });
+
+            modelBuilder.Entity<TypePayement>(entity =>
+            {
+                entity.HasKey(e => new { e.TypePayementId })
+                    .HasName("pk_tpa");
             });
 
             modelBuilder.Entity<User>(entity =>

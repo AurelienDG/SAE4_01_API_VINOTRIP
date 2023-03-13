@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WS_VINOTRIP.Migrations
 {
-    public partial class SuperMigration : Migration
+    public partial class TopMoumoute : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,7 +49,8 @@ namespace WS_VINOTRIP.Migrations
                 {
                     cvg_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    cvg_libelle = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true)
+                    cvg_libelle = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
+                    cvg_description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -138,6 +139,19 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_tpe", x => x.tpe_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "t_e_typepayement_tpa",
+                columns: table => new
+                {
+                    tpa_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    tpa_libelle = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_tpa", x => x.tpa_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -978,6 +992,30 @@ namespace WS_VINOTRIP.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "t_j_paye_pay",
+                columns: table => new
+                {
+                    rsv_id = table.Column<int>(type: "integer", nullable: false),
+                    tpa_id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_pay", x => new { x.rsv_id, x.tpa_id });
+                    table.ForeignKey(
+                        name: "fk_pay_rsv",
+                        column: x => x.rsv_id,
+                        principalTable: "t_e_reservation_rsv",
+                        principalColumn: "rsv_id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_pay_tpa",
+                        column: x => x.tpa_id,
+                        principalTable: "t_e_typepayement_tpa",
+                        principalColumn: "tpa_id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_t_e_avis_avi_prs_id",
                 table: "t_e_avis_avi",
@@ -1139,6 +1177,11 @@ namespace WS_VINOTRIP.Migrations
                 column: "cmd_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_t_j_paye_pay_tpa_id",
+                table: "t_j_paye_pay",
+                column: "tpa_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_t_j_reported_rep_prs_id",
                 table: "t_j_reported_rep",
                 column: "prs_id");
@@ -1212,6 +1255,9 @@ namespace WS_VINOTRIP.Migrations
                 name: "t_j_passe_pss");
 
             migrationBuilder.DropTable(
+                name: "t_j_paye_pay");
+
+            migrationBuilder.DropTable(
                 name: "t_j_reported_rep");
 
             migrationBuilder.DropTable(
@@ -1237,6 +1283,9 @@ namespace WS_VINOTRIP.Migrations
 
             migrationBuilder.DropTable(
                 name: "t_e_reservation_rsv");
+
+            migrationBuilder.DropTable(
+                name: "t_e_typepayement_tpa");
 
             migrationBuilder.DropTable(
                 name: "t_e_avis_avi");

@@ -209,9 +209,13 @@ namespace WS_VINOTRIP.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CatVignobleId"));
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("cvg_description");
+
                     b.Property<string>("Libelle")
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)")
+                        .HasColumnType("character varying(30)")
                         .HasColumnName("cvg_libelle");
 
                     b.HasKey("CatVignobleId")
@@ -827,6 +831,24 @@ namespace WS_VINOTRIP.Migrations
                     b.ToTable("t_j_passe_pss");
                 });
 
+            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Paye", b =>
+                {
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("integer")
+                        .HasColumnName("rsv_id");
+
+                    b.Property<int>("TypePayementId")
+                        .HasColumnType("integer")
+                        .HasColumnName("tpa_id");
+
+                    b.HasKey("ReservationId", "TypePayementId")
+                        .HasName("pk_pay");
+
+                    b.HasIndex("TypePayementId");
+
+                    b.ToTable("t_j_paye_pay");
+                });
+
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Personne", b =>
                 {
                     b.Property<int>("PersonneId")
@@ -1144,6 +1166,25 @@ namespace WS_VINOTRIP.Migrations
                         .HasName("pk_tpe");
 
                     b.ToTable("t_e_typeelementetape_tpe");
+                });
+
+            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.TypePayement", b =>
+                {
+                    b.Property<int>("TypePayementId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("tpa_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TypePayementId"));
+
+                    b.Property<string>("Libelle")
+                        .HasColumnType("text")
+                        .HasColumnName("tpa_libelle");
+
+                    b.HasKey("TypePayementId")
+                        .HasName("pk_tpa");
+
+                    b.ToTable("t_e_typepayement_tpa");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.User", b =>
@@ -1701,6 +1742,27 @@ namespace WS_VINOTRIP.Migrations
                     b.Navigation("ReservationPasse");
                 });
 
+            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Paye", b =>
+                {
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Reservation", "ReservationPaye")
+                        .WithMany("PayeReservation")
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_pay_rsv");
+
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.TypePayement", "TypePayementPaye")
+                        .WithMany("PayeTypePayement")
+                        .HasForeignKey("TypePayementId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_pay_tpa");
+
+                    b.Navigation("ReservationPaye");
+
+                    b.Navigation("TypePayementPaye");
+                });
+
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Reported", b =>
                 {
                     b.HasOne("WS_VINOTRIP.Models.EntityFramework.Avis", "AvisReported")
@@ -1974,6 +2036,8 @@ namespace WS_VINOTRIP.Migrations
                     b.Navigation("Est_factureeReservation");
 
                     b.Navigation("PasseReservation");
+
+                    b.Navigation("PayeReservation");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.RouteDesVins", b =>
@@ -2010,6 +2074,11 @@ namespace WS_VINOTRIP.Migrations
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.TypeElementEtape", b =>
                 {
                     b.Navigation("ElementEtapeTypeElementEtape");
+                });
+
+            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.TypePayement", b =>
+                {
+                    b.Navigation("PayeTypePayement");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.User", b =>

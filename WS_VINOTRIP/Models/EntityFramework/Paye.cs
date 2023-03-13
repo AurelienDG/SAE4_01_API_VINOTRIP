@@ -5,7 +5,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_paye_pay")]
     public class Paye
     {
-        [Column("res_id")]
+        [Column("rsv_id")]
         public int ReservationId { get; set; }
 
         [Column("tpa_id")]
