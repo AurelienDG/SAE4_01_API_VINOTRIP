@@ -10,7 +10,7 @@ using WS_VINOTRIP.Models.Repository;
 
 namespace WS_VINOTRIP.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class SejoursController : ControllerBase
     {
@@ -32,7 +32,9 @@ namespace WS_VINOTRIP.Controllers
         }
 
         // GET: api/Sejours/5
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("[action]/{id}")]
+        [ActionName("GetById")]
         public async Task<ActionResult<Sejour>> GetSejourById(int id)
         {
             var sejour = dataRepository.GetByIdAsync(id).Result;
@@ -46,6 +48,9 @@ namespace WS_VINOTRIP.Controllers
         }
 
         //idcatvignoble idcatsejour, idcatparticipant
+        [HttpGet]
+        [Route("[action]/{catsejour}/{catvignoble}/{catparticipant}")]
+        [ActionName("GetWithFilter")]
         public async Task<ActionResult<IEnumerable<Sejour>>> GetSejourFilter(int catsejour, int catvignoble, int catparticipant)
         {
             if (catsejour == null && catvignoble == null && catparticipant == null)
