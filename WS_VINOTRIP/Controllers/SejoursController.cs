@@ -47,7 +47,7 @@ namespace WS_VINOTRIP.Controllers
             return sejour;
         }
 
-        /*//idcatvignoble idcatsejour, idcatparticipant
+        //idcatvignoble idcatsejour, idcatparticipant
         [HttpGet]
         [Route("[action]/{catsejour}/{catvignoble}/{catparticipant}")]
         [ActionName("GetWithFilter")]
@@ -55,25 +55,28 @@ namespace WS_VINOTRIP.Controllers
         {
             if (catsejour == null && catvignoble == null && catparticipant == null)
                 return dataRepository.GetAllAsync().Result;
-
-            var pute = dataRepository3.GetAllAsync().Result.Value.Where(e => e.CatParticipantId == catparticipant);
+            List<Sejour> bite = new List<Sejour>();
+            
 
             var filterList = dataRepository.GetAllAsync().Result.Value.Where(e => e.CatSejourId == catsejour && e.CatVignobleId == catvignoble);
-
-            foreach (var sejour in filterList)
+            foreach (var filter in filterList)
             {
-                var result = sejour.ComporteSejour.Intersect(pute);
+                foreach (var result in filter.ComporteSejour)
+                {
+                    if (result.CatParticipantId == catparticipant)
+                        bite.Add(filterList.Where(e => e.SejourId == result.SejourId).FirstOrDefault());
+                }
             }
 
             //var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(e => e.Mail.ToUpper() == email.ToUpper());
 
-            if (filterList == null)
+            if (bite == null)
             {
                 return NotFound();
             }
 
-            return filterList.ToList();
-        }*/
+            return bite.ToList();
+        }
 
         // PUT: api/Sejours/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
