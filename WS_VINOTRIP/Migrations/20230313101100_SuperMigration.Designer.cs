@@ -12,8 +12,8 @@ using WS_VINOTRIP.Models.EntityFramework;
 namespace WS_VINOTRIP.Migrations
 {
     [DbContext(typeof(VinotripDBContext))]
-    [Migration("20230313095734_CreationBDVinotrip")]
-    partial class CreationBDVinotrip
+    [Migration("20230313101100_SuperMigration")]
+    partial class SuperMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

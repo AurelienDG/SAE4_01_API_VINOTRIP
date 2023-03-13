@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WS_VINOTRIP.Migrations
 {
-    public partial class CreationBDVinotrip : Migration
+    public partial class SuperMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
