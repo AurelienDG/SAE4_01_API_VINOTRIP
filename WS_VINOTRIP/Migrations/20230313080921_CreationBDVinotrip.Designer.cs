@@ -12,8 +12,8 @@ using WS_VINOTRIP.Models.EntityFramework;
 namespace WS_VINOTRIP.Migrations
 {
     [DbContext(typeof(VinotripDBContext))]
-    [Migration("20230309100917_CreationBDVinotrique")]
-    partial class CreationBDVinotrique
+    [Migration("20230313080921_CreationBDVinotrip")]
+    partial class CreationBDVinotrip
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,6 +64,8 @@ namespace WS_VINOTRIP.Migrations
                         .HasName("pk_ads");
 
                     b.ToTable("t_e_adresse_ads");
+
+                    b.HasCheckConstraint("ck_ads_rue1_rue2", "rue1 <> rue2");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Avis", b =>
@@ -115,6 +117,8 @@ namespace WS_VINOTRIP.Migrations
                     b.HasIndex("SejourId");
 
                     b.ToTable("t_e_avis_avi");
+
+                    b.HasCheckConstraint("ck_avi_note", "note BETWEEN 1 AND 5");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.BonCadeau", b =>

@@ -24,6 +24,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.AdresseId })
                     .HasName("pk_ads");
+
+                entity.HasCheckConstraint("ck_ads_rue1_rue2", "rue1 <> rue2");
             });
 
             modelBuilder.Entity<Avis>(entity =>
@@ -40,6 +42,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasForeignKey(d => d.SejourId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_avi_sjr");
+
+                entity.HasCheckConstraint("ck_avi_note", "note BETWEEN 1 AND 5");
             });
 
             modelBuilder.Entity<BonCadeau>(entity =>
@@ -98,22 +102,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasConstraintName("fk_cmd_cmp");
             });
 
-            modelBuilder.Entity<CompteCarte>(entity =>
-            {
-                entity.HasKey(e => new { e.PersonneId, e.CarteId })
-                    .HasName("pk_cpc");
-
-                entity.HasOne(d => d.CompteCompteCarte).WithMany(p => p.CompteCarteCompte)
-                    .HasForeignKey(d => d.PersonneId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_cpc_cmp");
-
-                entity.HasOne(d => d.RefCarteBancaireCompteCarte).WithMany(p => p.CompteCarteRefCarteBancaire)
-                    .HasForeignKey(d => d.CarteId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_cpc_rcb");
-            });
-
             modelBuilder.Entity<Comporte>(entity =>
             {
                 entity.HasKey(e => new { e.SejourId, e.CatParticipantId })
@@ -139,6 +127,24 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasForeignKey(d => d.TypeCompteId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_cmp_tpc");
+
+                entity.HasCheckConstraint("ck_cmp_datenaissance", "DATEDIFF(year,datenaissance,getdate()) > 18)");
+            });
+
+            modelBuilder.Entity<CompteCarte>(entity =>
+            {
+                entity.HasKey(e => new { e.PersonneId, e.CarteId })
+                    .HasName("pk_cpc");
+
+                entity.HasOne(d => d.CompteCompteCarte).WithMany(p => p.CompteCarteCompte)
+                    .HasForeignKey(d => d.PersonneId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_cpc_cmp");
+
+                entity.HasOne(d => d.RefCarteBancaireCompteCarte).WithMany(p => p.CompteCarteRefCarteBancaire)
+                    .HasForeignKey(d => d.CarteId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_cpc_rcb");
             });
 
             modelBuilder.Entity<Concerne>(entity =>

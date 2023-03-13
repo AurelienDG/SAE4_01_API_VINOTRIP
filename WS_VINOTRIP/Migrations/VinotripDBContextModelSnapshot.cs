@@ -62,6 +62,8 @@ namespace WS_VINOTRIP.Migrations
                         .HasName("pk_ads");
 
                     b.ToTable("t_e_adresse_ads");
+
+                    b.HasCheckConstraint("ck_ads_rue1_rue2", "rue1 <> rue2");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Avis", b =>
@@ -113,6 +115,8 @@ namespace WS_VINOTRIP.Migrations
                     b.HasIndex("SejourId");
 
                     b.ToTable("t_e_avis_avi");
+
+                    b.HasCheckConstraint("ck_avi_note", "note BETWEEN 1 AND 5");
                 });
 
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.BonCadeau", b =>

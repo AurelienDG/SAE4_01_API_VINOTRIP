@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WS_VINOTRIP.Migrations
 {
-    public partial class CreationBDVinotrique : Migration
+    public partial class CreationBDVinotrip : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,6 +25,7 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_ads", x => x.ads_id);
+                    table.CheckConstraint("ck_ads_rue1_rue2", "rue1 <> rue2");
                 });
 
             migrationBuilder.CreateTable(
@@ -627,6 +628,7 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_avi", x => x.avi_id);
+                    table.CheckConstraint("ck_avi_note", "note BETWEEN 1 AND 5");
                     table.ForeignKey(
                         name: "fk_avi_prs",
                         column: x => x.prs_id,
