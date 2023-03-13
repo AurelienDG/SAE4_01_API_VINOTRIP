@@ -12,7 +12,7 @@ using WS_VINOTRIP.Models.EntityFramework;
 namespace WS_VINOTRIP.Migrations
 {
     [DbContext(typeof(VinotripDBContext))]
-    [Migration("20230313132512_TopMoumoute")]
+    [Migration("20230313143345_TopMoumoute")]
     partial class TopMoumoute
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1018,6 +1018,11 @@ namespace WS_VINOTRIP.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RouteDesVinsId"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("rdv_description");
+
                     b.Property<int>("LienId")
                         .HasColumnType("integer")
                         .HasColumnName("len_id");
@@ -1078,7 +1083,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("numeric(7,2)")
                         .HasColumnName("sjr_prix");
 
-                    b.Property<int>("Promotion")
+                    b.Property<int?>("Promotion")
                         .HasColumnType("integer")
                         .HasColumnName("sjr_promotion");
 
@@ -1223,7 +1228,6 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnName("usr_prenomclient");
 
                     b.Property<string>("Tel")
-                        .IsRequired()
                         .HasColumnType("char(10)")
                         .HasColumnName("usr_tel");
 
@@ -1244,10 +1248,10 @@ namespace WS_VINOTRIP.Migrations
                     b.HasKey("PersonneId")
                         .HasName("pk_usr");
 
-                    b.HasAlternateKey("Tel")
-                        .HasName("uq_usr_tel");
-
                     b.HasIndex("TypeCompteId");
+
+                    b.HasIndex(new[] { "Tel" }, "uq_usr_tel")
+                        .IsUnique();
 
                     b.ToTable("t_e_user_usr");
 

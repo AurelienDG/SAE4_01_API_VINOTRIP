@@ -326,7 +326,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     prs_id = table.Column<int>(type: "integer", nullable: false),
                     tpc_id = table.Column<int>(type: "integer", nullable: false),
-                    usr_tel = table.Column<string>(type: "char(10)", nullable: false),
+                    usr_tel = table.Column<string>(type: "char(10)", nullable: true),
                     usr_newsletter = table.Column<bool>(type: "boolean", nullable: false),
                     usr_estverifie = table.Column<bool>(type: "boolean", nullable: false),
                     usr_estadmin = table.Column<string>(type: "text", nullable: false),
@@ -339,7 +339,6 @@ namespace WS_VINOTRIP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_usr", x => x.prs_id);
-                    table.UniqueConstraint("uq_usr_tel", x => x.usr_tel);
                     table.CheckConstraint("ck_usr_datenaissance", "now() - usr_datenaissance > INTERVAL '6570 days'");
                     table.CheckConstraint("ck_usr_tel", "usr_tel like '06%' or usr_tel like '07%'");
                     table.ForeignKey(
@@ -414,6 +413,7 @@ namespace WS_VINOTRIP.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     vgb_id = table.Column<int>(type: "integer", nullable: false),
                     rdv_titre = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
+                    rdv_description = table.Column<string>(type: "text", nullable: false),
                     len_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -583,7 +583,7 @@ namespace WS_VINOTRIP.Migrations
                     sjr_prix = table.Column<decimal>(type: "numeric(7,2)", nullable: false),
                     sjr_nbjour = table.Column<decimal>(type: "numeric(3,2)", nullable: false),
                     sjr_nbnuit = table.Column<int>(type: "integer", nullable: false),
-                    sjr_promotion = table.Column<int>(type: "integer", nullable: false),
+                    sjr_promotion = table.Column<int>(type: "integer", nullable: true),
                     sjr_est_valide = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -1115,6 +1115,12 @@ namespace WS_VINOTRIP.Migrations
                 name: "IX_t_e_user_usr_tpc_id",
                 table: "t_e_user_usr",
                 column: "tpc_id");
+
+            migrationBuilder.CreateIndex(
+                name: "uq_usr_tel",
+                table: "t_e_user_usr",
+                column: "usr_tel",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_t_e_vignoble_vgb_len_id",

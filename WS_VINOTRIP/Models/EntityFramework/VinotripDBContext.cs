@@ -589,6 +589,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
                 entity.HasAlternateKey(u => u.Tel)
                     .HasName("uq_usr_tel");
+
+                entity.Property(p => p.Tel).IsRequired(false);
             });
 
             modelBuilder.Entity<Vignoble>(entity =>
