@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
@@ -14,7 +15,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int TypeCompteId { get; set; }
 
         [Column("usr_tel", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
-        public string? Tel { get; set; } = null;
+        public string? Tel { get; set; }
 
         [Required, Column("usr_newsletter")]
         public bool Newsletter { get; set; }

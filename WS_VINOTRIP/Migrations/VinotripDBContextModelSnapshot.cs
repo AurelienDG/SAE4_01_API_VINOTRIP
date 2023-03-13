@@ -1081,7 +1081,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("numeric(7,2)")
                         .HasColumnName("sjr_prix");
 
-                    b.Property<int>("Promotion")
+                    b.Property<int?>("Promotion")
                         .HasColumnType("integer")
                         .HasColumnName("sjr_promotion");
 
@@ -1226,7 +1226,6 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnName("usr_prenomclient");
 
                     b.Property<string>("Tel")
-                        .IsRequired()
                         .HasColumnType("char(10)")
                         .HasColumnName("usr_tel");
 
@@ -1247,10 +1246,10 @@ namespace WS_VINOTRIP.Migrations
                     b.HasKey("PersonneId")
                         .HasName("pk_usr");
 
-                    b.HasAlternateKey("Tel")
-                        .HasName("uq_usr_tel");
-
                     b.HasIndex("TypeCompteId");
+
+                    b.HasIndex(new[] { "Tel" }, "uq_usr_tel")
+                        .IsUnique();
 
                     b.ToTable("t_e_user_usr");
 

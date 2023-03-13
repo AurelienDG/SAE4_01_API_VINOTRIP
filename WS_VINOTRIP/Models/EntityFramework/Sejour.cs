@@ -27,7 +27,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("sjr_nbnuit")]
         public int NbNuit { get; set; }
         [Column("sjr_promotion")]
-        public int Promotion { get; set; }
+        public int? Promotion { get; set; }
         [Column("sjr_est_valide")]
         public bool Est_Valide { get; set; }
 
