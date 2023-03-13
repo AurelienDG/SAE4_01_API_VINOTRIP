@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
-    [Table("t_e_compte_usr")]
+    [Table("t_e_compte_cmp")]
     public partial class User
     {
         [Key, Required, Column("prs_id")]
@@ -13,31 +13,31 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("tpc_id")]
         public int TypeCompteId { get; set; }
 
-        [Required, Column("usr_telcompte", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
+        [Required, Column("cmp_telcompte", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
         public string? Tel { get; set; }
 
-        [Required, Column("usr_newsletter")]
+        [Required, Column("cmp_newsletter")]
         public bool Newsletter { get; set; }
 
-        [Required, Column("usr_estverifie")]
+        [Required, Column("cmp_estverifie")]
         public bool EstVerifie { get; set; }
 
-        [Required, Column("usr_estadmin")]
-        public string? UserRole { get; set; }
+        [Required, Column("cmp_estadmin")]
+        public bool EstAdmin { get; set; }
 
-        [Required, Column("usr_dateconnexion", TypeName = "date")]
+        [Required, Column("cmp_dateconnexion", TypeName = "date")]
         public DateTime DateConnexion { get; set; }
 
-        [Column("usr_titreclient", TypeName = "char(5)")]
+        [Column("cmp_titreclient", TypeName = "char(5)")]
         public string? Titre { get; set; }
 
-        [Required, Column("usr_prenomclient")]
+        [Required, Column("cmp_prenomclient")]
         public string? Prenom { get; set; }
 
-        [Column("usr_datenaissance", TypeName = "date")]
+        [Column("cmp_datenaissance", TypeName = "date")]
         public DateTime DateNaissance { get; set; }
 
-        [Required, Column("usr_mdp"), StringLength(100)]
+        [Required, Column("cmp_mdp"), StringLength(100)]
         public string? Mdp { get; set; }
 
         [InverseProperty("CompteReside")]
