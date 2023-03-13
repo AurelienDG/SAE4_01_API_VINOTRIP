@@ -13,6 +13,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int VignobleId { get; set; }
         [StringLength(30), Required, Column("rdv_titre", TypeName = "varchar(30)")]
         public string? Titre { get; set; }
+        [Required, Column("rdv_description", TypeName = "text")]
+        public String? Description { get; set; }
         [Column("len_id")]
         public int LienId { get; set; }
 
