@@ -49,5 +49,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("ReservationEst_facturee")]
         public virtual ICollection<Est_facturee> Est_factureeReservation { get; } = new List<Est_facturee>();
+
+        [InverseProperty("ReservationPaye")]
+        public virtual ICollection<Paye> PayeReservation { get; } = null!;
     }
 }
