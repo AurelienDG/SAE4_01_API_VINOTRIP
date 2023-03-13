@@ -60,10 +60,10 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("UserHistoriqueCadeau")]
         public virtual ICollection<HistoriqueCadeau> HistoriqueCadeauUser { get; } = new List<HistoriqueCadeau>();
-        
+
         [InverseProperty("UserCommande")]
         public virtual ICollection<Commande> CommandeUser { get; } = new List<Commande>();
-        
+
         [ForeignKey("PersonneId")]
         [InverseProperty("UserPersonne")]
         public virtual Personne PersonneUser { get; set; } = null!;
