@@ -14,7 +14,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int TypeCompteId { get; set; }
 
         [Column("usr_tel", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
-        public string? Tel { get; set; }
+        public string? Tel { get; set; } = null;
 
         [Required, Column("usr_newsletter")]
         public bool Newsletter { get; set; }
