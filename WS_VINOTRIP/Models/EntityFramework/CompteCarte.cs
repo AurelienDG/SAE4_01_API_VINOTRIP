@@ -17,7 +17,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("PersonneId")]
         [InverseProperty("CompteCarteCompte")]
-        public virtual Compte CompteCompteCarte { get; set; } = null!;
+        public virtual User CompteCompteCarte { get; set; } = null!;
 
         [ForeignKey("CarteId")]
         [InverseProperty("CompteCarteRefCarteBancaire")]

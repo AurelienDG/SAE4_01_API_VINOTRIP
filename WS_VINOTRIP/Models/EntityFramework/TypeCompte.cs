@@ -19,6 +19,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public string? Libelle { get; set; }
 
         [InverseProperty("TypeCompteCompte")]
-        public virtual ICollection<Compte> CompteTypeCompte { get; } = new List<Compte>();
+        public virtual ICollection<User> CompteTypeCompte { get; } = new List<User>();
     }
 }

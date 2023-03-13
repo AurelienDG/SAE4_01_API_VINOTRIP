@@ -43,6 +43,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("CompteId")]
         [InverseProperty("PanierCompte")]
-        public virtual Compte ComptePanier { get; set; } = null!;
+        public virtual User ComptePanier { get; set; } = null!;
     }
 }

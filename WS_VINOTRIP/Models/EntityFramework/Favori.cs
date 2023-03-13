@@ -16,7 +16,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("PersonneId")]
         [InverseProperty("FavoriCompte")]
-        public virtual Compte CompteFavori { get; set; } = null!;
+        public virtual User CompteFavori { get; set; } = null!;
 
         [ForeignKey("SejourId")]
         [InverseProperty("FavoriSejour")]

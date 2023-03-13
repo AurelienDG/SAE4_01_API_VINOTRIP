@@ -11,14 +11,14 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int CommandeId { get; set; }
         [Required, Column("prs_id")]
         public int PersonneId { get; set; }
-        [Column("cmp_datenaissance", TypeName = "date")]
+        [Column("usr_datenaissance", TypeName = "date")]
         public DateTime DateFacture { get; set; }
         [Required, Column("cmd_montantreduction")]
         public int MontantReduction { get; set; }
 
         [ForeignKey("PersonneId")]
         [InverseProperty("CommandeCompte")]
-        public virtual Compte CompteCommande { get; set; } = null!;
+        public virtual User CompteCommande { get; set; } = null!;
 
         [InverseProperty("CommandePasse")]
         public virtual ICollection<Passe> PasseCommande { get; } = new List<Passe>();

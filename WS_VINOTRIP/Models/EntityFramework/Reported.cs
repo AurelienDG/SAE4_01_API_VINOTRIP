@@ -20,7 +20,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("PersonneId")]
         [InverseProperty("ReportedCompte")]
-        public virtual Compte CompteReported { get; set; } = null!;
+        public virtual User CompteReported { get; set; } = null!;
 
         [ForeignKey("AvisId")]
         [InverseProperty("ReportedAvis")]
