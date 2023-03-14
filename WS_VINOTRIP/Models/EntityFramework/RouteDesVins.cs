@@ -15,8 +15,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public string? Titre { get; set; }
         [Required, Column("rdv_description", TypeName = "text")]
         public String? Description { get; set; }
-        [Column("len_id")]
-        public int LienId { get; set; }
 
         [InverseProperty("RouteDesVinsSejour")]
         public virtual ICollection<Sejour> SejourRouteDesVins { get; set; } = new List<Sejour>();
