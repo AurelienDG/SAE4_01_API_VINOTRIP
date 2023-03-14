@@ -15,7 +15,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int LienId { get; set; }
 
         [InverseProperty("CatParticipantComporte")]
-        public virtual ICollection<Comporte> ComporteCatParticipant { get; set; } = new List<Comporte>();
+        public virtual ICollection<Comporte>? ComporteCatParticipant { get; set; }
 
         [ForeignKey("LienId")]
         [InverseProperty("CatParticipantLien")]
