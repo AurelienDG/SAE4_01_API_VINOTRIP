@@ -9,7 +9,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_user_usr")]
     public partial class User
     {
-        [Key, Required, Column("prs_id")]
+        [Key, Column("prs_id")]
         public int PersonneId { get; set; }
 
         [Required, StringLength(30), Column("usr_pseudo")]
