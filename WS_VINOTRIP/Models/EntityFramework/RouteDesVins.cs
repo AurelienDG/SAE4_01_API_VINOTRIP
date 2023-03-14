@@ -6,24 +6,27 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_routedesvins_rdv")]
     public partial class RouteDesVins
     {
+        //Property
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("rdv_id")]
+        [Key, Column("rdv_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RouteDesVinsId { get; set; }
         [Column("vgb_id")]
         public int? VignobleId { get; set; }
-        [StringLength(30), Required, Column("rdv_titre", TypeName = "varchar(30)")]
+        [Required, Column("rdv_titre", TypeName = "varchar(30)"), StringLength(30)]
         public string? Titre { get; set; }
         [Required, Column("rdv_description", TypeName = "text")]
         public String? Description { get; set; }
 
+        //InverseProperty
+
         [InverseProperty("RouteDesVinsSejour")]
-        public virtual ICollection<Sejour> SejourRouteDesVins { get; set; } = new List<Sejour>();
+        public virtual ICollection<Sejour>? SejourRouteDesVins { get; }
 
         [InverseProperty("RouteDesVinsLienRouteDesVins")]
-        public virtual ICollection<LienRouteDesVins> LienRouteDesVinsRouteDesVins { get; set; } = new List<LienRouteDesVins>();
+        public virtual ICollection<LienRouteDesVins>? LienRouteDesVinsRouteDesVins { get; }
 
         [ForeignKey("VignobleId")]
         [InverseProperty("RouteDesVinsVignoble")]
-        public virtual Vignoble VignobleRouteDesVins { get; set; } = null!;
+        public virtual Vignoble? VignobleRouteDesVins { get; set; }
     }
 }
