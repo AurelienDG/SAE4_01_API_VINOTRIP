@@ -561,12 +561,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .HasConstraintName("fk_sjc_sjr");
             });
 
-            modelBuilder.Entity<TypeCompte>(entity =>
-            {
-                entity.HasKey(e => new { e.TypeCompteId })
-                    .HasName("pk_tpc");
-            });
-
             modelBuilder.Entity<TypeElementEtape>(entity =>
             {
                 entity.HasKey(e => new { e.TypeElementEtapeId })
