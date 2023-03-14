@@ -23,6 +23,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<VinotripDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("VinotripDbContextRemote")));
 
 builder.Services.AddScoped<IDataRepository<Sejour>, SejourManager>();
+builder.Services.AddScoped<IDataRepository<Comporte>, ComporteManager>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>

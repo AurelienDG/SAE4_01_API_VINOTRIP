@@ -15,13 +15,13 @@ namespace WS_VINOTRIP.Controllers
     public class SejoursController : ControllerBase
     {
         private readonly IDataRepository<Sejour> dataRepository;
-        /*private readonly IDataRepository<CatParticipant> dataRepository2;
-        private readonly IDataRepository<Comporte> dataRepository3;*/
-        public SejoursController(IDataRepository<Sejour> dataRepo/*, IDataRepository<CatParticipant> dataRepo2, IDataRepository<Comporte> dataRepo3*/)
+        private readonly IDataRepository<Comporte> dataRepository2;
+        /*private readonly IDataRepository<CatParticipant> dataRepository3;*/
+        public SejoursController(IDataRepository<Sejour> dataRepo, IDataRepository<Comporte> dataRepo2/*, IDataRepository<CatParticipant> dataRepo3*/)
         {
             dataRepository = dataRepo;
-            /*dataRepository2 = dataRepo2;
-            dataRepository3 = dataRepo3;*/
+            dataRepository2 = dataRepo2;
+            /*dataRepository3 = dataRepo3;*/
         }
 
         // GET: api/Sejours
@@ -56,17 +56,23 @@ namespace WS_VINOTRIP.Controllers
             if (catsejour == null && catvignoble == null && catparticipant == null)
                 return dataRepository.GetAllAsync().Result;
             List<Sejour> bite = new List<Sejour>();
-            
+            var truc = dataRepository2.GetAllAsync().Result.Value.Where(e => e.CatParticipantId == catparticipant);
 
-            var filterList = dataRepository.GetAllAsync().Result.Value.Where(e => e.CatSejourId == catsejour && e.CatVignobleId == catvignoble);
-            foreach (var filter in filterList)
+/*            var filterList = dataRepository.GetAllAsync().Result.Value.Where(e => e.CatSejourId == catsejour && e.CatVignobleId == catvignoble);
+*/
+            foreach (var item in truc )
+            {
+                var filterList = dataRepository.GetAllAsync().Result.Value.Where(e => e.CatSejourId == catsejour && e.CatVignobleId == catvignoble && item.CatParticipantId == catparticipant && e.SejourId == item.SejourId);
+            }
+
+            /*foreach (var filter in filterList)
             {
                 foreach (var result in filter.ComporteSejour)
                 {
                     if (result.CatParticipantId == catparticipant)
                         bite.Add(filterList.Where(e => e.SejourId == result.SejourId).FirstOrDefault());
                 }
-            }
+            }*/
 
             //var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(e => e.Mail.ToUpper() == email.ToUpper());
 

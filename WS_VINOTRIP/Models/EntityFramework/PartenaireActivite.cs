@@ -24,7 +24,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("PersonneId")]
         [InverseProperty("PartenairesActivitePartenaire")]
-        public virtual Partenaire? PartenairePartenaireActivite { get; set; };
+        public virtual Partenaire? PartenairePartenaireActivite { get; set; }
 
     }
 }
