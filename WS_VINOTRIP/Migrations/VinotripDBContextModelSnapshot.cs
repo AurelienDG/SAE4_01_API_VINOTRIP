@@ -670,11 +670,8 @@ namespace WS_VINOTRIP.Migrations
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Partenaire", b =>
                 {
                     b.Property<int>("PersonneId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("prs_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PersonneId"));
 
                     b.Property<string>("Tel")
                         .IsRequired()
@@ -1021,10 +1018,6 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("text")
                         .HasColumnName("rdv_description");
 
-                    b.Property<int>("LienId")
-                        .HasColumnType("integer")
-                        .HasColumnName("len_id");
-
                     b.Property<string>("Titre")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -1225,8 +1218,13 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("text")
                         .HasColumnName("usr_prenomclient");
 
-                    b.Property<string>("Tel")
+                    b.Property<string>("Pseudo")
                         .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
+                        .HasColumnName("usr_pseudo");
+
+                    b.Property<string>("Tel")
                         .HasColumnType("char(10)")
                         .HasColumnName("usr_tel");
 
@@ -1247,8 +1245,8 @@ namespace WS_VINOTRIP.Migrations
                     b.HasKey("PersonneId")
                         .HasName("pk_usr");
 
-                    b.HasAlternateKey("Tel")
-                        .HasName("uq_usr_tel");
+                    b.HasAlternateKey("Pseudo")
+                        .HasName("uq_usr_pseudo");
 
                     b.HasIndex("TypeCompteId");
 
@@ -1678,6 +1676,18 @@ namespace WS_VINOTRIP.Migrations
                     b.Navigation("UserPanier");
                 });
 
+            modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Partenaire", b =>
+                {
+                    b.HasOne("WS_VINOTRIP.Models.EntityFramework.Personne", "PersonnePartenaire")
+                        .WithMany("PartenairePersonne")
+                        .HasForeignKey("PersonneId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_ptn_prs");
+
+                    b.Navigation("PersonnePartenaire");
+                });
+
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.PartenaireActivite", b =>
                 {
                     b.HasOne("WS_VINOTRIP.Models.EntityFramework.Partenaire", "PartenairePartenaireActivite")
@@ -1899,8 +1909,9 @@ namespace WS_VINOTRIP.Migrations
                     b.HasOne("WS_VINOTRIP.Models.EntityFramework.Personne", "PersonneUser")
                         .WithMany("UserPersonne")
                         .HasForeignKey("PersonneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_usr_prs");
 
                     b.HasOne("WS_VINOTRIP.Models.EntityFramework.TypeCompte", "TypeCompteUser")
                         .WithMany("UserTypeCompte")
@@ -2027,6 +2038,8 @@ namespace WS_VINOTRIP.Migrations
             modelBuilder.Entity("WS_VINOTRIP.Models.EntityFramework.Personne", b =>
                 {
                     b.Navigation("AvisPersonne");
+
+                    b.Navigation("PartenairePersonne");
 
                     b.Navigation("UserPersonne");
                 });
