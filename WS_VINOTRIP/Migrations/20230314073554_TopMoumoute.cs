@@ -72,19 +72,6 @@ namespace WS_VINOTRIP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "t_e_partenaire_ptn",
-                columns: table => new
-                {
-                    prs_id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ptn_tel = table.Column<string>(type: "char(10)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_ptn", x => x.prs_id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "t_e_personne_prs",
                 columns: table => new
                 {
@@ -234,6 +221,132 @@ namespace WS_VINOTRIP.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "t_e_partenaire_ptn",
+                columns: table => new
+                {
+                    prs_id = table.Column<int>(type: "integer", nullable: false),
+                    ptn_tel = table.Column<string>(type: "char(10)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_ptn", x => x.prs_id);
+                    table.ForeignKey(
+                        name: "fk_ptn_prs",
+                        column: x => x.prs_id,
+                        principalTable: "t_e_personne_prs",
+                        principalColumn: "prs_id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "t_e_user_usr",
+                columns: table => new
+                {
+                    prs_id = table.Column<int>(type: "integer", nullable: false),
+                    usr_pseudo = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    tpc_id = table.Column<int>(type: "integer", nullable: false),
+                    usr_tel = table.Column<string>(type: "char(10)", nullable: true),
+                    usr_newsletter = table.Column<bool>(type: "boolean", nullable: false),
+                    usr_estverifie = table.Column<bool>(type: "boolean", nullable: false),
+                    usr_estadmin = table.Column<string>(type: "text", nullable: false),
+                    usr_dateconnexion = table.Column<DateTime>(type: "date", nullable: false),
+                    usr_titreclient = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: true),
+                    usr_prenomclient = table.Column<string>(type: "text", nullable: false),
+                    usr_datenaissance = table.Column<DateTime>(type: "date", nullable: false),
+                    usr_mdp = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_usr", x => x.prs_id);
+                    table.UniqueConstraint("uq_usr_pseudo", x => x.usr_pseudo);
+                    table.CheckConstraint("ck_usr_datenaissance", "now() - usr_datenaissance > INTERVAL '6570 days'");
+                    table.CheckConstraint("ck_usr_tel", "usr_tel like '06%' or usr_tel like '07%'");
+                    table.ForeignKey(
+                        name: "fk_usr_prs",
+                        column: x => x.prs_id,
+                        principalTable: "t_e_personne_prs",
+                        principalColumn: "prs_id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_usr_tpc",
+                        column: x => x.tpc_id,
+                        principalTable: "t_e_typecompte_tpc",
+                        principalColumn: "tpc_id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "t_e_elementvignoble_evg",
+                columns: table => new
+                {
+                    evg_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    vgb_id = table.Column<int>(type: "integer", nullable: false),
+                    evg_titre = table.Column<string>(type: "varchar(70)", maxLength: 70, nullable: false),
+                    evg_description = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_evg", x => x.evg_id);
+                    table.ForeignKey(
+                        name: "fk_evg_vgb",
+                        column: x => x.vgb_id,
+                        principalTable: "t_e_vignoble_vgb",
+                        principalColumn: "vgb_id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "t_e_routedesvins_rdv",
+                columns: table => new
+                {
+                    rdv_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    vgb_id = table.Column<int>(type: "integer", nullable: false),
+                    rdv_titre = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
+                    rdv_description = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_rdv", x => x.rdv_id);
+                    table.ForeignKey(
+                        name: "fk_rdv_vgb",
+                        column: x => x.vgb_id,
+                        principalTable: "t_e_vignoble_vgb",
+                        principalColumn: "vgb_id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "t_e_elementetape_ele",
+                columns: table => new
+                {
+                    ele_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    prs_id = table.Column<int>(type: "integer", nullable: false),
+                    tpe_id = table.Column<int>(type: "integer", nullable: false),
+                    ele_libelle = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    ele_description = table.Column<string>(type: "text", nullable: true),
+                    TypeElementEtapeId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_ele", x => x.ele_id);
+                    table.ForeignKey(
+                        name: "fk_ele_ptn",
+                        column: x => x.prs_id,
+                        principalTable: "t_e_partenaire_ptn",
+                        principalColumn: "prs_id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_ele_tpe",
+                        column: x => x.tpe_id,
+                        principalTable: "t_e_typeelementetape_tpe",
+                        principalColumn: "tpe_id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "t_e_partenaireactivite_pta",
                 columns: table => new
                 {
@@ -317,114 +430,6 @@ namespace WS_VINOTRIP.Migrations
                         column: x => x.ptn_id,
                         principalTable: "t_e_partenaire_ptn",
                         principalColumn: "prs_id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "t_e_user_usr",
-                columns: table => new
-                {
-                    prs_id = table.Column<int>(type: "integer", nullable: false),
-                    tpc_id = table.Column<int>(type: "integer", nullable: false),
-                    usr_tel = table.Column<string>(type: "char(10)", nullable: false),
-                    usr_newsletter = table.Column<bool>(type: "boolean", nullable: false),
-                    usr_estverifie = table.Column<bool>(type: "boolean", nullable: false),
-                    usr_estadmin = table.Column<string>(type: "text", nullable: false),
-                    usr_dateconnexion = table.Column<DateTime>(type: "date", nullable: false),
-                    usr_titreclient = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: true),
-                    usr_prenomclient = table.Column<string>(type: "text", nullable: false),
-                    usr_datenaissance = table.Column<DateTime>(type: "date", nullable: false),
-                    usr_mdp = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_usr", x => x.prs_id);
-                    table.UniqueConstraint("uq_usr_tel", x => x.usr_tel);
-                    table.CheckConstraint("ck_usr_datenaissance", "now() - usr_datenaissance > INTERVAL '6570 days'");
-                    table.CheckConstraint("ck_usr_tel", "usr_tel like '06%' or usr_tel like '07%'");
-                    table.ForeignKey(
-                        name: "FK_t_e_user_usr_t_e_personne_prs_prs_id",
-                        column: x => x.prs_id,
-                        principalTable: "t_e_personne_prs",
-                        principalColumn: "prs_id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_usr_tpc",
-                        column: x => x.tpc_id,
-                        principalTable: "t_e_typecompte_tpc",
-                        principalColumn: "tpc_id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "t_e_elementetape_ele",
-                columns: table => new
-                {
-                    ele_id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    prs_id = table.Column<int>(type: "integer", nullable: false),
-                    tpe_id = table.Column<int>(type: "integer", nullable: false),
-                    ele_libelle = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    ele_description = table.Column<string>(type: "text", nullable: true),
-                    TypeElementEtapeId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_ele", x => x.ele_id);
-                    table.ForeignKey(
-                        name: "fk_ele_ptn",
-                        column: x => x.prs_id,
-                        principalTable: "t_e_partenaire_ptn",
-                        principalColumn: "prs_id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "fk_ele_tpe",
-                        column: x => x.tpe_id,
-                        principalTable: "t_e_typeelementetape_tpe",
-                        principalColumn: "tpe_id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "t_e_elementvignoble_evg",
-                columns: table => new
-                {
-                    evg_id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    vgb_id = table.Column<int>(type: "integer", nullable: false),
-                    evg_titre = table.Column<string>(type: "varchar(70)", maxLength: 70, nullable: false),
-                    evg_description = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_evg", x => x.evg_id);
-                    table.ForeignKey(
-                        name: "fk_evg_vgb",
-                        column: x => x.vgb_id,
-                        principalTable: "t_e_vignoble_vgb",
-                        principalColumn: "vgb_id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "t_e_routedesvins_rdv",
-                columns: table => new
-                {
-                    rdv_id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    vgb_id = table.Column<int>(type: "integer", nullable: false),
-                    rdv_titre = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
-                    rdv_description = table.Column<string>(type: "text", nullable: false),
-                    len_id = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_rdv", x => x.rdv_id);
-                    table.ForeignKey(
-                        name: "fk_rdv_vgb",
-                        column: x => x.vgb_id,
-                        principalTable: "t_e_vignoble_vgb",
-                        principalColumn: "vgb_id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -523,30 +528,6 @@ namespace WS_VINOTRIP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "t_j_contient_ctn",
-                columns: table => new
-                {
-                    ele_id = table.Column<int>(type: "integer", nullable: false),
-                    len_id = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_ctn", x => new { x.len_id, x.ele_id });
-                    table.ForeignKey(
-                        name: "fk_ctn_ele",
-                        column: x => x.ele_id,
-                        principalTable: "t_e_elementetape_ele",
-                        principalColumn: "ele_id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "fk_ctn_len",
-                        column: x => x.len_id,
-                        principalTable: "t_e_lien_len",
-                        principalColumn: "len_id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "t_j_lienelementvignoble_lev",
                 columns: table => new
                 {
@@ -631,6 +612,30 @@ namespace WS_VINOTRIP.Migrations
                         column: x => x.rdv_id,
                         principalTable: "t_e_routedesvins_rdv",
                         principalColumn: "rdv_id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "t_j_contient_ctn",
+                columns: table => new
+                {
+                    ele_id = table.Column<int>(type: "integer", nullable: false),
+                    len_id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_ctn", x => new { x.len_id, x.ele_id });
+                    table.ForeignKey(
+                        name: "fk_ctn_ele",
+                        column: x => x.ele_id,
+                        principalTable: "t_e_elementetape_ele",
+                        principalColumn: "ele_id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_ctn_len",
+                        column: x => x.len_id,
+                        principalTable: "t_e_lien_len",
+                        principalColumn: "len_id",
                         onDelete: ReferentialAction.Restrict);
                 });
 

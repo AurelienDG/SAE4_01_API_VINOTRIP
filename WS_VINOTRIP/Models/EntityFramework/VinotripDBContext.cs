@@ -597,10 +597,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
                 entity.HasCheckConstraint("ck_usr_datenaissance", "now() - usr_datenaissance > INTERVAL '6570 days'");
                 entity.HasCheckConstraint("ck_usr_tel", "usr_tel like '06%' or usr_tel like '07%'");
 
-                entity.HasAlternateKey(u => u.Tel)
-                    .HasName("uq_usr_tel");
-
-                /*entity.Property(p => p.Tel).IsRequired(false);*/
+                entity.HasAlternateKey(u => u.Pseudo)
+                    .HasName("uq_usr_pseudo");
             });
 
             modelBuilder.Entity<Vignoble>(entity =>

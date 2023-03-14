@@ -12,13 +12,13 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Key, Required, Column("prs_id")]
         public int PersonneId { get; set; }
 
-        [Required, StringLength(30)]
+        [Required, StringLength(30), Column("usr_pseudo")]
         public string Pseudo { get; set; }
 
         [Required, Column("tpc_id")]
         public int TypeCompteId { get; set; }
 
-        [Column("usr_tel", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide"), Required(AllowEmptyStrings = true)]
+        [Column("usr_tel", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
         public string? Tel { get; set; }
 
         [Required, Column("usr_newsletter")]
