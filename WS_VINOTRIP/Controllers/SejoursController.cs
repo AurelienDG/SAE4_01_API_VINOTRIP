@@ -53,6 +53,7 @@ namespace WS_VINOTRIP.Controllers
         [ActionName("GetWithFilter")]
         public async Task<ActionResult<IEnumerable<Sejour>>> GetSejourFilter(int catsejour, int catvignoble, int catparticipant)
         {
+            List<Sejour> filterList = new List<Sejour>();
             if (catsejour == null && catvignoble == null && catparticipant == null)
                 return dataRepository.GetAllAsync().Result;
             List<Sejour> bite = new List<Sejour>();
@@ -62,7 +63,9 @@ namespace WS_VINOTRIP.Controllers
 */
             foreach (var item in truc )
             {
-                var filterList = dataRepository.GetAllAsync().Result.Value.Where(e => e.CatSejourId == catsejour && e.CatVignobleId == catvignoble && item.CatParticipantId == catparticipant && e.SejourId == item.SejourId);
+                var t = dataRepository.GetAllAsync().Result.Value.Where(e => e.CatSejourId == catsejour && e.CatVignobleId == catvignoble && e.SejourId == item.SejourId).FirstOrDefault();
+                if (t != null)
+                    filterList.Add(t);
             }
 
             /*foreach (var filter in filterList)
@@ -76,12 +79,12 @@ namespace WS_VINOTRIP.Controllers
 
             //var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(e => e.Mail.ToUpper() == email.ToUpper());
 
-            if (bite == null)
+            if (filterList == null)
             {
                 return NotFound();
             }
 
-            return bite.ToList();
+            return filterList;
         }
 
         // PUT: api/Sejours/5

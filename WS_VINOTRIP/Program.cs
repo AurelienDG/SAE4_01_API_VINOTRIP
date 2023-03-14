@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using WS_VINOTRIP.Models;
 using WS_VINOTRIP.Models.DataManager;
 using WS_VINOTRIP.Models.EntityFramework;
@@ -47,6 +49,12 @@ builder.Services.AddAuthorization(config =>
 {
     config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
     config.AddPolicy(Policies.User, Policies.UserPolicy());
+});
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
 });
 
 var app = builder.Build();
