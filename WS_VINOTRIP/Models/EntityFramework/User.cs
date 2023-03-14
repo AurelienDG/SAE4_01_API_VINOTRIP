@@ -12,6 +12,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Key, Required, Column("prs_id")]
         public int PersonneId { get; set; }
 
+        [Required, StringLength(30)]
+        public string Pseudo { get; set; }
+
         [Required, Column("tpc_id")]
         public int TypeCompteId { get; set; }
 
