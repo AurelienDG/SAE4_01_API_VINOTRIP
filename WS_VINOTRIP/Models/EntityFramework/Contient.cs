@@ -6,17 +6,22 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_contient_ctn")]
     public partial class Contient
     {
-        [Column("ele_id")]
+        //Property
+
+        [Required, Column("ele_id")]
         public int ElementId { get; set; }
-        [Column("len_id")]
+
+        [Required, Column("len_id")]
         public int LienId { get; set; }
+
+        //InverseProperty
 
         [ForeignKey("ElementId")]
         [InverseProperty("ContientElementEtape")]
-        public virtual ElementEtape ElementEtapeContient { get; set; } = null!;
+        public virtual ElementEtape? ElementEtapeContient { get; set; }
 
         [ForeignKey("LienId")]
         [InverseProperty("ContientLien")]
-        public virtual Lien LienContient { get; set; } = null!;
+        public virtual Lien? LienContient { get; set; }
     }
 }

@@ -6,19 +6,25 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_concerne_ccr")]
     public partial class Concerne
     {
-        [Column("etp_id")]
+        //Property
+
+        [Required, Column("etp_id")]
         public int EtapeId { get; set; }
 
-        [Column("ele_id")]
+        [Required, Column("ele_id")]
         public int ElementId { get; set; }
         
-        [Column("ccr_horaire", TypeName = "time"), Required]
+        [Required, Column("ccr_horaire", TypeName = "time")]
         public TimeOnly Horaire { get; set; }
 
-        [InverseProperty("ConcerneEtape"), ForeignKey("EtapeId")]
-        public virtual Etape EtapeConcerne { get; set; } = null!;
+        //InverseProperty
 
-        [InverseProperty("ConcerneElementEtape"), ForeignKey("ElementId")]
-        public virtual ElementEtape ElementEtapeConcerne { get; set; } = null!;
+        [ForeignKey("EtapeId")]
+        [InverseProperty("ConcerneEtape")]
+        public virtual Etape? EtapeConcerne { get; set; }
+
+        [ForeignKey("ElementId")]
+        [InverseProperty("ConcerneElementEtape")]
+        public virtual ElementEtape? ElementEtapeConcerne { get; set; }
     }
 }

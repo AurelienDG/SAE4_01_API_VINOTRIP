@@ -6,16 +6,20 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_catvignoble_cvg")]
     public partial class CatVignoble
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("cvg_id")]
+        //Property
+
+        [Key, Column("cvg_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CatVignobleId { get; set; }
 
-        [StringLength(30), Column("cvg_libelle")]
+        [Required, Column("cvg_libelle"), StringLength(30)]
         public string? Libelle { get; set; }
 
         [Column("cvg_description", TypeName = "text")]
         public string? Description { get; set; }
 
+        //InverseProperty
+
         [InverseProperty("SejourCatVignoble")]
-        public virtual ICollection<Sejour> CatVignobleSejour { get; set; } = new List<Sejour>();
+        public virtual ICollection<Sejour>? CatVignobleSejour { get; }
     }
 }

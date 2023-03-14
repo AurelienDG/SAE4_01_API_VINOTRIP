@@ -6,17 +6,18 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_chequecadeau_cqc")]
     public partial class ChequeCadeau
     {
-        [Key]
-        [Required]
-        [Column("bcd_id")]
+        //Property
+
+        [Key, Column("bcd_id")]
         public int BonCadeauId { get; set; }
 
-        [Required]
-        [Column("cqc_montant")]
-        public int montant { get; set; }
+        [Required, Column("cqc_montant")]
+        public int Montant { get; set; }
+
+        //InverseProperty
 
         [ForeignKey("BonCadeauId")]
         [InverseProperty("ChequeCadeauBonCadeau")]
-        public virtual BonCadeau BonCadeauChequeCadeau { get; set; } = null!;
+        public virtual BonCadeau? BonCadeauChequeCadeau { get; set; }
     }
 }

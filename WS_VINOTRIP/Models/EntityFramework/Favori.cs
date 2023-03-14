@@ -4,22 +4,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WS_VINOTRIP.Models.EntityFramework
 {
     [Table("t_j_favori_fav")]
-    public class Favori
+    public partial class Favori
     {
-        [Required]
-        [Column("prs_id")]
+        //Property
+
+        [Required, Column("prs_id")]
         public int PersonneId { get; set; }
 
-        [Required]
-        [Column("sjr_id")]
+        [Required, Column("sjr_id")]
         public int SejourId { get; set; }
+
+        //InverseProperty
 
         [ForeignKey("PersonneId")]
         [InverseProperty("FavoriUser")]
-        public virtual User UserFavori { get; set; } = null!;
+        public virtual User? UserFavori { get; set; }
 
         [ForeignKey("SejourId")]
         [InverseProperty("FavoriSejour")]
-        public virtual Sejour SejourFavori { get; set; } = null!;
+        public virtual Sejour? SejourFavori { get; set; }
     }
 }
