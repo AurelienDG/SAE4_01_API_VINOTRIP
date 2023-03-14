@@ -23,8 +23,8 @@ namespace WS_VINOTRIP.Controllers
         };
         private List<User> appUsers = new List<User>
         {
-            new User { Tel="0637042057",Prenom="Irwin",UserRole="Admin",Mdp="1234"},
-            new User { Tel="0637042057",Prenom="JOSIANNE",UserRole="User",Mdp="1234"}
+            new User { Pseudo = "Connard",Prenom="Irwin",UserRole="Admin",Mdp="1234"},
+            new User { Pseudo = "TG",Prenom="JOSIANNE",UserRole="User",Mdp="1234"}
 
         };
 
@@ -54,7 +54,7 @@ namespace WS_VINOTRIP.Controllers
 
         private User AuthenticateUser(User user)
         {
-            return appUsers.SingleOrDefault(x => x.Tel.ToUpper() == user.Tel.ToUpper() && x.Mdp == user.Mdp);
+            return appUsers.SingleOrDefault(x => x.Pseudo.ToUpper() == user.Pseudo.ToUpper() && x.Mdp == user.Mdp);
         }
 
 
@@ -64,8 +64,8 @@ namespace WS_VINOTRIP.Controllers
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, userInfo.Tel),
-                new Claim("tel", userInfo.Tel.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, userInfo.Pseudo),
+                new Claim("tel", userInfo.Pseudo.ToString()),
                 new Claim("role",userInfo.UserRole),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
