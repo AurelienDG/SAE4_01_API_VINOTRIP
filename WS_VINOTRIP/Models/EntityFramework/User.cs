@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
@@ -14,7 +15,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("tpc_id")]
         public int TypeCompteId { get; set; }
 
-        [Column("usr_tel", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
+        [Column("usr_tel", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide"), Required(AllowEmptyStrings = true)]
         public string? Tel { get; set; }
 
         [Required, Column("usr_newsletter")]
@@ -68,6 +69,5 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [ForeignKey("PersonneId")]
         [InverseProperty("UserPersonne")]
         public virtual Personne PersonneUser { get; set; } = null!;
-
     }
 }

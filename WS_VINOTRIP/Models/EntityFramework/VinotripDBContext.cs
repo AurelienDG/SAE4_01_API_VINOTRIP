@@ -361,6 +361,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
             {
                 entity.HasKey(e => new { e.PersonneId })
                     .HasName("pk_ptn");
+
+                entity.HasOne(d => d.PersonnePartenaire).WithMany(p => p.PartenairePersonne)
+                    .HasForeignKey(d => d.PersonneId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_ptn_prs");
             });
 
             modelBuilder.Entity<PartenaireActivite>(entity =>
@@ -584,13 +589,18 @@ namespace WS_VINOTRIP.Models.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("fk_usr_tpc");
 
+                entity.HasOne(d => d.PersonneUser).WithMany(p => p.UserPersonne)
+                    .HasForeignKey(d => d.PersonneId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("fk_usr_prs");
+
                 entity.HasCheckConstraint("ck_usr_datenaissance", "now() - usr_datenaissance > INTERVAL '6570 days'");
                 entity.HasCheckConstraint("ck_usr_tel", "usr_tel like '06%' or usr_tel like '07%'");
 
                 entity.HasAlternateKey(u => u.Tel)
                     .HasName("uq_usr_tel");
 
-                entity.Property(p => p.Tel).IsRequired(false);
+                /*entity.Property(p => p.Tel).IsRequired(false);*/
             });
 
             modelBuilder.Entity<Vignoble>(entity =>
