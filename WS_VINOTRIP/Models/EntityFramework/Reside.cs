@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.Build.Framework;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WS_VINOTRIP.Models.EntityFramework
 {
@@ -7,9 +8,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
     {
         //Property
 
-        [Column("prs_id")]
+        [Required, Column("prs_id")]
         public int PersonneId { get; set; }
-        [Column("ads_id")]
+        [Required, Column("ads_id")]
         public int AdresseId { get; set; }
 
         //InverseProperty
