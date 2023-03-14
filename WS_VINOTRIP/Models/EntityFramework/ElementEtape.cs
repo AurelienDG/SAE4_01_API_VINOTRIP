@@ -6,38 +6,37 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_elementetape_ele")]
     public class ElementEtape
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("ele_id")]
+        //Property
+
+        [Key, Column("ele_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ElementId { get; set; }
 
-        [Column("prs_id")]
-        [Required]
+        [Required, Column("prs_id")]
         public int PersonneId { get; set; }
 
         [Column("tpe_id")]
-        public int TypeElementId { get; set; }
+        public int? TypeElementId { get; set; }
 
-        [Column("ele_libelle")]
-        [StringLength(100)]
-        [Required]
+        [Required, Column("ele_libelle"), StringLength(100)]
         public string? Libelle { get; set; }
 
-        [Column("ele_description", TypeName = "text")]
+        [Required, Column("ele_description", TypeName = "text")]
         public string? Description { get; set; }
+
+        //InverseProperty
 
         [ForeignKey("PersonneId")]
         [InverseProperty("ElementsEtapePartenaire")]
-        public virtual Partenaire PartenaireElementEtape { get; set; } = null!;
+        public virtual Partenaire? PartenaireElementEtape { get; set; }
 
         [InverseProperty("ElementEtapeConcerne")]
-        public virtual ICollection<Concerne> ConcerneElementEtape { get; set; } = null!;
+        public virtual ICollection<Concerne>? ConcerneElementEtape { get; }
 
-        [ForeignKey("TypeElementEtapeId")]
+        [ForeignKey("TypeElementId")]
         [InverseProperty("ElementEtapeTypeElementEtape")]
-        public virtual TypeElementEtape TypeElementEtapeElementEtape { get; set; } = null!;
+        public virtual TypeElementEtape? TypeElementEtapeElementEtape { get; set; }
 
         [InverseProperty("ElementEtapeContient")]
-        public virtual ICollection<Contient> ContientElementEtape { get; set; } = new List<Contient>();
+        public virtual ICollection<Contient>? ContientElementEtape { get; }
     }
 }

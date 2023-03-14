@@ -6,7 +6,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_lien_len")]
     public partial class Lien
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("len_id")]
+        //Property
+
+        [Key, Column("len_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LienId { get; set; }
 
         [Required, Column("len_url"), StringLength(150)]
@@ -15,32 +17,34 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("len_type"), StringLength(30)]
         public string? Type { get; set; }
 
+        //InverseProperty
+
         [InverseProperty("LienVignoble")]
-        public virtual ICollection<Vignoble> VignobleLien { get; set; } = new List<Vignoble>();
+        public virtual ICollection<Vignoble>? VignobleLien { get; }
 
         [InverseProperty("LienCatSejour")]
-        public virtual ICollection<CatSejour> CatSejourLien { get; set; } = new List<CatSejour>();
+        public virtual ICollection<CatSejour>? CatSejourLien { get; }
 
         [InverseProperty("LienCatParticipant")]
-        public virtual ICollection<CatParticipant> CatParticipantLien { get; set; } = new List<CatParticipant>();
+        public virtual ICollection<CatParticipant>? CatParticipantLien { get; }
 
         [InverseProperty("LienLienElementVignoble")]
-        public virtual ICollection<LienElementVignoble> LienElementVignobleLien { get; set; } = new List<LienElementVignoble>();
+        public virtual ICollection<LienElementVignoble>? LienElementVignobleLien { get; }
 
         [InverseProperty("LienLienSejour")]
-        public virtual ICollection<LienSejour> LienSejourLien { get; set; } = new List<LienSejour>();
+        public virtual ICollection<LienSejour>? LienSejourLien { get; } 
 
         [InverseProperty("LienLienRouteDesVins")]
-        public virtual ICollection<LienRouteDesVins> LienRouteDesVinsLien { get; set; } = new List<LienRouteDesVins>();
+        public virtual ICollection<LienRouteDesVins>? LienRouteDesVinsLien { get; }
 
         [InverseProperty("LienLienEtape")]
-        public virtual ICollection<LienEtape> LienEtapeLien { get; set; } = new List<LienEtape>();
+        public virtual ICollection<LienEtape>? LienEtapeLien { get; }
 
         [InverseProperty("LienContient")]
-        public virtual ICollection<Contient> ContientLien { get; set; } = new List<Contient>();
+        public virtual ICollection<Contient>? ContientLien { get; }
 
         [InverseProperty("LienLienAvis")]
-        public virtual ICollection<LienAvis> LiensAvisLien { get; set; } = new List<LienAvis>();
+        public virtual ICollection<LienAvis>? LiensAvisLien { get; }
 
 
     }

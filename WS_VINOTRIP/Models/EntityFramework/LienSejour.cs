@@ -6,19 +6,22 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_liensejour_lsj")]
     public partial class LienSejour
     {
-        [Column("sjr_id")]
+        //Property
+
+        [Required, Column("sjr_id")]
         public int SejourId { get; set; }
-        [Column("len_id")]
+        [Required, Column("len_id")]
         public int LienId { get; set; }
 
+        //InverseProperty
 
         [ForeignKey("SejourId")]
         [InverseProperty("LienSejourSejour")]
-        public virtual Sejour SejourLienSejour { get; set; } = null!;
+        public virtual Sejour? SejourLienSejour { get; set; }
 
         [ForeignKey("LienId")]
         [InverseProperty("LienSejourLien")]
-        public virtual Lien LienLienSejour { get; set; } = null!;
+        public virtual Lien? LienLienSejour { get; set; }
 
 
     }

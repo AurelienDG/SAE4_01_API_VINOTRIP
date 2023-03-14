@@ -6,17 +6,21 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_lienroutedesvins_lrv")]
     public partial class LienRouteDesVins
     {
-        [Column("rdv_id")]
+        //Property
+
+        [Required, Column("rdv_id")]
         public int RouteDesVinsId { get; set; }
-        [Column("len_id")]
+        [Required, Column("len_id")]
         public int LienId { get; set; }
+
+        //InverseProperty
 
         [ForeignKey("RouteDesVinsId")]
         [InverseProperty("LienRouteDesVinsRouteDesVins")]
-        public virtual RouteDesVins RouteDesVinsLienRouteDesVins { get; set; } = null!;
+        public virtual RouteDesVins? RouteDesVinsLienRouteDesVins { get; set; }
 
         [ForeignKey("LienId")]
         [InverseProperty("LienRouteDesVinsLien")]
-        public virtual Lien LienLienRouteDesVins { get; set; } = null!;
+        public virtual Lien? LienLienRouteDesVins { get; set; }
     }
 }

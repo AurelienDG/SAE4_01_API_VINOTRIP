@@ -6,43 +6,40 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_panier_pnr")]
     public partial class Panier
     {
-        [Required]
-        [Column("prs_id")]
+        //Property
+
+        [Required, Column("prs_id")]
         public int PersonneId { get; set; }
 
-        [Required]
-        [Column("sjr_id")]
+        [Required, Column("sjr_id")]
         public int SejourId { get; set; }
 
-        [Required]
-        [Column("pnr_nbadultes")]
+        [Required, Column("pnr_nbadultes")]
         public int NbAdultes { get; set; }
 
-        [Required]
-        [Column("pnr_nbenfants")]
+        [Required, Column("pnr_nbenfants")]
         public int NbEnfants{ get; set; }
 
-        [Required]
-        [Column("pnr_nbchambres")]
+        [Required, Column("pnr_nbchambres")]
         public int NbChambres { get; set; }
 
-        [Required]
-        [Column("pnr_offert")]
+        [Required, Column("pnr_offert")]
         public bool Offert { get; set; }
 
-        [Required]
-        [Column("pnr_prixtotal", TypeName = "numeric(9,2)")]
+        [Required, Column("pnr_prixtotal", TypeName = "numeric(9,2)")]
         public double PrixTotal { get; set; }
 
-        [Column("pnr_datesejour", TypeName = "date")]
+        [Required, Column("pnr_datesejour", TypeName = "date")]
         public DateTime DateSejour { get; set; }
+
+        //InverseProperty
 
         [ForeignKey("SejourId")]
         [InverseProperty("PanierSejour")]
-        public virtual Sejour SejourPanier { get; set; } = null!;
+        public virtual Sejour? SejourPanier { get; set; }
 
         [ForeignKey("PersonneId")]
         [InverseProperty("PanierUser")]
-        public virtual User UserPanier { get; set; } = null!;
+        public virtual User? UserPanier { get; set; }
     }
 }
