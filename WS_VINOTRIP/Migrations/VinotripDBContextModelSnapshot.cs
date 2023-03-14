@@ -93,7 +93,6 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnName("prs_id");
 
                     b.Property<string>("Reponse")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("avi_reponse");
 
@@ -158,7 +157,7 @@ namespace WS_VINOTRIP.Migrations
                     b.Property<string>("Libelle")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)")
+                        .HasColumnType("character varying(30)")
                         .HasColumnName("vgb_titre");
 
                     b.Property<int>("LienId")
@@ -185,7 +184,7 @@ namespace WS_VINOTRIP.Migrations
                     b.Property<string>("Libelle")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)")
+                        .HasColumnType("character varying(30)")
                         .HasColumnName("csj_libelle");
 
                     b.Property<int>("LienId")
@@ -214,6 +213,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnName("cvg_description");
 
                     b.Property<string>("Libelle")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)")
                         .HasColumnName("cvg_libelle");
@@ -230,7 +230,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("bcd_id");
 
-                    b.Property<int>("montant")
+                    b.Property<int>("Montant")
                         .HasColumnType("integer")
                         .HasColumnName("cqc_montant");
 
@@ -253,7 +253,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("date")
                         .HasColumnName("cmd_datefacture");
 
-                    b.Property<int>("MontantReduction")
+                    b.Property<int?>("MontantReduction")
                         .HasColumnType("integer")
                         .HasColumnName("cmd_montantreduction");
 
@@ -355,6 +355,7 @@ namespace WS_VINOTRIP.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ElementId"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ele_description");
 
@@ -368,10 +369,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("prs_id");
 
-                    b.Property<int>("TypeElementEtapeId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TypeElementId")
+                    b.Property<int?>("TypeElementId")
                         .HasColumnType("integer")
                         .HasColumnName("tpe_id");
 
@@ -402,7 +400,7 @@ namespace WS_VINOTRIP.Migrations
                     b.Property<string>("Titre")
                         .IsRequired()
                         .HasMaxLength(70)
-                        .HasColumnType("varchar(70)")
+                        .HasColumnType("character varying(70)")
                         .HasColumnName("evg_titre");
 
                     b.Property<int>("VignobleId")
@@ -445,10 +443,11 @@ namespace WS_VINOTRIP.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EtapeId"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("etp_description");
 
-                    b.Property<int>("SejourId")
+                    b.Property<int?>("SejourId")
                         .HasColumnType("integer")
                         .HasColumnName("sjr_id");
 
@@ -674,7 +673,6 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnName("prs_id");
 
                     b.Property<string>("Tel")
-                        .IsRequired()
                         .HasColumnType("char(10)")
                         .HasColumnName("ptn_tel");
 
@@ -745,11 +743,11 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("ptn_id");
 
-                    b.Property<int>("Etoiles")
+                    b.Property<int?>("Etoiles")
                         .HasColumnType("integer")
                         .HasColumnName("pth_etoiles");
 
-                    b.Property<int>("NbChambre")
+                    b.Property<int?>("NbChambre")
                         .HasColumnType("integer")
                         .HasColumnName("pth_nbchambre");
 
@@ -780,7 +778,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("ptn_id");
 
-                    b.Property<int>("Etoiles")
+                    b.Property<int?>("Etoiles")
                         .HasColumnType("integer")
                         .HasColumnName("ptr_etoiles");
 
@@ -1024,7 +1022,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("varchar(30)")
                         .HasColumnName("rdv_titre");
 
-                    b.Property<int>("VignobleId")
+                    b.Property<int?>("VignobleId")
                         .HasColumnType("integer")
                         .HasColumnName("vgb_id");
 
@@ -1049,7 +1047,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("csj_id");
 
-                    b.Property<int>("CatVignobleId")
+                    b.Property<int?>("CatVignobleId")
                         .HasColumnType("integer")
                         .HasColumnName("cvg_id");
 
@@ -1078,7 +1076,7 @@ namespace WS_VINOTRIP.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("sjr_promotion");
 
-                    b.Property<int>("RouteVinId")
+                    b.Property<int?>("RouteVinId")
                         .HasColumnType("integer")
                         .HasColumnName("rdv_id");
 
@@ -1278,7 +1276,7 @@ namespace WS_VINOTRIP.Migrations
                     b.Property<string>("Titre")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("vgb_titre");
 
                     b.HasKey("VignobleId")
@@ -1455,7 +1453,6 @@ namespace WS_VINOTRIP.Migrations
                         .WithMany("ElementEtapeTypeElementEtape")
                         .HasForeignKey("TypeElementId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
                         .HasConstraintName("fk_ele_tpe");
 
                     b.Navigation("PartenaireElementEtape");
@@ -1502,7 +1499,6 @@ namespace WS_VINOTRIP.Migrations
                         .WithMany("EtapesSejour")
                         .HasForeignKey("SejourId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
                         .HasConstraintName("fk_etp_sjr");
 
                     b.Navigation("SejourEtape");
@@ -1847,7 +1843,6 @@ namespace WS_VINOTRIP.Migrations
                         .WithMany("RouteDesVinsVignoble")
                         .HasForeignKey("VignobleId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
                         .HasConstraintName("fk_rdv_vgb");
 
                     b.Navigation("VignobleRouteDesVins");
@@ -1866,14 +1861,12 @@ namespace WS_VINOTRIP.Migrations
                         .WithMany("CatVignobleSejour")
                         .HasForeignKey("CatVignobleId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
                         .HasConstraintName("fk_sjr_cvg");
 
                     b.HasOne("WS_VINOTRIP.Models.EntityFramework.RouteDesVins", "RouteDesVinsSejour")
                         .WithMany("SejourRouteDesVins")
                         .HasForeignKey("RouteVinId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
                         .HasConstraintName("fk_sjr_rdv");
 
                     b.Navigation("RouteDesVinsSejour");

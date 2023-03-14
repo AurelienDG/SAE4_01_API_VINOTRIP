@@ -18,10 +18,10 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public string? TypeHebergement { get; set; }
 
         [Column("pth_nbchambre")]
-        public int NbChambre { get; set; }
+        public int? NbChambre { get; set; }
 
         [Column("pth_etoiles")]
-        public int Etoiles { get; set; }
+        public int? Etoiles { get; set; }
 
         //InverseProperty
 

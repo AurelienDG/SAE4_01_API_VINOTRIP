@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WS_VINOTRIP.Migrations
 {
-    public partial class TopMoumoute : Migration
+    public partial class FEUR : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,7 +49,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     cvg_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    cvg_libelle = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
+                    cvg_libelle = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     cvg_description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -165,7 +165,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     cpp_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    vgb_titre = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
+                    vgb_titre = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     len_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -185,7 +185,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     csj_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    csj_libelle = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
+                    csj_libelle = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     len_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -205,7 +205,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     vgb_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    vgb_titre = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    vgb_titre = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     vgb_description = table.Column<string>(type: "text", nullable: false),
                     len_id = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -225,7 +225,7 @@ namespace WS_VINOTRIP.Migrations
                 columns: table => new
                 {
                     prs_id = table.Column<int>(type: "integer", nullable: false),
-                    ptn_tel = table.Column<string>(type: "char(10)", nullable: false)
+                    ptn_tel = table.Column<string>(type: "char(10)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -282,7 +282,7 @@ namespace WS_VINOTRIP.Migrations
                     evg_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     vgb_id = table.Column<int>(type: "integer", nullable: false),
-                    evg_titre = table.Column<string>(type: "varchar(70)", maxLength: 70, nullable: false),
+                    evg_titre = table.Column<string>(type: "character varying(70)", maxLength: 70, nullable: false),
                     evg_description = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -302,7 +302,7 @@ namespace WS_VINOTRIP.Migrations
                 {
                     rdv_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    vgb_id = table.Column<int>(type: "integer", nullable: false),
+                    vgb_id = table.Column<int>(type: "integer", nullable: true),
                     rdv_titre = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     rdv_description = table.Column<string>(type: "text", nullable: false)
                 },
@@ -324,10 +324,9 @@ namespace WS_VINOTRIP.Migrations
                     ele_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     prs_id = table.Column<int>(type: "integer", nullable: false),
-                    tpe_id = table.Column<int>(type: "integer", nullable: false),
+                    tpe_id = table.Column<int>(type: "integer", nullable: true),
                     ele_libelle = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    ele_description = table.Column<string>(type: "text", nullable: true),
-                    TypeElementEtapeId = table.Column<int>(type: "integer", nullable: false)
+                    ele_description = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -395,8 +394,8 @@ namespace WS_VINOTRIP.Migrations
                     pth_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     pth_typehebergement = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    pth_nbchambre = table.Column<int>(type: "integer", nullable: false),
-                    pth_etoiles = table.Column<int>(type: "integer", nullable: false)
+                    pth_nbchambre = table.Column<int>(type: "integer", nullable: true),
+                    pth_etoiles = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -419,7 +418,7 @@ namespace WS_VINOTRIP.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ptr_typecuisine = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     ptr_specialite = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
-                    ptr_etoiles = table.Column<int>(type: "integer", nullable: false)
+                    ptr_etoiles = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -441,7 +440,7 @@ namespace WS_VINOTRIP.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     prs_id = table.Column<int>(type: "integer", nullable: false),
                     cmd_datefacture = table.Column<DateTime>(type: "date", nullable: false),
-                    cmd_montantreduction = table.Column<int>(type: "integer", nullable: false)
+                    cmd_montantreduction = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -557,9 +556,9 @@ namespace WS_VINOTRIP.Migrations
                 {
                     sjr_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    rdv_id = table.Column<int>(type: "integer", nullable: false),
+                    rdv_id = table.Column<int>(type: "integer", nullable: true),
                     csj_id = table.Column<int>(type: "integer", nullable: false),
-                    cvg_id = table.Column<int>(type: "integer", nullable: false),
+                    cvg_id = table.Column<int>(type: "integer", nullable: true),
                     sjr_titre = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     sjr_description = table.Column<string>(type: "text", nullable: false),
                     sjr_prix = table.Column<decimal>(type: "numeric(7,2)", nullable: false),
@@ -646,12 +645,12 @@ namespace WS_VINOTRIP.Migrations
                     avi_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     prs_id = table.Column<int>(type: "integer", nullable: false),
+                    sjr_id = table.Column<int>(type: "integer", nullable: false),
                     avi_titre = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     avi_note = table.Column<int>(type: "integer", nullable: false),
                     avi_description = table.Column<string>(type: "text", nullable: false),
                     avi_dateavis = table.Column<DateTime>(type: "date", nullable: false),
-                    sjr_id = table.Column<int>(type: "integer", nullable: false),
-                    avi_reponse = table.Column<string>(type: "text", nullable: false)
+                    avi_reponse = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -677,9 +676,9 @@ namespace WS_VINOTRIP.Migrations
                 {
                     etp_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    sjr_id = table.Column<int>(type: "integer", nullable: false),
+                    sjr_id = table.Column<int>(type: "integer", nullable: true),
                     etp_titre = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    etp_description = table.Column<string>(type: "text", nullable: true)
+                    etp_description = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
