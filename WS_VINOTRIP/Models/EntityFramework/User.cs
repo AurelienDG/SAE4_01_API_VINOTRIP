@@ -75,6 +75,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("PersonneId")]
         [InverseProperty("UserPersonne")]
-        public virtual Personne? PersonneUser { get; set; };
+        public virtual Personne? PersonneUser { get; set; }
     }
 }
