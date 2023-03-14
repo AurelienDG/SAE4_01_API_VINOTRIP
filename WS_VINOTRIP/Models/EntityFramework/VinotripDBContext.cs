@@ -16,6 +16,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual DbSet<Comporte>? Comportes { get; set; }
         public virtual DbSet<User>? Users { get; set; }
         public virtual DbSet<Avis>? Aviss { get; set; }
+        public virtual DbSet<RouteDesVins>? RouteDesVinss { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql("Server=51.83.36.122;port=5432;Database=vinotrique;SearchPath=vinotrip; uid=s222; password=8F1ASd"); //à changer
