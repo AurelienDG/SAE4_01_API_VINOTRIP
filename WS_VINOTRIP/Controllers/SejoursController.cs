@@ -26,9 +26,9 @@ namespace WS_VINOTRIP.Controllers
 
         // GET: api/Sejours
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Sejour>>> GetSejours()
+        public async Task<ActionResult<int>> GetSejours()
         {
-            return dataRepository.GetAllAsync().Result;
+            return 1;
         }
 
         // GET: api/Sejours/5
