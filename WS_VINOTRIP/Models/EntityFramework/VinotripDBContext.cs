@@ -584,11 +584,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
                 entity.HasKey(e => new { e.PersonneId })
                     .HasName("pk_usr");
 
-                entity.HasOne(d => d.TypeCompteUser).WithMany(p => p.UserTypeCompte)
-                    .HasForeignKey(d => d.TypeCompteId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_usr_tpc");
-
                 entity.HasOne(d => d.PersonneUser).WithMany(p => p.UserPersonne)
                     .HasForeignKey(d => d.PersonneId)
                     .OnDelete(DeleteBehavior.Restrict)

@@ -17,9 +17,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, StringLength(30), Column("usr_pseudo")]
         public string? Pseudo { get; set; }
 
-        [Required, Column("tpc_id")]
-        public int TypeCompteId { get; set; }
-
         [Column("usr_tel", TypeName = "char(10)"), RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Numéro de téléphone non valide")]
         public string? Tel { get; set; }
 
@@ -29,8 +26,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("usr_estverifie")]
         public bool EstVerifie { get; set; }
 
-        [Required, Column("usr_estadmin")]
-        public string? UserRole { get; set; }
+        [Required, Column("usr_role")]
+        public string? Role { get; set; }
 
         [Required, Column("usr_dateconnexion", TypeName = "date")]
         public DateTime DateConnexion { get; set; }
@@ -51,9 +48,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [InverseProperty("UserReside")]
         public virtual ICollection<Reside> ResideUser { get; set; } = new List<Reside>();
-
-        [ForeignKey("TypeCompteId"), InverseProperty("UserTypeCompte")]
-        public virtual TypeCompte TypeCompteUser { get; set; } = null!;
 
         [InverseProperty("UserPanier")]
         public virtual ICollection<Panier> PanierUser { get; } = new List<Panier>();

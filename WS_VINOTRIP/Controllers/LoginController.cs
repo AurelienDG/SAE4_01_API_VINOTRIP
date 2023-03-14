@@ -23,8 +23,8 @@ namespace WS_VINOTRIP.Controllers
         };
         private List<User> appUsers = new List<User>
         {
-            new User { Pseudo = "Connard",Prenom="Irwin",UserRole="Admin",Mdp="1234"},
-            new User { Pseudo = "TG",Prenom="JOSIANNE",UserRole="User",Mdp="1234"}
+            new User { Pseudo = "Connard",Prenom="Irwin",Role="Admin",Mdp="1234"},
+            new User { Pseudo = "TG",Prenom="JOSIANNE",Role="User",Mdp="1234"}
 
         };
 
@@ -66,7 +66,7 @@ namespace WS_VINOTRIP.Controllers
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userInfo.Pseudo),
                 new Claim("tel", userInfo.Pseudo.ToString()),
-                new Claim("role",userInfo.UserRole),
+                new Claim("role",userInfo.Role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
