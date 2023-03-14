@@ -13,8 +13,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int PersonneId { get; set; }
         [Column("cmd_datefacture", TypeName = "date")]
         public DateTime DateFacture { get; set; }
-        [Required, Column("cmd_montantreduction")]
-        public int MontantReduction { get; set; }
+        [Column("cmd_montantreduction")]
+        public int? MontantReduction { get; set; }
 
         [ForeignKey("PersonneId")]
         [InverseProperty("CommandeUser")]

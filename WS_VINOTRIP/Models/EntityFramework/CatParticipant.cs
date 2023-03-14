@@ -6,24 +6,19 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_catparticipant_cpp")]
     public partial class CatParticipant
     {
-        //Property
 
-        [Key, Column("cpp_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("cpp_id")]
         public int CatParticipantId { get; set; }
-
-        [Required, Column("cpp_libelle"), StringLength(30)]
+        [StringLength(30), Required, Column("vgb_titre", TypeName = "varchar(30)")]
         public string? Libelle { get; set; }
-
-        [Required, Column("len_id")]
+        [Column("len_id")]
         public int LienId { get; set; }
 
-        //InverseProperty
-
         [InverseProperty("CatParticipantComporte")]
-        public virtual ICollection<Comporte>? ComporteCatParticipant { get; }
+        public virtual ICollection<Comporte>? ComporteCatParticipant { get; set; }
 
         [ForeignKey("LienId")]
         [InverseProperty("CatParticipantLien")]
-        public virtual Lien? LienCatParticipant { get; set; }
+        public virtual Lien LienCatParticipant { get; set; } = null!;
     }
 }
