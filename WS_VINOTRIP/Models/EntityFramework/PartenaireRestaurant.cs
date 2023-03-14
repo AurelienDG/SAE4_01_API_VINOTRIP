@@ -21,7 +21,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public string? Specialite { get; set; }
 
         [Column("ptr_etoiles")]
-        public int Etoiles { get; set; }
+        public int? Etoiles { get; set; }
 
         //InverseProperty
 
