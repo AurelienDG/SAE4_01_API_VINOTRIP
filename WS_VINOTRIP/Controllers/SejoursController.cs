@@ -28,6 +28,8 @@ namespace WS_VINOTRIP.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sejour>>> GetSejours()
         {
+            var catparticipant = dataRepository2.GetAllAsync().Result;
+
             return dataRepository.GetAllAsync().Result;
         }
 
@@ -38,6 +40,7 @@ namespace WS_VINOTRIP.Controllers
         public async Task<ActionResult<Sejour>> GetSejourById(int id)
         {
             var sejour = dataRepository.GetByIdAsync(id).Result;
+            var catparticipant = dataRepository2.GetAllAsync().Result;
 
             if (sejour == null)
             {
@@ -54,30 +57,19 @@ namespace WS_VINOTRIP.Controllers
         public async Task<ActionResult<IEnumerable<Sejour>>> GetSejourFilter(int catsejour, int catvignoble, int catparticipant)
         {
             List<Sejour> filterList = new List<Sejour>();
+
             if (catsejour == null && catvignoble == null && catparticipant == null)
                 return dataRepository.GetAllAsync().Result;
-            List<Sejour> bite = new List<Sejour>();
+            
             var truc = dataRepository2.GetAllAsync().Result.Value.Where(e => e.CatParticipantId == catparticipant);
 
-/*            var filterList = dataRepository.GetAllAsync().Result.Value.Where(e => e.CatSejourId == catsejour && e.CatVignobleId == catvignoble);
-*/
-            foreach (var item in truc )
+            foreach (var item in truc)
             {
                 var t = dataRepository.GetAllAsync().Result.Value.Where(e => e.CatSejourId == catsejour && e.CatVignobleId == catvignoble && e.SejourId == item.SejourId).FirstOrDefault();
                 if (t != null)
                     filterList.Add(t);
             }
 
-            /*foreach (var filter in filterList)
-            {
-                foreach (var result in filter.ComporteSejour)
-                {
-                    if (result.CatParticipantId == catparticipant)
-                        bite.Add(filterList.Where(e => e.SejourId == result.SejourId).FirstOrDefault());
-                }
-            }*/
-
-            //var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(e => e.Mail.ToUpper() == email.ToUpper());
 
             if (filterList == null)
             {
