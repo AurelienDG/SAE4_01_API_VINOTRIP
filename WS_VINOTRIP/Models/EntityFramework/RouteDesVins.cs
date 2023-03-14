@@ -10,7 +10,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("rdv_id")]
         public int RouteDesVinsId { get; set; }
         [Column("vgb_id")]
-        public int VignobleId { get; set; }
+        public int? VignobleId { get; set; }
         [StringLength(30), Required, Column("rdv_titre", TypeName = "varchar(30)")]
         public string? Titre { get; set; }
         [Required, Column("rdv_description", TypeName = "text")]
