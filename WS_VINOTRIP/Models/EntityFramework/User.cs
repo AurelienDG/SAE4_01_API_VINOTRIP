@@ -13,7 +13,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public int PersonneId { get; set; }
 
         [Required, StringLength(30), Column("usr_pseudo")]
-        public string Pseudo { get; set; }
+        public string? Pseudo { get; set; }
 
         [Required, Column("tpc_id")]
         public int TypeCompteId { get; set; }
