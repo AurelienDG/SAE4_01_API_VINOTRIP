@@ -6,7 +6,9 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_reservation_rsv")]
     public partial class Reservation
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("rsv_id")]
+        //Property
+
+        [Key, Column("rsv_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ReservationId { get; set; }
 
         [Required, Column("sjr_id")]
@@ -36,6 +38,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("rsv_datefacture", TypeName = "date")]
         public DateTime DateFacture { get; set; }
 
+        //InverseProperty
+
         [ForeignKey("SejourId")]
         [InverseProperty("ReservationsSejour")]
         public virtual Sejour SejourReservation { get; set; } = null!;
@@ -45,12 +49,12 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual BonCadeau BonCadeauReservation { get; set; } = null!;
 
         [InverseProperty("ReservationPasse")]
-        public virtual ICollection<Passe> PasseReservation { get; } = new List<Passe>();
+        public virtual ICollection<Passe>? PasseReservation { get; }
 
         [InverseProperty("ReservationEst_facturee")]
-        public virtual ICollection<Est_facturee> Est_factureeReservation { get; } = new List<Est_facturee>();
+        public virtual ICollection<Est_facturee>? Est_factureeReservation { get; }
 
         [InverseProperty("ReservationPaye")]
-        public virtual ICollection<Paye> PayeReservation { get; } = null!;
+        public virtual ICollection<Paye>? PayeReservation { get; }
     }
 }

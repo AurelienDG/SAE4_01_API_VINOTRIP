@@ -6,13 +6,17 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_typepayement_tpa")]
     public partial class TypePayement
     {
+        //Property
+
         [Key, Column("tpa_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TypePayementId { get; set; }
 
         [Column("tpa_libelle")]
         public string? Libelle { get; set; }
 
+        //InverseProperty
+
         [InverseProperty("TypePayementPaye")]
-        public virtual ICollection<Paye> PayeTypePayement { get; set; } = null!;
+        public virtual ICollection<Paye>? PayeTypePayement { get; }
     }
 }

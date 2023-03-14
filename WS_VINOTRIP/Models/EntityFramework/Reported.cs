@@ -6,25 +6,26 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_j_reported_rep")]
     public partial class Reported
     {
-        [Column("prs_id")]
-        [Required]
+        //Property
+
+        [Required, Column("prs_id")]
         public int PersonneId { get; set; }
 
-        [Column("avi_id")]
-        [Required]
+        [Required, Column("avi_id")]
         public int AvisId { get; set; }
 
-        [Column("rep_a_signale")]
-        [Required]
+        [Required, Column("rep_a_signale")]
         public bool A_Signale { get; set; }
+
+        //InverseProperty
 
         [ForeignKey("PersonneId")]
         [InverseProperty("ReportedUser")]
-        public virtual User UserReported { get; set; } = null!;
+        public virtual User? UserReported { get; set; }
 
         [ForeignKey("AvisId")]
         [InverseProperty("ReportedAvis")]
-        public virtual Avis AvisReported { get; set; } = null!;
+        public virtual Avis? AvisReported { get; set; }
 
     }
 }

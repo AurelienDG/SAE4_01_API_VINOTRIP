@@ -4,20 +4,17 @@ using System.ComponentModel.DataAnnotations;
 namespace WS_VINOTRIP.Models.EntityFramework
 {
     [Table("t_e_partenairehebergement_pth")]
-    public class PartenaireHebergement
+    public partial class PartenaireHebergement
     {
-        [Key]
-        [Column("pth_id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //Property
+
+        [Key, Column("pth_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PartenaireHebergementId { get; set; }
 
-        [Required]
-        [Column("ptn_id")]
+        [Required, Column("ptn_id")]
         public int PersonneId { get; set; }
 
-        [Required]
-        [StringLength(30)]
-        [Column("pth_typehebergement")]
+        [Required, Column("pth_typehebergement"), StringLength(30)]
         public string? TypeHebergement { get; set; }
 
         [Column("pth_nbchambre")]
@@ -26,9 +23,11 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Column("pth_etoiles")]
         public int Etoiles { get; set; }
 
+        //InverseProperty
+
         [ForeignKey("PersonneId")]
         [InverseProperty("PartenairesHebergementPartenaire")]
-        public virtual Partenaire PartenairePartenaireHebergement { get; set; } = null!;
+        public virtual Partenaire? PartenairePartenaireHebergement { get; set; }
 
     }
 }

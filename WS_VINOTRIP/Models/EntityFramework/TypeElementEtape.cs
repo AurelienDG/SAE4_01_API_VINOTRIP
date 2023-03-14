@@ -6,18 +6,17 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_typeelementetape_tpe")]
     public partial class TypeElementEtape
     {
-        [Key]
-        [Required]
-        [Column("tpe_id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //Property
+
+        [Key, Column("tpe_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TypeElementEtapeId { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        [Column("tpe_libelle")]
+        [Required, Column("tpe_libelle"), StringLength(50)]
         public string? Libelle { get; set; }
 
+        //InverseProperty
+
         [InverseProperty("TypeElementEtapeElementEtape")]
-        public virtual ICollection<ElementEtape> ElementEtapeTypeElementEtape { get; } = new List<ElementEtape>();
+        public virtual ICollection<ElementEtape>? ElementEtapeTypeElementEtape { get;  }
     }
 }

@@ -4,29 +4,25 @@ using System.ComponentModel.DataAnnotations;
 namespace WS_VINOTRIP.Models.EntityFramework
 {
     [Table("t_e_refcartebancaire_rcb")]
-    public class RefCarteBancaire
+    public partial class RefCarteBancaire
     {
-        [Key]
-        [Required]
-        [Column("rcb_id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //Property
+
+        [Key, Column("rcb_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CarteId { get; set; }
 
-        [Required]
-        [StringLength(250)]
-        [Column("rcb_numcarte")]
+        [Required, Column("rcb_numcarte"), StringLength(250)]
         public string? NumCarte { get; set; }
 
-        [Required]
-        [Column("rcb_dateexpirationcarte", TypeName = "date")]
+        [Required, Column("rcb_dateexpirationcarte", TypeName = "date")]
         public DateTime DateExpirationCarte { get; set; }
 
-        [Required]
-        [StringLength(30)]
-        [Column("rcb_nomcarte")]
+        [Required, Column("rcb_nomcarte"), StringLength(30)]
         public string? NomCarte { get; set; }
 
+        //InverseProperty
+
         [InverseProperty("RefCarteBancaireCompteCarte")]
-        public virtual ICollection<CompteCarte> CompteCarteRefCarteBancaire { get; set; } = null!;
+        public virtual ICollection<CompteCarte>? CompteCarteRefCarteBancaire { get; }
     }
 }

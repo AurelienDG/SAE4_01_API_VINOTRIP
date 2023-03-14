@@ -9,6 +9,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_user_usr")]
     public partial class User
     {
+        //Property
+
         [Key, Column("prs_id")]
         public int PersonneId { get; set; }
 
@@ -45,6 +47,8 @@ namespace WS_VINOTRIP.Models.EntityFramework
         [Required, Column("usr_mdp"), StringLength(100)]
         public string? Mdp { get; set; }
 
+        //InverseProperty
+
         [InverseProperty("UserReside")]
         public virtual ICollection<Reside> ResideUser { get; set; } = new List<Reside>();
 
@@ -71,6 +75,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
 
         [ForeignKey("PersonneId")]
         [InverseProperty("UserPersonne")]
-        public virtual Personne PersonneUser { get; set; } = null!;
+        public virtual Personne? PersonneUser { get; set; };
     }
 }

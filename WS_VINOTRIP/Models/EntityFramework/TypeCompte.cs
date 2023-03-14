@@ -7,18 +7,17 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_typecompte_tpc")]
     public partial class TypeCompte
     {
-        [Key]
-        [Required]
-        [Column("tpc_id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //Property
+
+        [Key, Column("tpc_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TypeCompteId { get; set; }
 
-        [Required]
-        [StringLength(30)]
-        [Column("tpc_libelle")]
+        [Required, Column("tpc_libelle"), StringLength(30)]
         public string? Libelle { get; set; }
 
+        //InverseProperty
+
         [InverseProperty("TypeCompteUser")]
-        public virtual ICollection<User> UserTypeCompte { get; } = new List<User>();
+        public virtual ICollection<User>? UserTypeCompte { get; }
     }
 }

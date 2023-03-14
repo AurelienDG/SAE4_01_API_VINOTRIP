@@ -4,29 +4,27 @@ using System.ComponentModel.DataAnnotations;
 namespace WS_VINOTRIP.Models.EntityFramework
 {
     [Table("t_e_partenaireactivite_pta")]
-    public class PartenaireActivite
+    public partial class PartenaireActivite
     {
-        [Key]
-        [Column("pta_id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //Property
+
+        [Key, Column("pta_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PartenaireActiviteId { get; set; }
 
-        [Required]
-        [Column("ptn_id")]
+        [Required, Column("ptn_id")]
         public int PersonneId { get; set; }
 
-        [Required]
-        [StringLength(30)]
-        [Column("pta_typeactivite")]
+        [Required, Column("pta_typeactivite"), StringLength(30)]
         public string? TypeActivite { get; set; }
 
-        [StringLength(100)]
-        [Column("pta_lieurdv")]
+        [Column("pta_lieurdv"), StringLength(100)]
         public string? LieuRdv { get; set; }
+
+        //InverseProperty
 
         [ForeignKey("PersonneId")]
         [InverseProperty("PartenairesActivitePartenaire")]
-        public virtual Partenaire PartenairePartenaireActivite { get; set; } = null!;
+        public virtual Partenaire? PartenairePartenaireActivite { get; set; };
 
     }
 }

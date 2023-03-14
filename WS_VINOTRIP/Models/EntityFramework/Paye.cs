@@ -3,20 +3,24 @@
 namespace WS_VINOTRIP.Models.EntityFramework
 {
     [Table("t_j_paye_pay")]
-    public class Paye
+    public partial class Paye
     {
+        //Property
+
         [Column("rsv_id")]
         public int ReservationId { get; set; }
 
         [Column("tpa_id")]
         public int TypePayementId { get; set; }
 
+        //InverseProperty
+
         [ForeignKey("ReservationId")]
         [InverseProperty("PayeReservation")]
-        public virtual Reservation ReservationPaye { get; set; } = null!;
+        public virtual Reservation? ReservationPaye { get; set; }
 
         [ForeignKey("TypePayementId")]
         [InverseProperty("PayeTypePayement")]
-        public virtual TypePayement TypePayementPaye { get; set; } = null!;
+        public virtual TypePayement? TypePayementPaye { get; set; }
     }
 }
