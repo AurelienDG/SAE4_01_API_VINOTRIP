@@ -6,7 +6,6 @@ namespace WS_VINOTRIP.Models.EntityFramework
     [Table("t_e_boncadeau_bcd")]
     public partial class BonCadeau
     {
-
         //Property
 
         [Key, Column("bcd_id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
