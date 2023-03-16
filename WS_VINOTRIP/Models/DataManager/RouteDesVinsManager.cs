@@ -5,13 +5,13 @@ using WS_VINOTRIP.Models.Repository;
 
 namespace WS_VINOTRIP.Models.DataManager
 {
-    public class RoutesDesVinsManager : IDataRepository<RouteDesVins>
+    public class RouteDesVinsManager : IDataRepository<RouteDesVins>
     {
         readonly VinotripDBContext? vinotripDbContext;
-        public RoutesDesVinsManager()
+        public RouteDesVinsManager()
         { }
 
-        public RoutesDesVinsManager(VinotripDBContext context)
+        public RouteDesVinsManager(VinotripDBContext context)
         {
             vinotripDbContext = context;
         }
