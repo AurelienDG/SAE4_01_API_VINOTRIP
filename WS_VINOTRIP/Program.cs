@@ -26,6 +26,10 @@ builder.Services.AddDbContext<VinotripDBContext>(options => options.UseNpgsql(bu
 
 builder.Services.AddScoped<IDataRepository<Sejour>, SejourManager>();
 builder.Services.AddScoped<IDataRepository<Comporte>, ComporteManager>();
+builder.Services.AddScoped<IDataRepository<Avis>, AvisManager>();
+builder.Services.AddScoped<IDataRepository<RouteDesVins>, RoutesDesVinsManager>();
+builder.Services.AddScoped<IDataRepository<User>, UserManager>();
+builder.Services.AddScoped<IDataRepository<Vignoble>, VignobleManager>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
