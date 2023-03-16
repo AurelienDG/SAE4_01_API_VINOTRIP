@@ -47,25 +47,25 @@ namespace WS_VINOTRIP.Models.EntityFramework
         //InverseProperty
 
         [InverseProperty("UserReside")]
-        public virtual ICollection<Reside> ResideUser { get; set; } = new List<Reside>();
+        public virtual ICollection<Reside>? ResideUser { get; set; }
 
         [InverseProperty("UserPanier")]
-        public virtual ICollection<Panier> PanierUser { get; } = new List<Panier>();
+        public virtual ICollection<Panier>? PanierUser { get; }
 
         [InverseProperty("UserReported")]
-        public virtual ICollection<Reported> ReportedUser { get; } = new List<Reported>();
+        public virtual ICollection<Reported>? ReportedUser { get; }
 
         [InverseProperty("UserFavori")]
-        public virtual ICollection<Favori> FavoriUser { get; } = new List<Favori>();
+        public virtual ICollection<Favori>? FavoriUser { get; }
 
         [InverseProperty("UserCompteCarte")]
-        public virtual ICollection<CompteCarte> CompteCarteUser { get; } = new List<CompteCarte>();
+        public virtual ICollection<CompteCarte>? CompteCarteUser { get; }
 
         [InverseProperty("UserHistoriqueCadeau")]
-        public virtual ICollection<HistoriqueCadeau> HistoriqueCadeauUser { get; } = new List<HistoriqueCadeau>();
+        public virtual ICollection<HistoriqueCadeau>? HistoriqueCadeauUser { get; }
 
         [InverseProperty("UserCommande")]
-        public virtual ICollection<Commande> CommandeUser { get; } = new List<Commande>();
+        public virtual ICollection<Commande>? CommandeUser { get; }
 
         [ForeignKey("PersonneId")]
         [InverseProperty("UserPersonne")]
