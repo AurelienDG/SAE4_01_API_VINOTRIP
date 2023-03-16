@@ -11,47 +11,47 @@ namespace WS_VINOTRIP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RouteDesVinsController : ControllerBase
+    public class VignoblesController : ControllerBase
     {
         private readonly VinotripDBContext _context;
 
-        public RouteDesVinsController(VinotripDBContext context)
+        public VignoblesController(VinotripDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/RouteDesVins
+        // GET: api/Vignobles
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RouteDesVins>>> GetRoutesDesVins()
+        public async Task<ActionResult<IEnumerable<Vignoble>>> GetRoutesDesVins()
         {
-            return await _context.RoutesDesVins.ToListAsync();
+            return await _context.Vignobles.ToListAsync();
         }
 
-        // GET: api/RouteDesVins/5
+        // GET: api/Vignobles/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<RouteDesVins>> GetRouteDesVins(int id)
+        public async Task<ActionResult<Vignoble>> GetVignobles(int id)
         {
-            var routeDesVins = await _context.RoutesDesVins.FindAsync(id);
+            var vignoble = await _context.Vignobles.FindAsync(id);
 
-            if (routeDesVins == null)
+            if (vignoble == null)
             {
                 return NotFound();
             }
 
-            return routeDesVins;
+            return vignoble;
         }
 
-        // PUT: api/RouteDesVins/5
+        // PUT: api/Vignobles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRouteDesVins(int id, RouteDesVins routeDesVins)
+        public async Task<IActionResult> PutVignobles(int id, Vignoble vignoble)
         {
-            if (id != routeDesVins.RouteDesVinsId)
+            if (id != vignoble.VignobleId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(routeDesVins).State = EntityState.Modified;
+            _context.Entry(vignoble).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace WS_VINOTRIP.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RouteDesVinsExists(id))
+                if (!VignoblesExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace WS_VINOTRIP.Controllers
             return NoContent();
         }
 
-        // POST: api/RouteDesVins
+        // POST: api/Vignobles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RouteDesVins>> PostRouteDesVins(RouteDesVins routeDesVins)
+        public async Task<ActionResult<Vignoble>> PostVignobles(Vignoble vignoble)
         {
-            _context.RoutesDesVins.Add(routeDesVins);
+            _context.Vignobles.Add(vignoble);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRouteDesVins", new { id = routeDesVins.RouteDesVinsId }, routeDesVins);
+            return CreatedAtAction("GetVignobles", new { id = vignoble.VignobleId }, vignoble);
         }
 
-        // DELETE: api/RouteDesVins/5
+        // DELETE: api/Vignobles/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRouteDesVins(int id)
+        public async Task<IActionResult> DeleteVignobles(int id)
         {
-            var routeDesVins = await _context.RoutesDesVins.FindAsync(id);
-            if (routeDesVins == null)
+            var vignoble = await _context.Vignobles.FindAsync(id);
+            if (vignoble == null)
             {
                 return NotFound();
             }
 
-            _context.RoutesDesVins.Remove(routeDesVins);
+            _context.Vignobles.Remove(vignoble);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool RouteDesVinsExists(int id)
+        private bool VignoblesExists(int id)
         {
-            return _context.RoutesDesVins.Any(e => e.RouteDesVinsId == id);
+            return _context.Vignobles.Any(e => e.VignobleId == id);
         }
     }
 }
