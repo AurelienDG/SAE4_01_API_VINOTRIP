@@ -16,7 +16,7 @@ namespace WS_VINOTRIP.Models.EntityFramework
         public virtual DbSet<Comporte>? Comportes { get; set; }
         public virtual DbSet<User>? Users { get; set; }
         public virtual DbSet<Avis>? Aviss { get; set; }
-        public virtual DbSet<RouteDesVins>? RouteDesVinss { get; set; }
+        public virtual DbSet<RouteDesVins>? RoutesDesVins { get; set; }
         public virtual DbSet<Vignoble>? Vignobles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

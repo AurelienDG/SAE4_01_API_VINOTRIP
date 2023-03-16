@@ -18,22 +18,22 @@ namespace WS_VINOTRIP.Models.DataManager
 
         public async Task<ActionResult<IEnumerable<RouteDesVins>>> GetAllAsync()
         {
-            return await vinotripDbContext.RouteDesVinss.ToListAsync();
+            return await vinotripDbContext.RoutesDesVins.ToListAsync();
         }
 
         public async Task<ActionResult<RouteDesVins>> GetByIdAsync(int id)
         {
-            return await vinotripDbContext.RouteDesVinss.FirstOrDefaultAsync(e => e.RouteDesVinsId == id);
+            return await vinotripDbContext.RoutesDesVins.FirstOrDefaultAsync(e => e.RouteDesVinsId == id);
         }
 
         public async Task<ActionResult<RouteDesVins>> GetByStringAsync(string titre)
         {
-            return await vinotripDbContext.RouteDesVinss.FirstOrDefaultAsync(u => u.Titre.ToUpper() == titre.ToUpper());
+            return await vinotripDbContext.RoutesDesVins.FirstOrDefaultAsync(u => u.Titre.ToUpper() == titre.ToUpper());
         }
 
         public async Task AddAsync(RouteDesVins entity)
         {
-            await vinotripDbContext.RouteDesVinss.AddAsync(entity);
+            await vinotripDbContext.RoutesDesVins.AddAsync(entity);
             await vinotripDbContext.SaveChangesAsync();
         }
 
@@ -43,7 +43,7 @@ namespace WS_VINOTRIP.Models.DataManager
 
         public async Task DeleteAsync(RouteDesVins routeDesVins)
         {
-            vinotripDbContext.RouteDesVinss.Remove(routeDesVins);
+            vinotripDbContext.RoutesDesVins.Remove(routeDesVins);
             await vinotripDbContext.SaveChangesAsync();
         }
     }
