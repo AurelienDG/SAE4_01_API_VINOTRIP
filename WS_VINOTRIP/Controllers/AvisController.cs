@@ -10,7 +10,7 @@ using WS_VINOTRIP.Models.Repository;
 
 namespace WS_VINOTRIP.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AvisController : ControllerBase
     {
@@ -30,10 +30,10 @@ namespace WS_VINOTRIP.Controllers
         }
 
         // GET: api/Avis/5
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("[action]/{id}")]
         [ActionName("GetById")]
-        public async Task<ActionResult<Avis>> GetAvis(int id)
+        public async Task<ActionResult<Avis>> GetAvisById(int id)
         {
             var avis =  dataRepository.GetByIdAsync(id).Result;
 
