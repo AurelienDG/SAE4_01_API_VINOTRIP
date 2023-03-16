@@ -39,7 +39,7 @@ namespace WS_VINOTRIP.Models.DataManager
 
         public async Task UpdateAsync(Sejour sejour, Sejour entity)
         {
-            /*vinotripDbContext.Entry(sejour).State = EntityState.Modified;
+            vinotripDbContext.Entry(sejour).State = EntityState.Modified;
             sejour.SejourId = entity.SejourId;
             sejour.RouteVinId = entity.RouteVinId;
             sejour.CatSejourId = entity.CatSejourId;
@@ -54,10 +54,7 @@ namespace WS_VINOTRIP.Models.DataManager
             sejour.RouteDesVinsSejour = entity.RouteDesVinsSejour;
             sejour.SejourCatSejour = entity.SejourCatSejour;
             sejour.SejourCatVignoble = entity.SejourCatVignoble;
-            sejour.EtapesSejour = entity.EtapesSejour;
-            sejour.PanierSejour = entity.PanierSejour;
-            sejour.ComporteSejour = entity.ComporteSejour;
-            await vinotripDbContext.SaveChangesAsync();*/
+            await vinotripDbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Sejour sejour)
